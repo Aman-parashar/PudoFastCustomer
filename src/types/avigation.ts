@@ -1,0 +1,27 @@
+export type RootStackParamList = {
+  Walkthrough: undefined;
+  Start: undefined;
+  Login: undefined;
+  SignUp: undefined;
+  Main: undefined;
+  Notification: undefined;
+  ChooseAddress: { type: 'pickup' | 'delivery' };
+  DeliveryMiles: undefined;
+  TransitAndReceiverDetails: { orderData?: any };
+  MyReviews: undefined;
+  ChangePassword: undefined;
+  Terms: undefined;
+  Privacy: undefined;
+  Support: undefined;
+  Profile: undefined;
+  EditProfile: undefined;
+  WebViewScreen: { title: string; url: string };
+  ContactUs: undefined;
+  DeliveryDetails: { orderId: string };
+  ItemDetails: { orderData: any };
+  DeliverySelection: { orderData: any };
+  PaymentOptions: { orderData: any };
+  ForgotPassword: { type: 'email' | 'phone' };
+  OTPVerification: { type: 'email' | 'phone'; value: string };
+  NewPassword: { userId: string };
+};

@@ -1,0 +1,45 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/SantralMedium.ttf",
+      "sha1": "4ff0e19e281b9bf3307d1162969d6c8ac950bfbe"
+    },
+    {
+      "path": "src/assets/fonts/SantralExtraLight.ttf",
+      "sha1": "016cabd223c4f6db4e42014d70bf69ed518fb0bb"
+    },
+    {
+      "path": "src/assets/fonts/SantralThin.ttf",
+      "sha1": "ef9a5b54216bd9389243c6502552b7e9504adca1"
+    },
+    {
+      "path": "src/assets/fonts/SantralUltra.ttf",
+      "sha1": "5ad1e9e7c6da29706daf6aae169fef9d020e8f6f"
+    },
+    {
+      "path": "src/assets/fonts/SantralBook.ttf",
+      "sha1": "a624797201c9638c59593db7c5a19ba49c37718d"
+    },
+    {
+      "path": "src/assets/fonts/SantralLight.ttf",
+      "sha1": "338759332e689ad86e4a65a213ea76e7e9c355f1"
+    },
+    {
+      "path": "src/assets/fonts/SantralBold.ttf",
+      "sha1": "657e109baa097384ead5e8d5101355264eb5f8b5"
+    },
+    {
+      "path": "src/assets/fonts/SantralHairline.ttf",
+      "sha1": "0fc334cc1d02d4e76a7f230675fd6606e4ad82a5"
+    },
+    {
+      "path": "src/assets/fonts/SantralExtraBold.ttf",
+      "sha1": "6cada68d8de0784708d56ae3605817421fdbb3c2"
+    },
+    {
+      "path": "src/assets/fonts/SantralSemiBold.ttf",
+      "sha1": "1751ab39915ae2fb02b6203a236538982016417f"
+    }
+  ]
+}
