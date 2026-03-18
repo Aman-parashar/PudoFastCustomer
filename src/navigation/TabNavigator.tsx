@@ -48,7 +48,7 @@ const TabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.PRIMARY,
+        tabBarActiveTintColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
         tabBarInactiveTintColor: COLORS.GRAY_TEXT,
         tabBarStyle: [
           styles.tabBar,

@@ -1,162 +1,140 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../../utils/colors';
-import { FONTS, FONT_SIZES } from '../../../utils/fonts';
 import { dimensions } from '../../../utils/constant';
+import { FONTS } from '../../../utils/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.BACKGROUND,
   },
-  gradientHeader: {
-
-  },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-  },
-  bgImage: {
-    width: dimensions.width,
-
-    position: 'absolute',
-    top: 0,
-    height: dimensions.height,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 6,
-  },
-  contentContainer: {
-    marginTop: 250,
-    paddingHorizontal: 20,
-    backgroundColor: COLORS.BACKGROUND,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    flex: 1,
-    paddingTop: 30,
-  },
-  title: {
-    fontSize: FONT_SIZES.XXLARGE,
-    fontFamily: FONTS.SANTRAL_BOLD,
+  gradientHeaderTitle: {
     color: COLORS.SECONDARY,
-    marginBottom: 10,
+    fontSize: 34,
+    fontFamily: FONTS.SANTRAL_BOLD,
+
+    marginTop: 10,
   },
-  description: {
-    fontSize: FONT_SIZES.MEDIUM,
+  gradientHeaderSubTitle: {
+    color: COLORS.WHITE,
+    fontSize: 14,
     fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.TEXT_SECONDARY,
-    marginBottom: 30,
+    marginTop: 10,
+
   },
-  toggleContainer: {
-    flexDirection: 'row',
-    marginBottom: 20,
+  curve: {
+    width: '100%',
+    height: 50,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    backgroundColor: COLORS.TRANSPARENT,
+    alignItems: 'flex-start',
+
+  },
+  gradientHeader1: {
+    width: '100%',
+    height: dimensions.height * 0.1,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  gradientHeader: {
+    width: '100%',
+    height: dimensions.height * 0.5,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  keyboardContainer: {
+    flex: 1,
+
+    width: '100%',
+  },
+  emailIcon: {
+    width: 5,
+    aspectRatio: 1 / 1.2,
+
+
+  },
+  emailContainer: {
+    height: 60,
+    width: 50,
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: COLORS.PRIMARY,
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  toggleButton: {
-    flex: 1,
-    paddingVertical: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  activeToggle: {
-    backgroundColor: COLORS.PRIMARY,
-  },
-  toggleText: {
-    color: COLORS.PRIMARY,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-  },
-  activeToggleText: {
-    color: COLORS.WHITE,
+  phoneIcon: {
+    width: 5,
+    aspectRatio: 1 / 1.2,
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.PRIMARY,
   },
   inputContainer: {
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: COLORS.BORDER,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    height: 50,
-    justifyContent: 'center',
     flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  input: {
-    flex: 1,
-    height: '100%',
-    fontFamily: FONTS.SANTRAL_BOOK,
-  },
-  eyeIcon: {
-    padding: 5,
-  },
-  forgotPassword: {
-    alignSelf: 'flex-end',
-    marginBottom: 30,
+  forgotPasswordContainer: {
+    alignItems: 'flex-end',
+    marginVertical: 15,
   },
   forgotPasswordText: {
     color: COLORS.PRIMARY,
     fontFamily: FONTS.SANTRAL_MEDIUM,
   },
   loginButton: {
-    height: 50,
-    borderRadius: 25,
-    overflow: 'hidden',
-    marginBottom: 30,
-  },
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginButtonText: {
-    color: COLORS.WHITE,
-    fontSize: FONT_SIZES.LARGE,
-    fontFamily: FONTS.SANTRAL_BOLD,
+    marginVertical: 15,
   },
   orContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    gap: 2,
+    justifyContent: 'center',
   },
   line: {
     flex: 1,
-    height: 1,
-    backgroundColor: COLORS.BORDER,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: COLORS.GRAY_TEXT,
   },
   orText: {
-    marginHorizontal: 10,
     color: COLORS.GRAY_TEXT,
-    fontSize: FONT_SIZES.SMALL,
     fontFamily: FONTS.SANTRAL_MEDIUM,
+    fontSize: 12,
   },
-  socialContainer: {
-    flexDirection: 'row',
+  footerContainer: {
+    flex: 1,
     justifyContent: 'center',
-    marginBottom: 30,
+
+
   },
-  signUpContainer: {
+  socialButtonsContainer: {
+    flex: 0.6,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    gap: 2,
+    justifyContent: 'center',
+  },
+  socialIcon: {
+    width: 55,
+    height: 55,
   },
   signUpText: {
-    color: COLORS.TEXT_SECONDARY,
+    color: COLORS.GRAY_TEXT,
     fontFamily: FONTS.SANTRAL_MEDIUM,
+    alignSelf: 'center',
   },
   signUpLink: {
     color: COLORS.PRIMARY,
-    fontFamily: FONTS.SANTRAL_BOLD,
+    fontFamily: FONTS.SANTRAL_EXTRA_BOLD,
   },
-  skipButton: {
-    marginTop: 10,
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  skipText: {
-    color: COLORS.PRIMARY,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    textDecorationLine: 'underline',
+  emailInputContainer: {
+    flex: 1,
   },
 });
 

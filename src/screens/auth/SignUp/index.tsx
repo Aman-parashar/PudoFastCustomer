@@ -2,165 +2,148 @@ import React from 'react';
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
+  ImageBackground,
+  Pressable,
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useSignUpViewModel } from './SignUpViewModel';
 import { Images } from '../../../utils/images';
+import Container from '../../../components/common/Container';
+import KeyboardContainer from '../../../components/layout/KeyboardContainer';
+import { CommonInput } from '../../../components/common/CommonInput';
+import CustomButton from '../../../components/common/CustomButton';
+import { useForm } from 'react-hook-form';
+import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
 
 const SignUpScreen = () => {
+  const { control } = useForm();
   const {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    address,
-    setAddress,
-    password,
-    setPassword,
     agreeTerms,
-    showPassword,
     handleSignUp,
     navigateToLogin,
-    toggleShowPassword,
     toggleAgreeTerms,
   } = useSignUpViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          <Image
-            source={Images.loginBG}
-            style={styles.bgImage}
-            resizeMode="cover"
+    <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
+      <KeyboardContainer style={styles.keyboardContainer}>
+        <ImageBackground
+          source={Images.loginBG}
+          style={styles.gradientHeader}
+        >
+          <Header type="auth" style={{ backgroundColor: COLORS.TRANSPARENT }} />
+          <View style={styles.headerPadding}>
+            <Text style={styles.gradientHeaderTitle}>No more stress!</Text>
+            <Text style={styles.gradientHeaderSubTitle}>Create an account now and wave goodbye to your parcel pickup and delivery woes.</Text>
+          </View>
+          <View style={styles.headerSpacing} />
+        </ImageBackground>
+
+        <View style={styles.contentWrapper}>
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="First Name"
+              name="firstName"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.user}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="Last Name"
+              name="lastName"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.user}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="Email Address"
+              name="email"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.email}
+              keyboardType="email-address"
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="Phone Number"
+              name="phone"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.phone}
+              keyboardType="phone-pad"
+              isMobileNumber
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="Address"
+              name="address"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.addressIcon}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <CommonInput
+              inputlabel="Password"
+              name="password"
+              control={control}
+              containerStyle={styles.emailInputContainer}
+              isLeftImage
+              leftImage={Images.password}
+              secureTextEntry
+              isRightImage
+            />
+          </View>
+
+          <Pressable
+            style={styles.termsContainer}
+            onPress={toggleAgreeTerms}
+          >
+            <View
+              style={[styles.checkbox, agreeTerms && styles.checkboxActive]}
+            >
+              {agreeTerms && <Text style={styles.checkmark}>✓</Text>}
+            </View>
+            <Text style={styles.termsText}>
+              I agree with the{' '}
+              <Text style={styles.termsLink}>Terms & Conditions</Text> &{' '}
+              <Text style={styles.termsLink}>Privacy Policy</Text>
+            </Text>
+          </Pressable>
+
+          <CustomButton
+            title="SIGN UP"
+            onPress={handleSignUp}
+            style={styles.signUpButton}
           />
 
-          <View style={styles.contentContainer}>
-            <Text style={styles.title}>SIGN UP</Text>
-            <Text style={styles.description}>
-              Ready to deliver with confidence? Take the first step now.
+          <Pressable onPress={navigateToLogin}>
+            <Text style={styles.loginText}>
+              Already have an account?{' '}
+              <Text style={styles.loginLink}>LOGIN</Text>
             </Text>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="First Name"
-                value={firstName}
-                onChangeText={setFirstName}
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Last Name"
-                value={lastName}
-                onChangeText={setLastName}
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Email Address"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Phone Number"
-                value={phone}
-                onChangeText={setPhone}
-                keyboardType="phone-pad"
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Address"
-                value={address}
-                onChangeText={setAddress}
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                style={styles.eyeIcon}
-                onPress={toggleShowPassword}
-              >
-                <Text>{showPassword ? '👁️' : '👁️‍🗨️'}</Text>
-              </TouchableOpacity>
-            </View>
-
-            <TouchableOpacity
-              style={styles.termsContainer}
-              onPress={toggleAgreeTerms}
-            >
-              <View
-                style={[styles.checkbox, agreeTerms && styles.checkboxActive]}
-              >
-                {agreeTerms && <Text style={styles.checkmark}>✓</Text>}
-              </View>
-              <Text style={styles.termsText}>
-                I agree with the{' '}
-                <Text style={styles.termsLink}>Terms & Conditions</Text> &{' '}
-                <Text style={styles.termsLink}>Privacy Policy</Text>
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.signUpButton}
-              onPress={handleSignUp}
-            >
-              <LinearGradient
-                colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-                style={styles.gradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-              >
-                <Text style={styles.signUpButtonText}>SIGN UP</Text>
-              </LinearGradient>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.loginContainer} onPress={navigateToLogin}>
-              <Text style={styles.loginText}>
-                Already have an account?{' '}
-                <Text style={styles.loginLink}>LOGIN</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          </Pressable>
+        </View>
+      </KeyboardContainer>
+    </Container>
   );
 };
 

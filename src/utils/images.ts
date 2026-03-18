@@ -40,7 +40,7 @@ export const Images = {
   notification: require('../assets/Notification.png'),
   notificationSelected: require('../assets/NotificationSelected.png'),
   one: require('../assets/One.png'),
-  password: require('../assets/Passwod.png'),
+  password: require('../assets/Password.png'),
   phone: require('../assets/Phone.png'),
   pickupGreenIcon: require('../assets/PickupIGreenIcone.png'),
   privacy: require('../assets/Privacy.png'),
@@ -71,7 +71,7 @@ export const Images = {
   wallet: require('../assets/Wallet.png'),
   wayToDropOff: require('../assets/WayToDropOff.png'),
   wayToPickUp: require('../assets/WaytopickupIcone.png'),
-  eyeSelect: require('../assets/eyeselect.png'),
-  eyeUnselect: require('../assets/eyeunselect.png'),
-
+  eye: require('../assets/eyeselect.png'),
+  eyeOff: require('../assets/eyeunselect.png'),
+  curve: require('../assets/curve.png'),
 };

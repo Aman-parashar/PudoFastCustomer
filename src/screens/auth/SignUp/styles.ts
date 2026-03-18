@@ -1,68 +1,53 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../../utils/colors';
-import { FONTS, FONT_SIZES } from '../../../utils/fonts';
+import { dimensions } from '../../../utils/constant';
+import { FONTS } from '../../../utils/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.BACKGROUND,
   },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-  },
-  bgImage: {
-    width: '100%',
-    height: 300,
-    position: 'absolute',
-    top: 0,
-  },
-  contentContainer: {
-    marginTop: 200,
-    paddingHorizontal: 20,
-    backgroundColor: COLORS.BACKGROUND,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    flex: 1,
-    paddingTop: 30,
-  },
-  title: {
-    fontSize: FONT_SIZES.XXLARGE,
-    fontFamily: FONTS.SANTRAL_BOLD,
+  gradientHeaderTitle: {
     color: COLORS.SECONDARY,
-    marginBottom: 10,
+    fontSize: 34,
+    fontFamily: FONTS.SANTRAL_BOLD,
+    marginTop: 10,
   },
-  description: {
-    fontSize: FONT_SIZES.MEDIUM,
+  gradientHeaderSubTitle: {
+    color: COLORS.WHITE,
+    fontSize: 14,
     fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.TEXT_SECONDARY,
-    marginBottom: 30,
+    marginTop: 10,
+  },
+  gradientHeader: {
+    width: '100%',
+    height: dimensions.height * 0.48,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  keyboardContainer: {
+    flex: 1,
+    width: '100%',
+  },
+  contentWrapper: {
+    paddingHorizontal: 16,
+    flex: 1,
   },
   inputContainer: {
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: COLORS.BORDER,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    height: 50,
-    justifyContent: 'center',
     flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  input: {
-    flex: 1,
-    height: '100%',
-    fontFamily: FONTS.SANTRAL_BOOK,
-  },
-  eyeIcon: {
-    padding: 5,
+  signUpButton: {
+    marginVertical: 20,
   },
   termsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginVertical: 15,
   },
   checkbox: {
     width: 20,
@@ -85,40 +70,31 @@ const styles = StyleSheet.create({
   termsText: {
     flex: 1,
     fontSize: 12,
-    color: COLORS.TEXT_SECONDARY,
+    color: COLORS.GRAY_TEXT,
     fontFamily: FONTS.SANTRAL_MEDIUM,
   },
   termsLink: {
-    color: COLORS.BLACK,
+    color: COLORS.PRIMARY,
     fontFamily: FONTS.SANTRAL_BOLD,
-  },
-  signUpButton: {
-    height: 50,
-    borderRadius: 25,
-    overflow: 'hidden',
-    marginBottom: 30,
-  },
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signUpButtonText: {
-    color: COLORS.WHITE,
-    fontSize: FONT_SIZES.LARGE,
-    fontFamily: FONTS.SANTRAL_BOLD,
-  },
-  loginContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
   },
   loginText: {
-    color: COLORS.TEXT_SECONDARY,
+    color: COLORS.GRAY_TEXT,
     fontFamily: FONTS.SANTRAL_MEDIUM,
+    alignSelf: 'center',
+    marginBottom: 20,
   },
   loginLink: {
     color: COLORS.PRIMARY,
-    fontFamily: FONTS.SANTRAL_BOLD,
+    fontFamily: FONTS.SANTRAL_EXTRA_BOLD,
+  },
+  emailInputContainer: {
+    flex: 1,
+  },
+  headerPadding: {
+    paddingHorizontal: 16,
+  },
+  headerSpacing: {
+    height: dimensions.height * 0.05,
   },
 });
 

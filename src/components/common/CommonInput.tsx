@@ -13,6 +13,7 @@ import {
   TextStyle,
   ImageSourcePropType,
   Dimensions,
+  Platform
 } from 'react-native';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Controller, useFormState } from 'react-hook-form';
@@ -50,6 +51,9 @@ interface inputProps {
   formatText?: (text: string) => string;
   maxLength?: number;
   labelStyle?: StyleProp<TextStyle>;
+  isLeftImage?: boolean;
+  leftImage?: ImageSourcePropType;
+
 }
 
 export const CommonInput = React.forwardRef<TextInput, inputProps>(
@@ -68,12 +72,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
       editable = true,
       isRightImage = false,
       rightImage,
-
+      leftImage,
       containerStyle,
       textInputStyle,
       addInfo = false,
       onRightImagePress,
-
+      isLeftImage = false,
       rightImageStyle,
       onFocus,
       onBlur,
@@ -143,21 +147,15 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   secureTextEntry && styles.passwordInputStyle,
                   customStyle,
                 ]}>
-                {isMobileNumber && (
-                  <Pressable
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      backgroundColor: COLORS.TRIBE_BACKGROUND,
-                      borderRadius: 12,
-                      paddingHorizontal: 20,
-                      paddingVertical: 5,
-                      height: 55,
-                    }}
-                    onPress={onPressCountryCode}>
-                    <Text style={styles.labelTextStyle}>{countryCode}</Text>
-                  </Pressable>
-                )}
+
+                {isLeftImage && <Image
+                  source={leftImage}
+                  style={styles.leftImageStyle}
+                  resizeMode='center'
+                />}
+                {isMobileNumber && <View style={{}}>
+                  <Text >{countryCode}</Text>
+                </View>}
                 <TextInput
                   ref={inputRef}
                   allowFontScaling={false}
@@ -188,7 +186,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                     isRightImage && !secureTextEntry ? 'none' : 'auto'
                   }
                 />
-                {/* {isRightImage && !secureTextEntry && (
+                {isRightImage && !secureTextEntry && (
                   <Image
                     source={rightImage ? rightImage : Images.calendar}
                     style={{
@@ -198,17 +196,18 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                       right: 10,
                     }}
                   />
-                )} */}
-                {/* {secureTextEntry && isRightImage && (
+                )}
+                {secureTextEntry && isRightImage && (
                   <Pressable
                     style={[styles.rightImageStyle, rightImageStyle]}
                     onPress={() => setSecureEntry(!secureEntry)}>
                     <Image
                       source={secureEntry ? Images.eye : Images.eyeOff}
-                      style={{ height: 24, width: 24 }}
+                      style={styles.leftImageStyle}
+                      resizeMode='center'
                     />
                   </Pressable>
-                )} */}
+                )}
               </View>
             );
 
@@ -247,7 +246,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     gap: 4,
     width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.WHITE,
 
+    paddingHorizontal: 2
+  },
+  leftImageStyle: {
+    height: 24,
+    width: 24,
   },
   labelTextStyle: {
     fontSize: 14,
@@ -258,14 +265,27 @@ const styles = StyleSheet.create({
   },
   commonContainerStyle: {
     width: '100%',
-    paddingHorizontal: 10,
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+
+    alignItems: 'center',
     backgroundColor: COLORS.WHITE,
-    borderRadius: 12,
+    borderRadius: 8,
+    gap: 5,
+    borderColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
     height: 57,
-    zIndex: -1,
-    borderColor: COLORS.BORDER_COLOR,
-    borderWidth: 1,
+    overflow: 'visible',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.12,
+        shadowRadius: 6,
+      },
+      android: {
+        elevation: 3,
+      },
+    }),
   },
   font: {
     fontSize: 14,

@@ -13,6 +13,8 @@ import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import { useHomeViewModel } from './HomeViewModel';
 import { Images } from '../../../utils/images';
+import CustomButton from '../../../components/common/CustomButton';
+import Header from '../../../components/common/Header';
 
 const HomeScreen = () => {
   const {
@@ -29,15 +31,8 @@ const HomeScreen = () => {
           style={styles.navShadow}
           resizeMode="stretch"
         />
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>Pudo Fast</Text>
-          <TouchableOpacity onPress={navigateToNotifications}>
-            <Image
-              source={Images.notification}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
+        <Header title="Pudo Fast" type='home' onNotificationPress={navigateToNotifications} />
+
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -96,19 +91,7 @@ const HomeScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.continueButton}
-            onPress={navigateToDeliveryMiles}
-          >
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.continueText}>CONTINUE</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+          <CustomButton title="CONTINUE" onPress={navigateToDeliveryMiles} style={{ marginTop: 10 }} />
         </View>
       </ScrollView>
     </SafeAreaView>

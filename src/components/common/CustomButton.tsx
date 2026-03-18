@@ -77,7 +77,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 54,
+    height: 57,
 
     overflow: 'hidden',
   },

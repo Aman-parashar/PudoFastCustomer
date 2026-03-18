@@ -1,52 +1,44 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../../utils/colors';
+import { dimensions } from '../../../utils/constant';
 import { FONTS } from '../../../utils/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.BACKGROUND,
+  },
+  gradientHeaderTitle: {
+    color: COLORS.SECONDARY,
+    fontSize: 34,
+    fontFamily: FONTS.SANTRAL_BOLD,
+    marginTop: 10,
+  },
+  gradientHeaderSubTitle: {
+    color: COLORS.WHITE,
+    fontSize: 14,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    marginTop: 10,
   },
   gradientHeader: {
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    paddingBottom: 40,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
+    width: '100%',
+    height: dimensions.height * 0.45,
+    overflow: 'hidden',
     justifyContent: 'center',
+    alignItems: 'flex-start',
   },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  headerTextContainer: {
-    marginTop: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.WHITE,
-  },
-  subtitle: {
-    fontSize: 14,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 10,
-    lineHeight: 20,
-  },
-  content: {
+  keyboardContainer: {
     flex: 1,
-    paddingHorizontal: 20,
-    marginTop: 40,
+    width: '100%',
+  },
+  contentWrapper: {
+    paddingHorizontal: 16,
+    flex: 1,
+    marginTop: 20,
   },
   otpContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
     marginBottom: 40,
   },
   otpInput: {
@@ -59,7 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: FONTS.SANTRAL_BOLD,
     color: COLORS.PRIMARY,
-    backgroundColor: '#FBFBFB',
+    backgroundColor: COLORS.WHITE,
   },
   timerContainer: {
     alignItems: 'center',
@@ -76,19 +68,13 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   verifyButton: {
-    height: 55,
-    borderRadius: 27.5,
-    overflow: 'hidden',
+    marginVertical: 20,
   },
-  buttonGradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  headerPadding: {
+    paddingHorizontal: 16,
   },
-  verifyText: {
-    color: COLORS.WHITE,
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
+  headerSpacing: {
+    height: dimensions.height * 0.05,
   },
 });
 

@@ -2,124 +2,76 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
+  ImageBackground,
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useNewPasswordViewModel } from './NewPasswordViewModel';
 import { Images } from '../../../utils/images';
+import Container from '../../../components/common/Container';
+import KeyboardContainer from '../../../components/layout/KeyboardContainer';
+import { CommonInput } from '../../../components/common/CommonInput';
+import CustomButton from '../../../components/common/CustomButton';
+import { useForm } from 'react-hook-form';
+import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
 
 const NewPasswordScreen = () => {
+  const { control } = useForm();
   const {
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-    showPassword,
-    showConfirmPassword,
     handleSetPassword,
-    goBack,
-    toggleShowPassword,
-    toggleShowConfirmPassword,
   } = useNewPasswordViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-        style={styles.gradientHeader}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
+    <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
+      <KeyboardContainer style={styles.keyboardContainer}>
+        <ImageBackground
+          source={Images.loginBG}
+          style={styles.gradientHeader}
         >
-          <Image
-            source={Images.arrowLeft}
-            style={[styles.backIcon, { tintColor: COLORS.WHITE }]}
-          />
-        </TouchableOpacity>
+          <Header type="auth" style={{ backgroundColor: COLORS.TRANSPARENT }} />
+          <View style={styles.headerPadding}>
+            <Text style={styles.gradientHeaderTitle}>New Password</Text>
+            <Text style={styles.gradientHeaderSubTitle}>Please set a new password that is easy to remember.</Text>
+          </View>
+          <View style={styles.headerSpacing} />
+        </ImageBackground>
 
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.title}>New Password</Text>
-          <Text style={styles.subtitle}>
-            Please set a new password that is easy to remember.
-          </Text>
-        </View>
-      </LinearGradient>
-
-      <View style={styles.content}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.form}
-        >
+        <View style={styles.contentWrapper}>
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>New Password</Text>
-            <View style={styles.passwordRow}>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter new password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-              />
-              <TouchableOpacity
-                onPress={toggleShowPassword}
-                style={styles.eyeIconContainer}
-              >
-                <Image
-                  source={showPassword ? Images.eyeSelect : Images.eyeUnselect}
-                  style={styles.eyeIcon}
-                />
-              </TouchableOpacity>
-            </View>
+            <CommonInput 
+              inputlabel="New Password" 
+              name="password" 
+              control={control} 
+              containerStyle={styles.emailInputContainer} 
+              isLeftImage 
+              leftImage={Images.password} 
+              secureTextEntry 
+              isRightImage 
+            />
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Confirm New Password</Text>
-            <View style={styles.passwordRow}>
-              <TextInput
-                style={styles.input}
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry={!showConfirmPassword}
-              />
-              <TouchableOpacity
-                onPress={toggleShowConfirmPassword}
-                style={styles.eyeIconContainer}
-              >
-                <Image
-                  source={showConfirmPassword ? Images.eyeSelect : Images.eyeUnselect}
-                  style={styles.eyeIcon}
-                />
-              </TouchableOpacity>
-            </View>
+            <CommonInput 
+              inputlabel="Confirm New Password" 
+              name="confirmPassword" 
+              control={control} 
+              containerStyle={styles.emailInputContainer} 
+              isLeftImage 
+              leftImage={Images.password} 
+              secureTextEntry 
+              isRightImage 
+            />
           </View>
 
-          <TouchableOpacity
-            style={styles.submitButton}
+          <CustomButton
+            title="SET PASSWORD"
             onPress={handleSetPassword}
-          >
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.buttonGradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.submitText}>SET PASSWORD</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </View>
-    </SafeAreaView>
+            style={styles.submitButton}
+          />
+        </View>
+      </KeyboardContainer>
+    </Container>
   );
 };
 

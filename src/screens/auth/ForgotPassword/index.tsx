@@ -1,131 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
+  ImageBackground,
+  Pressable,
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useForgotPasswordViewModel } from './ForgotPasswordViewModel';
 import { Images } from '../../../utils/images';
+import Container from '../../../components/common/Container';
+import KeyboardContainer from '../../../components/layout/KeyboardContainer';
+import { CommonInput } from '../../../components/common/CommonInput';
+import CustomButton from '../../../components/common/CustomButton';
+import { useForm } from 'react-hook-form';
+import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
+import { dimensions } from '../../../utils/constant';
 
 const ForgotPasswordScreen = () => {
+  const { control } = useForm();
+  const [isMobile, setIsMobile] = useState(false);
   const {
-    loginType,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    countryCode,
     handleSend,
-    goBack,
-    toggleLoginType,
   } = useForgotPasswordViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-        style={styles.gradientHeader}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
+    <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
+      <KeyboardContainer style={styles.keyboardContainer}>
+        <ImageBackground
+          source={Images.loginBG}
+          style={styles.gradientHeader}
         >
-          <Image
-            source={Images.arrowLeft}
-            style={[styles.backIcon, { tintColor: COLORS.WHITE }]}
-          />
-        </TouchableOpacity>
+          <Header type="auth" style={{ backgroundColor: COLORS.TRANSPARENT }} />
+          <View style={styles.headerPadding}>
+            <Text style={styles.gradientHeaderTitle}>Can't sign in?</Text>
+            <Text style={styles.gradientHeaderSubTitle}>Enter the email address or phone number linked to your account, and we'll send you a recovery link.</Text>
+          </View>
+          <View style={{ height: dimensions.height * .05 }} />
+        </ImageBackground>
 
-        <View style={styles.headerTextContainer}>
-          <Text style={styles.title}>Forgot Password</Text>
-          <Text style={styles.subtitle}>
-            Please enter your registered email or phone number to reset your password.
-          </Text>
-        </View>
-      </LinearGradient>
-
-      <View style={styles.content}>
-        <View style={styles.toggleContainer}>
-          <TouchableOpacity
-            style={[styles.toggleButton, loginType === 'email' && styles.toggleButtonActive]}
-            onPress={() => toggleLoginType('email')}
-          >
-            <View style={styles.radioRow}>
-                <View style={[styles.radio, loginType === 'email' && styles.radioActive]} />
-                <Text style={[styles.toggleText, loginType === 'email' && styles.toggleTextActive]}>Email</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.toggleButton, loginType === 'phone' && styles.toggleButtonActive]}
-            onPress={() => toggleLoginType('phone')}
-          >
-            <View style={styles.radioRow}>
-                <View style={[styles.radio, loginType === 'phone' && styles.radioActive]} />
-                <Text style={[styles.toggleText, loginType === 'phone' && styles.toggleTextActive]}>Phone</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          style={styles.form}
-        >
-          {loginType === 'email' ? (
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Email Address</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter email address"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
+        <View style={styles.contentWrapper}>
+          <View style={styles.inputContainer}>
+            {isMobile && (
+              <Pressable onPress={() => setIsMobile(false)} style={styles.emailToggleContainer}>
+                <ImageBackground source={Images.email} style={styles.emailIcon} resizeMode='center' />
+              </Pressable>
+            )}
+            {isMobile ? (
+              <CommonInput
+                inputlabel="Phone Number"
+                name="phone"
+                control={control}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.phone}
+                keyboardType="phone-pad"
+                isMobileNumber
               />
-            </View>
-          ) : (
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Phone Number</Text>
-              <View style={styles.phoneInputRow}>
-                <TouchableOpacity style={styles.countryCodeSelector}>
-                  <Text style={styles.countryCodeText}>{countryCode}</Text>
-                </TouchableOpacity>
-                <TextInput
-                  style={[styles.input, { flex: 1 }]}
-                  placeholder="Phone number"
-                  value={phone}
-                  onChangeText={setPhone}
-                  keyboardType="phone-pad"
-                />
-              </View>
-            </View>
-          )}
+            ) : (
+              <CommonInput
+                inputlabel="Email Address"
+                name="email"
+                control={control}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.email}
+                keyboardType="email-address"
+              />
+            )}
+            {!isMobile && (
+              <Pressable onPress={() => setIsMobile(true)}>
+                <ImageBackground source={Images.phone} style={styles.phoneToggleContainer} resizeMode='center' />
+              </Pressable>
+            )}
+          </View>
 
-          <TouchableOpacity
-            style={styles.sendButton}
+          <CustomButton
+            title="SEND"
             onPress={handleSend}
-          >
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.buttonGradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.sendText}>SEND</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
-      </View>
-    </SafeAreaView>
+            style={styles.sendButton}
+          />
+        </View>
+      </KeyboardContainer>
+    </Container>
   );
 };
 
