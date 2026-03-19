@@ -58,16 +58,16 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SantralMedium.ttf</string>
-		<string>SantralExtraLight.ttf</string>
-		<string>SantralThin.ttf</string>
-		<string>SantralUltra.ttf</string>
-		<string>SantralBook.ttf</string>
-		<string>SantralLight.ttf</string>
-		<string>SantralBold.ttf</string>
-		<string>SantralHairline.ttf</string>
-		<string>SantralExtraBold.ttf</string>
-		<string>SantralSemiBold.ttf</string>
+		<string>Santral-Medium.ttf</string>
+		<string>Santral-Light.ttf</string>
+		<string>Santral-Ultra.ttf</string>
+		<string>Santral-ExtraBold.ttf</string>
+		<string>Santral-ExtraLight.ttf</string>
+		<string>Santral-Bold.ttf</string>
+		<string>Santral-Hairline.ttf</string>
+		<string>Santral-Book.ttf</string>
+		<string>Santral-SemiBold.ttf</string>
+		<string>Santral-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

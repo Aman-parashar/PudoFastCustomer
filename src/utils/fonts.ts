@@ -1,14 +1,14 @@
 export const FONTS = {
-	SANTRAL_HAIRLINE: "SantralHairline",
-	SANTRAL_THIN: "SantralThin",
-	SANTRAL_EXTRA_LIGHT: "SantralExtraLight",
-	SANTRAL_LIGHT: "SantralLight",
-	SANTRAL_BOOK: "SantralBook",
-	SANTRAL_MEDIUM: "SantralMedium",
-	SANTRAL_SEMI_BOLD: "SantralSemiBold",
-	SANTRAL_BOLD: "SantralBold",
-	SANTRAL_EXTRA_BOLD: "SantralExtraBold",
-	SANTRAL_ULTRA: "SantralUltra",
+  SANTRAL_HAIRLINE: "Santral-Hairline",
+  SANTRAL_THIN: "Santral-Thin",
+  SANTRAL_EXTRA_LIGHT: "Santral-ExtraLight",
+  SANTRAL_LIGHT: "Santral-Light",
+  SANTRAL_BOOK: "Santral-Book",
+  SANTRAL_MEDIUM: "Santral-Medium",
+  SANTRAL_SEMI_BOLD: "Santral-SemiBold",
+  SANTRAL_BOLD: "Santral-Bold",
+  SANTRAL_EXTRA_BOLD: "Santral-ExtraBold",
+  SANTRAL_ULTRA: "Santral-Ultra",
 };
 
 export const FONT_SIZES = {
