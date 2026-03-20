@@ -7,7 +7,7 @@ import { Images } from '../../../utils/images';
 export const walkthroughData = [
   {
     id: '1',
-    title: 'Parcel Pickup',
+    title: 'Pickup Parcel TEXT',
     description:
       'Sit back and relax while we take care of your delivery needs. Schedule a pickup, and a PUDO Driver will be at your service.',
     image: Images.tutorialImageOne,
@@ -15,7 +15,7 @@ export const walkthroughData = [
   },
   {
     id: '2',
-    title: 'Track Delivery',
+    title: 'GOING TO DELIVERY TEXT',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed felis at mauris vehicula',
     image: Images.tutorialImageTwo,
@@ -23,7 +23,7 @@ export const walkthroughData = [
   },
   {
     id: '3',
-    title: 'Safe Arrival',
+    title: 'PARCEL DELIVERED TEXT',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed felis at mauris vehicula',
     image: Images.tutorialImageThree,

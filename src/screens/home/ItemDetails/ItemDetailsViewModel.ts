@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { RootStackParamList } from '../../../types/avigation';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
@@ -7,59 +7,67 @@ import { Images } from '../../../utils/images';
 
 type ItemDetailsRouteProp = RouteProp<RootStackParamList, 'ItemDetails'>;
 
-export const PICKUP_TYPES = ['General', 'Secured', 'Special'];
+export const PICKUP_TYPES = ['General', 'Secured', 'Special'] as const;
+
+export type PickupType = (typeof PICKUP_TYPES)[number];
 
 export const ITEM_TYPES = [
   { id: '1', title: 'Document', img: Images.document, color: '#CB8803', bgColor: 'rgba(203, 136, 3, 0.1)' },
   { id: '2', title: 'Box', img: Images.box, color: '#5F9BE4', bgColor: 'rgba(95, 155, 228, 0.1)' },
-  { id: '3', title: 'Services', img: Images.serviceTypeSelected, color: '#CE43D7', bgColor: 'rgba(206, 67, 215, 0.1)' },
+  { id: '3', title: 'Notary', img: Images.wallet, color: '#CE43D7', bgColor: 'rgba(206, 67, 215, 0.1)' },
 ];
+
+interface FormValues {
+  description: string;
+  pickupType: PickupType;
+  itemType: string;
+  items: { name: string }[];
+}
 
 export const useItemDetailsViewModel = () => {
   const route = useRoute<ItemDetailsRouteProp>();
-  const { orderData } = route.params;
+  const { orderData } = route.params || {};
 
-  const [selectedPickupType, setSelectedPickupType] = useState('General');
-  const [selectedItemType, setSelectedItemType] = useState('Document');
-  const [itemsList, setItemsList] = useState(['']);
-  const [description, setDescription] = useState('');
+  const { control, handleSubmit, watch, setValue } = useForm<FormValues>({
+    defaultValues: {
+      description: '',
+      pickupType: 'General',
+      itemType: 'Document',
+      items: [{ name: '' }],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'items',
+  });
+
+  const selectedPickupType = watch('pickupType');
+  const selectedItemType = watch('itemType');
 
   const addItemField = () => {
-    if (itemsList[itemsList.length - 1].trim() === '') {
-      alert('Please enter item name');
+    const items = watch('items');
+    if (items[items.length - 1].name.trim() === '') {
+      // For simplicity, we bisa menggunakan Alert.alert if needed, 
+      // but let's just use form validation or simple check.
       return;
     }
-    setItemsList([...itemsList, '']);
+    append({ name: '' });
   };
 
   const removeItemField = (index: number) => {
-    if (itemsList.length === 1) {
-      alert('Please add at least one item');
-      return;
+    if (fields.length > 1) {
+      remove(index);
     }
-    const newList = [...itemsList];
-    newList.splice(index, 1);
-    setItemsList(newList);
   };
 
-  const updateItemName = (text: string, index: number) => {
-    const newList = [...itemsList];
-    newList[index] = text;
-    setItemsList(newList);
-  };
-
-  const handleNext = () => {
-    if (itemsList.some(item => item.trim() === '')) {
-      alert('Please enter at least one item name');
-      return;
-    }
-
+  const handleNext = (data: FormValues) => {
     const updatedOrderData = {
       ...orderData,
-      pickupType: selectedPickupType,
-      itemType: selectedItemType,
-      items: itemsList,
-      description: description,
+      pickupType: data.pickupType,
+      itemType: data.itemType,
+      items: data.items.map(item => item.name),
+      description: data.description,
     };
     NavigationService.navigate(RouteConstant.DeliverySelection, { orderData: updatedOrderData });
   };
@@ -69,16 +77,15 @@ export const useItemDetailsViewModel = () => {
   };
 
   return {
-    selectedPickupType,
-    setSelectedPickupType,
-    selectedItemType,
-    setSelectedItemType,
-    itemsList,
+    control,
+    handleSubmit,
+    fields,
     addItemField,
     removeItemField,
-    updateItemName,
-    description,
-    setDescription,
+    selectedPickupType,
+    setSelectedPickupType: (type: PickupType) => setValue('pickupType', type),
+    selectedItemType,
+    setSelectedItemType: (type: string) => setValue('itemType', type),
     handleNext,
     goBack,
   };

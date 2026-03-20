@@ -1,23 +1,29 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 
+interface ChangePasswordForm {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export const useChangePasswordViewModel = () => {
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { control, handleSubmit } = useForm<ChangePasswordForm>({
+    defaultValues: {
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
+  });
 
-  const [showOldPassword, setShowOldPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const handleSave = () => {
-    // Basic validation matching iOS
-    if (!oldPassword || !newPassword || !confirmPassword) {
+  const handleSave = (data: ChangePasswordForm) => {
+    // Basic validation
+    if (!data.oldPassword || !data.newPassword || !data.confirmPassword) {
       Alert.alert('Error', 'Please fill all fields');
       return;
     }
-    if (newPassword !== confirmPassword) {
+    if (data.newPassword !== data.confirmPassword) {
       Alert.alert('Error', 'New password and confirm password do not match');
       return;
     }
@@ -31,24 +37,10 @@ export const useChangePasswordViewModel = () => {
     NavigationService.goBack();
   };
 
-  const toggleOldPasswordVisibility = () => setShowOldPassword(!showOldPassword);
-  const toggleNewPasswordVisibility = () => setShowNewPassword(!showNewPassword);
-  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
-
   return {
-    oldPassword,
-    setOldPassword,
-    newPassword,
-    setNewPassword,
-    confirmPassword,
-    setConfirmPassword,
-    showOldPassword,
-    showNewPassword,
-    showConfirmPassword,
+    control,
     handleSave,
+    handleSubmit,
     goBack,
-    toggleOldPasswordVisibility,
-    toggleNewPasswordVisibility,
-    toggleConfirmPasswordVisibility,
   };
 };

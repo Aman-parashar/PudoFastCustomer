@@ -22,11 +22,13 @@ import DeliveryDetailsScreen from '../screens/history/deliveryDetails';
 import ItemDetailsScreen from '../screens/home/ItemDetails';
 import DeliverySelectionScreen from '../screens/home/DeliverySelection';
 import PaymentOptionsScreen from '../screens/home/PaymentOptions';
+import HistoryScreen from '../screens/history/history';
 import { RootStackParamList } from '../types/avigation';
 import { RouteConstant } from './Constant';
 
 import NavigationService from './NavigationService';
 import NotificationScreen from '../screens/notification';
+import DeliveryConfirmationScreen from '../screens/home/DeliveryConfirmation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -59,6 +61,8 @@ const AppNavigator = () => {
         <Stack.Screen name={RouteConstant.ItemDetails} component={ItemDetailsScreen} />
         <Stack.Screen name={RouteConstant.DeliverySelection} component={DeliverySelectionScreen} />
         <Stack.Screen name={RouteConstant.PaymentOptions} component={PaymentOptionsScreen} />
+        <Stack.Screen name={RouteConstant.DeliveryConfirmation} component={DeliveryConfirmationScreen} />
+        <Stack.Screen name={RouteConstant.ReceivingOrderHistory} component={HistoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

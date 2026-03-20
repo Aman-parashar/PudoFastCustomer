@@ -1,79 +1,137 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../utils/colors';
 import { FONTS } from '../../utils/fonts';
+import { COLORS } from '../../utils/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
-  },
-  header: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.BORDER,
-  },
-  backButton: {
-    padding: 10,
-  },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
+    backgroundColor: '#FFFFFF',
   },
   listContent: {
-    padding: 20,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
   },
-  notificationItem: {
+  sectionHeader: {
     flexDirection: 'row',
-    marginBottom: 20,
-    padding: 15,
-    backgroundColor: '#F9F9F9',
-    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 15,
   },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: COLORS.PRIMARY + '20',
-    justifyContent: 'center',
+  sectionTitle: {
+    fontSize: 16,
+    color: '#999',
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    marginRight: 10,
+  },
+  sectionLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#F0F0F0',
+  },
+  notificationCard: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#F8F8F8',
+  },
+  cardLeft: {
     alignItems: 'center',
     marginRight: 15,
+    width: 60,
   },
-  notificationIcon: {
-    width: 20,
-    height: 20,
-    tintColor: COLORS.PRIMARY,
+  iconCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#F3E5F5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
   },
-  textContainer: {
+  bellIcon: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+    tintColor: '#770275',
+  },
+  timeText: {
+    fontSize: 10,
+    color: '#333',
+    fontFamily: FONTS.SANTRAL_BOOK,
+    textAlign: 'center',
+  },
+  cardRight: {
     flex: 1,
   },
-  title: {
+  titleText: {
     fontSize: 16,
+    color: '#770275',
     fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
-    marginBottom: 5,
+    marginBottom: 4,
   },
-  description: {
+  bodyText: {
+    fontSize: 13,
+    color: '#666',
+    fontFamily: FONTS.SANTRAL_BOOK,
+    lineHeight: 18,
+  },
+  deleteAction: {
+    backgroundColor: '#FF3B30',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: '87%', // Slightly less than card height to account for marginBottom
+    borderRadius: 12,
+    marginTop: 1, // Visual alignment
+  },
+  deleteActionText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
     fontSize: 14,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: COLORS.TEXT_SECONDARY,
-    marginBottom: 5,
+    fontFamily: FONTS.SANTRAL_BOLD,
   },
-  time: {
-    fontSize: 12,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: COLORS.GRAY_TEXT,
+  emptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  headerSpacer: {
-    width: 40,
+  emptyImage: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    marginBottom: 30,
+  },
+  emptyTitle: {
+    fontSize: 18,
+    color: '#222',
+    fontWeight: 'bold',
+    fontFamily: FONTS.SANTRAL_BOLD,
+  },
+  clearBtn: {
+    paddingHorizontal: 5,
+  },
+  clearBtnText: {
+    fontSize: 15,
+    color: '#FF3B30',
+    fontWeight: '600',
+    fontFamily: FONTS.SANTRAL_SEMI_BOLD,
+  },
+  header: {
+    backgroundColor: COLORS.WHITE,
+    zIndex: 10,
+  },
+  navShadow: {
+    position: 'absolute',
+    top: -40,
+    width: '100%',
+    height: 110,
   },
 });
 

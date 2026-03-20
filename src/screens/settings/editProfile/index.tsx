@@ -15,129 +15,86 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useEditProfileViewModel } from './EditProfileViewModel';
 import { Images } from '../../../utils/images';
+import Header from '../../../components/common/Header';
+import CustomButton from '../../../components/common/CustomButton';
+import { CommonInput } from '../../../components/common/CommonInput';
+import { useForm } from 'react-hook-form';
 
 const EditProfileScreen = () => {
-  const {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    countryCode,
-    phone,
-    setPhone,
-    address,
-    setAddress,
-    handleSave,
-    goBack,
-  } = useEditProfileViewModel();
+  const { control, handleSave, handleSubmit, goBack } =
+    useEditProfileViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Edit Profile</Text>
-        <View style={styles.headerRightPlaceholder} />
-      </View>
+      <Header type="step" title="Edit Profile" onBack={goBack} />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          
           <View style={styles.profileImageContainer}>
             <Image
               source={Images.userPlaceholder}
               style={styles.profileImage}
             />
             <TouchableOpacity style={styles.editImageButton}>
-              <Image
-                source={Images.editIcon}
-                style={styles.editImageIcon}
-              />
+              <Image source={Images.editIcon} style={styles.editImageIcon} />
             </TouchableOpacity>
           </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>First Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="First Name"
-              value={firstName}
-              onChangeText={setFirstName}
+          <View style={styles.inputSection}>
+            <CommonInput
+              control={control}
+              name="firstName"
+              inputlabel="First Name"
+              isLeftImage
+              leftImage={Images.user}
             />
-          </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Last Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Last Name"
-              value={lastName}
-              onChangeText={setLastName}
+            <CommonInput
+              control={control}
+              name="lastName"
+              inputlabel="Last Name"
+              isLeftImage
+              leftImage={Images.user}
             />
-          </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
+            <CommonInput
+              control={control}
+              name="email"
+              inputlabel="Email"
+              isLeftImage
+              leftImage={Images.email}
               keyboardType="email-address"
-              autoCapitalize="none"
+            />
+
+            <CommonInput
+              control={control}
+              name="phone"
+              inputlabel="Phone Number"
+              isLeftImage
+              leftImage={Images.phone}
+              keyboardType="phone-pad"
+            />
+
+            <CommonInput
+              control={control}
+              name="address"
+              inputlabel="Address"
+              isLeftImage
+              leftImage={Images.addressIcon}
             />
           </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Phone Number</Text>
-            <View style={styles.phoneInputContainer}>
-              <TouchableOpacity style={styles.countryCodeButton}>
-                <Text style={styles.countryCodeText}>{countryCode}</Text>
-              </TouchableOpacity>
-              <TextInput
-                style={styles.phoneInput}
-                placeholder="Phone Number"
-                value={phone}
-                onChangeText={setPhone}
-                keyboardType="phone-pad"
-              />
-            </View>
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Address</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Address"
-              value={address}
-              onChangeText={setAddress}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.saveButtonText}>SAVE</Text>
-            </LinearGradient>
-          </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          title="SAVE"
+          onPress={handleSubmit(handleSave)}
+        />
+      </View>
     </SafeAreaView>
   );
 };

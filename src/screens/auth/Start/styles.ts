@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between', // logo top, bottomGroup bottom
     paddingHorizontal: 20,
     paddingVertical: 50,
   },
@@ -23,8 +23,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 80,
   },
+
+  // ✅ New wrapper that groups text + buttons at the bottom
+  bottomGroup: {
+    gap: 24,
+    marginBottom: 20,
+  },
+
   textContainer: {
-    marginBottom: 50,
+    // ✅ Removed backgroundColor: 'red'
   },
   welcome: {
     fontSize: 50,
@@ -39,8 +46,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   buttonContainer: {
-    gap: 20,
-    marginBottom: 20,
+    gap: 16,
   },
   loginButton: {
     height: 50,
@@ -66,17 +72,6 @@ const styles = StyleSheet.create({
     color: COLORS.WHITE,
     fontSize: 16,
     fontFamily: FONTS.SANTRAL_BOLD,
-  },
-  skipButton: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  skipText: {
-    color: COLORS.WHITE,
-    fontSize: 14,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    textDecorationLine: 'underline',
   },
 });
 

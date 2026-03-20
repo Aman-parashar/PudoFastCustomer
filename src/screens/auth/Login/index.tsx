@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-
   Image,
-
   Pressable,
   Platform,
   ImageBackground,
@@ -46,40 +44,88 @@ const LoginScreen = () => {
 
   return (
     <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
-
-
-
       <KeyboardContainer style={styles.keyboardContainer}>
-        <ImageBackground
-          source={Images.loginBG}
-          style={styles.gradientHeader}
-        >
-          <Header type="auth" style={{ backgroundColor: COLORS.TRANSPARENT }} />
-          <View style={{ paddingHorizontal: 16 }}>
+        <ImageBackground source={Images.loginBG} style={styles.gradientHeader}>
+          <Header
+            type="auth"
+            style={{ backgroundColor: COLORS.TRANSPARENT, marginTop: 30 }}
+          />
+          <View
+            style={{
+              paddingHorizontal: 16,
+              marginTop: 40,
+              justifyContent: 'space-between',
+              height: dimensions.height * 0.12,
+            }}
+          >
             <Text style={styles.gradientHeaderTitle}>LOGIN</Text>
-            <Text style={styles.gradientHeaderSubTitle}>Ready to deliver with confidence? Take the first step now.</Text>
+            <Text style={styles.gradientHeaderSubTitle}>
+              Ready to deliver with confidence? Take the first step now.
+            </Text>
           </View>
-          <View style={{ height: dimensions.height * .08 }} />
+          <View style={{ height: dimensions.height * 0.08 }} />
         </ImageBackground>
         <View style={{ paddingHorizontal: 16, flex: 1 }}>
-
           <View style={styles.inputContainer}>
-            {isMobile && <Pressable onPress={() => setIsMobile(false)} style={styles.emailContainer}>
-              <Image source={Images.email} style={styles.emailIcon} resizeMode='center' />
-            </Pressable>}
-            {isMobile ? (
-              <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber />
-            ) : (
-              <CommonInput inputlabel="Email" name="email" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.email} />
+            {isMobile && (
+              <Pressable
+                onPress={() => setIsMobile(false)}
+                style={styles.emailContainer}
+              >
+                <Image
+                  source={Images.email}
+                  style={styles.emailIcon}
+                  resizeMode="center"
+                />
+              </Pressable>
             )}
-            {!isMobile && <Pressable onPress={() => setIsMobile(true)}>
-              <Image source={Images.phone} style={styles.phoneIcon} resizeMode='center' />
-            </Pressable>}
+            {isMobile ? (
+              <CommonInput
+                inputlabel="Phone"
+                name="phone"
+                control={control}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.phone}
+                isMobileNumber
+              />
+            ) : (
+              <CommonInput
+                inputlabel="Email"
+                name="email"
+                control={control}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.email}
+              />
+            )}
+            {!isMobile && (
+              <Pressable onPress={() => setIsMobile(true)}>
+                <Image
+                  source={Images.phone}
+                  style={styles.phoneIcon}
+                  resizeMode="center"
+                />
+              </Pressable>
+            )}
           </View>
-          <CommonInput inputlabel="Password" name="password" control={control} isLeftImage leftImage={Images.password} secureTextEntry isRightImage />
+          <CommonInput
+            inputlabel="Password"
+            name="password"
+            control={control}
+            isLeftImage
+            leftImage={Images.password}
+            secureTextEntry
+            isRightImage
+          />
 
           <View style={styles.forgotPasswordContainer}>
-            <Text style={styles.forgotPasswordText} onPress={navigateToForgotPassword}>Forgot Password ?</Text>
+            <Text
+              style={styles.forgotPasswordText}
+              onPress={navigateToForgotPassword}
+            >
+              Forgot Password ?
+            </Text>
           </View>
 
           <CustomButton
@@ -97,20 +143,36 @@ const LoginScreen = () => {
           <View style={styles.footerContainer}>
             <View style={styles.socialButtonsContainer}>
               <Pressable>
-                <Image source={Images.facebookIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.facebookIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
               <Pressable>
-                <Image source={Images.googleIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.googleIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
               <Pressable>
-                <Image source={Images.appleIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.appleIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
             </View>
-            <Text style={styles.signUpText}>Don't have an account? <Text style={styles.signUpLink} onPress={navigateToSignUp}>SIGN UP</Text></Text>
+            <Text style={styles.signUpText}>
+              Don't have an account?{' '}
+              <Text style={styles.signUpLink} onPress={navigateToSignUp}>
+                SIGN UP
+              </Text>
+            </Text>
           </View>
         </View>
       </KeyboardContainer>
-
     </Container>
   );
 };
