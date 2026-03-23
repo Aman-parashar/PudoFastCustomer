@@ -13,7 +13,7 @@ import {
   TextStyle,
   ImageSourcePropType,
   Dimensions,
-  Platform
+  Platform,
 } from 'react-native';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Controller, useFormState } from 'react-hook-form';
@@ -53,7 +53,6 @@ interface inputProps {
   labelStyle?: StyleProp<TextStyle>;
   isLeftImage?: boolean;
   leftImage?: ImageSourcePropType;
-
 }
 
 export const CommonInput = React.forwardRef<TextInput, inputProps>(
@@ -124,13 +123,13 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
     return (
       <Pressable
         style={[styles.inputContainer, containerStyle]}
-        onPress={handlePressOutside}>
+        onPress={handlePressOutside}
+      >
         {label !== '' && (
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={[styles.labelTextStyle, labelStyle]}>
               {`${label}${isMandatory ? '*' : ''}`}
             </Text>
-
           </View>
         )}
 
@@ -146,16 +145,20 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   !editable && { backgroundColor: COLORS.TRIBE_BACKGROUND },
                   secureTextEntry && styles.passwordInputStyle,
                   customStyle,
-                ]}>
-
-                {isLeftImage && <Image
-                  source={leftImage}
-                  style={styles.leftImageStyle}
-                  resizeMode='center'
-                />}
-                {isMobileNumber && <View style={{}}>
-                  <Text >{countryCode}</Text>
-                </View>}
+                ]}
+              >
+                {isLeftImage && (
+                  <Image
+                    source={leftImage}
+                    style={styles.leftImageStyle}
+                    resizeMode="center"
+                  />
+                )}
+                {isMobileNumber && (
+                  <View style={{}}>
+                    <Text>{countryCode}</Text>
+                  </View>
+                )}
                 <TextInput
                   ref={inputRef}
                   allowFontScaling={false}
@@ -200,11 +203,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 {secureTextEntry && isRightImage && (
                   <Pressable
                     style={[styles.rightImageStyle, rightImageStyle]}
-                    onPress={() => setSecureEntry(!secureEntry)}>
+                    onPress={() => setSecureEntry(!secureEntry)}
+                  >
                     <Image
                       source={secureEntry ? Images.eye : Images.eyeOff}
                       style={styles.leftImageStyle}
-                      resizeMode='center'
+                      resizeMode="center"
                     />
                   </Pressable>
                 )}
@@ -228,7 +232,8 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                         color: COLORS.PRIMARY_RED,
                         fontSize: 14,
                         marginTop: -4,
-                      }}>
+                      }}
+                    >
                       {errors[name]?.message}
                     </Text>
                   )}
@@ -250,11 +255,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.WHITE,
 
-    paddingHorizontal: 2
+    paddingHorizontal: 2,
   },
   leftImageStyle: {
     height: 24,
     width: 24,
+    resizeMode: 'contain',
   },
   labelTextStyle: {
     fontSize: 14,

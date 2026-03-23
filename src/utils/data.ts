@@ -15,7 +15,8 @@ export const PickUpType = [
 ]
 
 export const CardType =[
-    {id:1,label:"Credit Card",value:"credit_card"},
-    {id:2,label:"Debit Card",value:"debit_card"},
+    {id:1,label:"Debit Card",value:"debit_card"},
+    {id:2,label:"Credit Card",value:"credit_card"},
+    
     
 ]

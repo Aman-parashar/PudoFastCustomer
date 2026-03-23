@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
   },
   pickupCard: {
     backgroundColor: '#E8F5E9',
-    borderColor: '#C8E6C9',
+    borderWidth: 1,
+    borderColor: '#5beb60ff',
   },
   dropoffCard: {
     backgroundColor: '#E3F2FD',
-    borderColor: '#BBDEFB',
+    borderColor: '#7fbdf0ff',
+    borderWidth: 1,
   },
   addressRow: {
     flexDirection: 'row',
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: FONTS.SANTRAL_BOOK,
     color: '#999999',
-    marginBottom: 2,
+    marginBottom: 10,
   },
   addressText: {
     fontSize: 14,

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Alert } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types/avigation';
 import NavigationService from '../../../navigation/NavigationService';
@@ -12,6 +11,7 @@ export const useDeliveryConfirmationViewModel = () => {
   const { orderData, fromHistory } = route.params || {};
 
   const [comment, setComment] = useState('');
+  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
 
   const handleConfirm = () => {
     // Collect all data
@@ -20,17 +20,13 @@ export const useDeliveryConfirmationViewModel = () => {
       driverComment: comment,
     };
     
-    // Process final confirmation
-    Alert.alert(
-      'Order Confirmed',
-      'Your order has been placed successfully!',
-      [
-        {
-          text: 'OK',
-          onPress: () => NavigationService.navigate(RouteConstant.Main as any),
-        },
-      ]
-    );
+    // Show success modal instead of Alert
+    setIsSuccessModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsSuccessModalVisible(false);
+    NavigationService.navigate(RouteConstant.Main as any);
   };
 
   const goBack = () => {
@@ -44,5 +40,7 @@ export const useDeliveryConfirmationViewModel = () => {
     handleConfirm,
     goBack,
     fromHistory,
+    isSuccessModalVisible,
+    handleCloseModal,
   };
 };

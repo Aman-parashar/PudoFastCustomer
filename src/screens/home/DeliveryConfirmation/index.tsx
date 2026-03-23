@@ -18,10 +18,19 @@ import CustomButton from '../../../components/common/CustomButton';
 import { deliverySteps } from '../../../utils/enum';
 
 import Header from '../../../components/common/Header';
+import CommonModal from '../../../components/common/CommonModal';
 
 const DeliveryConfirmationScreen = () => {
-  const { fromHistory, orderData, comment, setComment, handleConfirm, goBack } =
-    useDeliveryConfirmationViewModel();
+  const {
+    fromHistory,
+    orderData,
+    comment,
+    setComment,
+    handleConfirm,
+    goBack,
+    isSuccessModalVisible,
+    handleCloseModal,
+  } = useDeliveryConfirmationViewModel();
 
   const renderStatusItem = (
     label: string,
@@ -112,7 +121,7 @@ const DeliveryConfirmationScreen = () => {
             </View>
             <View style={[styles.trackingRow, { marginBottom: 0 }]}>
               <Image
-                source={Images.wallet}
+                source={Images.AmountImage}
                 style={styles.trackingIcon}
                 tintColor="#FB5184"
               />
@@ -147,7 +156,7 @@ const DeliveryConfirmationScreen = () => {
               </Text>
             </View>
           </View>
-
+          <Text style={styles.sectionTitle}>Receiver Details</Text>
           <View style={styles.receiverDetails}>
             <View style={styles.receiverRow}>
               <Image source={Images.useIcon} style={styles.receiverIcon} />
@@ -195,7 +204,7 @@ const DeliveryConfirmationScreen = () => {
           </View>
 
           <View style={styles.descriptionRow}>
-            <Image source={Images.document} style={styles.descIcon} />
+            <Image source={Images.descriptionNote} style={styles.descIcon} />
             <Text style={styles.descriptionText}>
               {orderData?.description ||
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis urna quam. Donec sagittis'}
@@ -207,37 +216,62 @@ const DeliveryConfirmationScreen = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Delivery Details</Text>
           <View style={styles.deliveryCard}>
+            {/* Header Row */}
             <View style={styles.serviceRow}>
               <Image source={Images.walker} style={styles.serviceIcon} />
               <Text style={styles.serviceName}>
                 {orderData?.service || 'Walker'}
               </Text>
             </View>
+
+            {/* Two Column Grid with Vertical Divider */}
             <View style={styles.deliveryGrid}>
-              <View style={styles.gridItem}>
-                <Image source={Images.wayToDropOff} style={styles.gridIcon} />
-                <Text style={styles.gridText}>
-                  {orderData?.tripType === 'one_way' ? 'One Way' : 'Two Way'}
-                </Text>
+              {/* Left Column */}
+              <View style={styles.leftColumn}>
+                <View style={styles.gridItem}>
+                  <Image source={Images.onWay} style={styles.gridIcon} />
+                  <Text style={styles.gridText}>
+                    {orderData?.tripType === 'one_way' ? 'One Way' : 'Two Way'}
+                  </Text>
+                </View>
+                <View style={styles.gridItem}>
+                  <Image source={Images.privacy} style={styles.gridIcon} />
+                  <Text style={styles.gridText}>General</Text>
+                </View>
+                <View style={styles.gridItem}>
+                  <Image
+                    source={Images.distance_image_green}
+                    style={styles.gridIcon}
+                  />
+                  <Text style={styles.gridText}>
+                    {orderData?.distance || '5.2 km'}
+                  </Text>
+                </View>
               </View>
-              <View style={styles.gridItem}>
-                <Image source={Images.greenCalendar} style={styles.gridIcon} />
-                <Text style={styles.gridText}>
-                  {orderData?.scheduleDetails?.date || '10/July/2022'}
-                </Text>
-              </View>
-              <View style={styles.gridItem}>
-                <Image source={Images.privacy} style={styles.gridIcon} />
-                <Text style={styles.gridText}>General</Text>
-              </View>
-              <View style={styles.gridItem}>
-                <Image
-                  source={Images.historySelected}
-                  style={styles.gridIcon}
-                />
-                <Text style={styles.gridText}>
-                  {orderData?.scheduleDetails?.time || '10:00 AM'}
-                </Text>
+
+              {/* Vertical Divider Line */}
+              <View style={styles.verticalDivider} />
+
+              {/* Right Column */}
+              <View style={styles.rightColumn}>
+                <View style={styles.gridItem}>
+                  <Image source={Images.calender} style={styles.gridIcon} />
+                  <Text style={styles.gridText}>
+                    {orderData?.scheduleDetails?.date || '10/July/2022'}
+                  </Text>
+                </View>
+                <View style={styles.gridItem}>
+                  <Image source={Images.clock} style={styles.gridIcon} />
+                  <Text style={styles.gridText}>
+                    {orderData?.scheduleDetails?.time || '10:00 AM'}
+                  </Text>
+                </View>
+                <View style={styles.gridItem}>
+                  <Image source={Images.clock} style={styles.gridIcon} />
+                  <Text style={styles.gridText}>
+                    {orderData?.scheduleDetails?.duration || '23 Min'}
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
@@ -249,21 +283,30 @@ const DeliveryConfirmationScreen = () => {
           <View style={styles.paymentInfoCard}>
             <View style={styles.paymentGrid}>
               <View style={styles.paymentItem}>
-                <Image source={Images.password} style={styles.paymentIcon} />
+                <Image
+                  source={Images.pinkCallDairy}
+                  style={styles.paymentIcon}
+                />
                 <Text style={styles.paymentText}>6216120521</Text>
               </View>
               <View style={styles.paymentItem}>
-                <Image source={Images.wallet} style={styles.paymentIcon} />
+                <Image source={Images.pinkCode} style={styles.paymentIcon} />
                 <Text style={styles.paymentText}>**** 1421</Text>
               </View>
               <View style={styles.paymentItem}>
-                <Image source={Images.star} style={styles.paymentIcon} />
+                <Image
+                  source={Images.pinkDolarPrise}
+                  style={styles.paymentIcon}
+                />
                 <Text style={styles.paymentText}>
                   ${orderData?.totalPrice || '15'}
                 </Text>
               </View>
               <View style={styles.paymentItem}>
-                <Image source={Images.wallet} style={styles.paymentIcon} />
+                <Image
+                  source={Images.pinkDabitCard}
+                  style={styles.paymentIcon}
+                />
                 <Text style={styles.paymentText}>
                   {orderData?.paymentType === 'debit'
                     ? 'Debit Card'
@@ -365,6 +408,14 @@ const DeliveryConfirmationScreen = () => {
           </>
         )}
       </ScrollView>
+
+      <CommonModal
+        visible={isSuccessModalVisible}
+        onClose={handleCloseModal}
+        image={Images.cancelOrderImage}
+        message="Delivery Scheduled Successfully"
+        tapToClose
+      />
     </SafeAreaView>
   );
 };

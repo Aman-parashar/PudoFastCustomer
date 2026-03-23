@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     marginRight: 10,
-    tintColor: '#58A5FF',
     marginTop: 2,
+    resizeMode:'contain'
   },
   descriptionText: {
     flex: 1,
@@ -187,53 +187,64 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   // Delivery Details
-  deliveryCard: {
-    backgroundColor: COLORS.WHITE,
-    borderRadius: 12,
-    padding: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  serviceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  serviceIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 10,
-    tintColor: '#E2B235',
-  },
-  serviceName: {
-    fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: '#E2B235',
-  },
-  deliveryGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  gridItem: {
-    width: '50%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  gridIcon: {
-    width: 18,
-    height: 18,
-    marginRight: 10,
-    tintColor: '#4CAF50',
-  },
-  gridText: {
-    fontSize: 13,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: '#666666',
-  },
+deliveryCard: {
+  backgroundColor: COLORS.WHITE,
+  borderRadius: 12,
+  padding: 15,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.05,
+  shadowRadius: 5,
+  elevation: 2,
+},
+serviceRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 15,
+},
+serviceIcon: {
+  width: 20,
+  height: 20,
+  marginRight: 10,
+  tintColor: '#E2B235',
+},
+serviceName: {
+  fontSize: 16,
+  fontFamily: FONTS.SANTRAL_BOLD,
+  color: '#E2B235',
+},
+deliveryGrid: {
+  flexDirection: 'row',       // ← row so columns sit side by side
+  alignItems: 'stretch',      // ← makes divider stretch full height
+},
+leftColumn: {
+  flex: 1,                    // ← takes half the space
+},
+rightColumn: {
+  flex: 1,                    // ← takes other half
+},
+verticalDivider: {
+  width: 1,
+  backgroundColor: '#E0E0E0',
+  marginHorizontal: 10,       // ← spacing around the line
+},
+gridItem: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: 12,
+},
+gridIcon: {
+  width: 18,
+  height: 18,
+  marginRight: 8,
+  tintColor: '#4CAF50',
+  resizeMode:"contain"
+},
+gridText: {
+  fontSize: 13,
+  fontFamily: FONTS.SANTRAL_MEDIUM,
+  color: '#666666',
+},
   // Payment Info
   paymentInfoCard: {
     backgroundColor: '#FBFBFB',
@@ -272,7 +283,7 @@ const styles = StyleSheet.create({
   counterText: {
     fontSize: 12,
     fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: '#999999',
+    color: '#000',
   },
   commentInput: {
     height: 100,
@@ -367,14 +378,14 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 20,
-    backgroundColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
+    // backgroundColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
     alignItems: 'center',
     justifyContent: 'center',
   },
   chatIcon: {
     width: 20,
     height: 20,
-    tintColor: COLORS.WHITE,
+    tintColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
   },
   statusSection: {
     paddingHorizontal: 16,

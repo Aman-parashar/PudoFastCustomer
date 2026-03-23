@@ -89,7 +89,7 @@ const TransitAndReceiverDetailsScreen = () => {
               name="firstName"
               inputlabel="First Name"
               isLeftImage
-              leftImage={Images.user}
+              leftImage={Images.useIcon}
               customStyle={{ borderColor: '#F57C00', borderWidth: 1 }} // Orange border for first field as per image
             />
 
@@ -98,7 +98,7 @@ const TransitAndReceiverDetailsScreen = () => {
               name="lastName"
               inputlabel="Last Name"
               isLeftImage
-              leftImage={Images.user}
+              leftImage={Images.useIcon}
               customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
             />
 

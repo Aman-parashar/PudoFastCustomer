@@ -69,7 +69,7 @@ const ItemDetailsScreen = () => {
               name="description"
               inputlabel="Description"
               isLeftImage
-              leftImage={Images.document}
+              leftImage={Images.descriptionBlue}
               multiline
               customStyle={{
                 height: 100,

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C80B921A6F3F58F76C31292 /* libPods-PudoFastCustomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-PudoFastCustomer.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		27E0420D42D64D4C81762DBF /* Santral-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A49FD197A1C464B9C284C48 /* Santral-Light.ttf */; };
 		401CBBB47B0A45578166AE32 /* Santral-Ultra.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B04DAFAFB16442E09596CEDF /* Santral-Ultra.ttf */; };
@@ -16,6 +15,7 @@
 		7C4E5CD87448458988735E80 /* Santral-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A99272C955B54A8EB8B2C990 /* Santral-Book.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		86DC97577D934AF6B810150B /* Santral-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C4F5D6311B04A0889DC1210 /* Santral-Medium.ttf */; };
+		93940F534DD739A3753BC095 /* libPods-PudoFastCustomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31784C80D16C85BB3BF639B /* libPods-PudoFastCustomer.a */; };
 		AD6335C015C546278A974EFE /* Santral-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45F3C57B1791424F8CE89D4C /* Santral-SemiBold.ttf */; };
 		B1C9A4F75B7C454ABB89E6C5 /* Santral-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9FD157C8846D498D9D189 /* Santral-Bold.ttf */; };
 		C376732B02B84046BE376316 /* Santral-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A6195E8371B47169D4E8F78 /* Santral-Hairline.ttf */; };
@@ -25,22 +25,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13A5D27687AF2D72F5C69622 /* Pods-PudoFastCustomer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PudoFastCustomer.debug.xcconfig"; path = "Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PudoFastCustomer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PudoFastCustomer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PudoFastCustomer/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PudoFastCustomer/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = PudoFastCustomer/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3371A14A84874B60A65DEB63 /* Santral-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Thin.ttf"; path = "../src/assets/fonts/Santral-Thin.ttf"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-PudoFastCustomer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PudoFastCustomer.debug.xcconfig"; path = "Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer.debug.xcconfig"; sourceTree = "<group>"; };
 		45F3C57B1791424F8CE89D4C /* Santral-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-SemiBold.ttf"; path = "../src/assets/fonts/Santral-SemiBold.ttf"; sourceTree = "<group>"; };
 		4A6195E8371B47169D4E8F78 /* Santral-Hairline.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Hairline.ttf"; path = "../src/assets/fonts/Santral-Hairline.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-PudoFastCustomer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PudoFastCustomer.release.xcconfig"; path = "Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-PudoFastCustomer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PudoFastCustomer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		646FBA6217464F4E8C65ECFC /* Santral-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraLight.ttf"; path = "../src/assets/fonts/Santral-ExtraLight.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PudoFastCustomer/AppDelegate.swift; sourceTree = "<group>"; };
 		7CB9FD157C8846D498D9D189 /* Santral-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Bold.ttf"; path = "../src/assets/fonts/Santral-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PudoFastCustomer/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8720F42D05BA8075F05438FC /* Pods-PudoFastCustomer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PudoFastCustomer.release.xcconfig"; path = "Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer.release.xcconfig"; sourceTree = "<group>"; };
 		9A49FD197A1C464B9C284C48 /* Santral-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Light.ttf"; path = "../src/assets/fonts/Santral-Light.ttf"; sourceTree = "<group>"; };
 		9C4F5D6311B04A0889DC1210 /* Santral-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Medium.ttf"; path = "../src/assets/fonts/Santral-Medium.ttf"; sourceTree = "<group>"; };
+		A31784C80D16C85BB3BF639B /* libPods-PudoFastCustomer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PudoFastCustomer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A99272C955B54A8EB8B2C990 /* Santral-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Book.ttf"; path = "../src/assets/fonts/Santral-Book.ttf"; sourceTree = "<group>"; };
 		B04DAFAFB16442E09596CEDF /* Santral-Ultra.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Ultra.ttf"; path = "../src/assets/fonts/Santral-Ultra.ttf"; sourceTree = "<group>"; };
 		E4D50F1A9841401CA2F6AFE1 /* Santral-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraBold.ttf"; path = "../src/assets/fonts/Santral-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-PudoFastCustomer.a in Frameworks */,
+				93940F534DD739A3753BC095 /* libPods-PudoFastCustomer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-PudoFastCustomer.a */,
+				A31784C80D16C85BB3BF639B /* libPods-PudoFastCustomer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,8 +130,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-PudoFastCustomer.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-PudoFastCustomer.release.xcconfig */,
+				13A5D27687AF2D72F5C69622 /* Pods-PudoFastCustomer.debug.xcconfig */,
+				8720F42D05BA8075F05438FC /* Pods-PudoFastCustomer.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -143,13 +143,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PudoFastCustomer" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				FB85815ED25CDD341177FF5A /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				45C11E5054E936C25A98342D /* [CP] Embed Pods Frameworks */,
+				59BC106096A5C14466A52E4E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,7 +231,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		45C11E5054E936C25A98342D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,7 +248,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		59BC106096A5C14466A52E4E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB85815ED25CDD341177FF5A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,23 +287,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -303,7 +303,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-PudoFastCustomer.debug.xcconfig */;
+			baseConfigurationReference = 13A5D27687AF2D72F5C69622 /* Pods-PudoFastCustomer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -334,7 +334,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-PudoFastCustomer.release.xcconfig */;
+			baseConfigurationReference = 8720F42D05BA8075F05438FC /* Pods-PudoFastCustomer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
