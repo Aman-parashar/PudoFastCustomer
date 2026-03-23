@@ -136,6 +136,19 @@ const styles = StyleSheet.create({
   emailInputContainer: {
     flex: 1,
   },
+  headerContent: {
+    paddingHorizontal: 16,
+  },
+  headerSpacer: {
+    height: dimensions.height * 0.08,
+  },
+  mainContent: {
+    paddingHorizontal: 16,
+    flex: 1,
+  },
+  transparentBackground: {
+    backgroundColor: COLORS.TRANSPARENT,
+  },
 });
 
 export default styles;

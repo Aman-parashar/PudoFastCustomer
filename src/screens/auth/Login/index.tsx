@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,9 @@ import {
   Image,
 
   Pressable,
-  Platform,
+  FlatList,
   ImageBackground,
+  TextInput,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,15 +19,23 @@ import Container from '../../../components/common/Container';
 import { Images } from '../../../utils/images';
 import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 import CustomButton from '../../../components/common/CustomButton';
-import { COLORS } from '../../../utils/colors';
 import { CommonInput } from '../../../components/common/CommonInput';
 import { useForm } from 'react-hook-form';
 import Header from '../../../components/common/Header';
-import { dimensions } from '../../../utils/constant';
+import { countryData } from '../../../utils/Country';
+import BottomSheetModalComponent from '../../../components/common/BottomSheetModal';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { getCountryByCode } from '../../../hooks/useCountry';
+import CountryPicker from '../../../components/common/CountryPicker';
+import { Rules } from '../../../utils/Rules';
+
 
 const LoginScreen = () => {
-  const { control } = useForm();
+
   const [isMobile, setIsMobile] = useState(false);
+  const [countryCode, setCountryCode] = useState('+61')
+  const [searchCountry, setSearchCountry] = useState('')
+  const [showPicker, setShowPicker] = useState(false)
   const {
     loginType,
     email,
@@ -36,6 +45,8 @@ const LoginScreen = () => {
     password,
     setPassword,
     showPassword,
+    control,
+    handleSubmit,
     handleLogin,
     navigateToSignUp,
     navigateToForgotPassword,
@@ -43,6 +54,7 @@ const LoginScreen = () => {
     toggleLoginType,
     toggleShowPassword,
   } = useLoginViewModel();
+
 
   return (
     <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
@@ -54,23 +66,30 @@ const LoginScreen = () => {
           source={Images.loginBG}
           style={styles.gradientHeader}
         >
-          <Header type="auth" style={{ backgroundColor: COLORS.TRANSPARENT }} />
-          <View style={{ paddingHorizontal: 16 }}>
+          <Header type="auth" style={styles.transparentBackground} />
+          <View style={styles.headerContent}>
             <Text style={styles.gradientHeaderTitle}>LOGIN</Text>
             <Text style={styles.gradientHeaderSubTitle}>Ready to deliver with confidence? Take the first step now.</Text>
           </View>
-          <View style={{ height: dimensions.height * .08 }} />
+          <View style={styles.headerSpacer} />
         </ImageBackground>
-        <View style={{ paddingHorizontal: 16, flex: 1 }}>
+        <View style={styles.mainContent}>
 
           <View style={styles.inputContainer}>
             {isMobile && <Pressable onPress={() => setIsMobile(false)} style={styles.emailContainer}>
               <Image source={Images.email} style={styles.emailIcon} resizeMode='center' />
             </Pressable>}
             {isMobile ? (
-              <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber />
+              <CommonInput inputlabel="Phone" name="phone" control={control} customStyle={{ height: 60 }} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
+                countryCode={countryCode}
+                keyboardType='phone-pad'
+                rules={Rules.Phone}
+                onPressCountryCode={() => {
+                  setShowPicker(true)
+
+                }} />
             ) : (
-              <CommonInput inputlabel="Email" name="email" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.email} />
+              <CommonInput inputlabel="Email" name="email" control={control} customStyle={{ height: 60 }} rules={Rules.Email} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.email} />
             )}
             {!isMobile && <Pressable onPress={() => setIsMobile(true)}>
               <Image source={Images.phone} style={styles.phoneIcon} resizeMode='center' />
@@ -84,7 +103,7 @@ const LoginScreen = () => {
 
           <CustomButton
             title="LOG IN"
-            onPress={handleLogin}
+            onPress={handleSubmit(handleLogin)}
             style={styles.loginButton}
           />
 
@@ -110,6 +129,7 @@ const LoginScreen = () => {
           </View>
         </View>
       </KeyboardContainer>
+      <CountryPicker showPicker={showPicker} setShowPicker={setShowPicker} onSelectCountry={setCountryCode} />
 
     </Container>
   );

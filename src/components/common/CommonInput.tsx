@@ -142,10 +142,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
             const inputContent = (
               <View
                 style={[
+
                   styles.commonContainerStyle,
                   !editable && { backgroundColor: COLORS.TRIBE_BACKGROUND },
                   secureTextEntry && styles.passwordInputStyle,
                   customStyle,
+
                 ]}>
 
                 {isLeftImage && <Image
@@ -153,9 +155,9 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   style={styles.leftImageStyle}
                   resizeMode='center'
                 />}
-                {isMobileNumber && <View style={{}}>
+                {isMobileNumber && <Pressable onPress={onPressCountryCode}>
                   <Text >{countryCode}</Text>
-                </View>}
+                </Pressable>}
                 <TextInput
                   ref={inputRef}
                   allowFontScaling={false}
@@ -212,7 +214,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
             );
 
             return (
-              <>
+              <View>
                 {isRightImage && !secureTextEntry ? (
                   <Pressable onPress={onRightImagePress}>
                     {inputContent}
@@ -227,12 +229,17 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                       style={{
                         color: COLORS.PRIMARY_RED,
                         fontSize: 14,
-                        marginTop: -4,
+
+                        fontFamily: FONTS.SANTRAL_MEDIUM,
+                        textAlign: 'left',
+                        width: '100%',
+
+
                       }}>
                       {errors[name]?.message}
                     </Text>
                   )}
-              </>
+              </View>
             );
           }}
         />
@@ -292,6 +299,8 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.SANTRAL_BOOK,
     color: COLORS.PRIMARY_BLACK,
     textAlignVertical: 'center',
+
+    flex: 1
   },
   passwordInputStyle: {
     flexDirection: 'row',
