@@ -7,80 +7,45 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  header: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.BORDER,
-  },
-  backButton: {
-    padding: 10,
-    marginLeft: -10,
-  },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
-  },
-  editButtonHeader: {
-    padding: 10,
-    marginRight: -10,
-  },
-  editIconHeader: {
-    width: 20,
-    height: 20,
-    tintColor: COLORS.PRIMARY,
-  },
   scrollContent: {
     padding: 20,
+    alignItems: 'center',
   },
   profileImageContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 40,
   },
   profileImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#F0F0F0',
+    width: 100,
+    height: 100,
+    borderRadius: 70,
+    backgroundColor: COLORS.BACKGROUND_GRAY,
   },
   infoSection: {
-    backgroundColor: COLORS.WHITE,
-    borderRadius: 15,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    width: '100%',
+    paddingHorizontal: 10,
   },
   infoRow: {
-    marginBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 30,
   },
-  label: {
-    fontSize: 12,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.GRAY_TEXT,
-    marginBottom: 5,
+  infoIcon: {
+    width: 22,
+    height: 22,
+    resizeMode: 'contain',
+    tintColor: COLORS.PRIMARY,
+    marginRight: 20,
   },
-  value: {
+  valueText: {
     fontSize: 16,
     fontFamily: FONTS.SANTRAL_MEDIUM,
     color: COLORS.BLACK,
+  },
+  buttonContainer: {
+    padding: 20,
+    paddingBottom: 30,
   },
 });
 

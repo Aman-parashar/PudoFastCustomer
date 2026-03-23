@@ -24,4 +24,6 @@ export type RootStackParamList = {
   ForgotPassword: { type: 'email' | 'phone' };
   OTPVerification: { type: 'email' | 'phone'; value: string };
   NewPassword: { userId: string };
+  DeliveryConfirmation: { orderData: any; fromHistory?: boolean };
+  ReceivingOrderHistory?: { isFromSettings?: boolean; title?: string };
 };

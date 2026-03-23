@@ -1,37 +1,23 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useDeliveryDetailsViewModel } from './DeliveryDetailsViewModel';
 import { Images } from '../../../utils/images';
 
 const DeliveryDetailsScreen = () => {
-  const { orderDetails, goBack, goToHome, getServiceIcon } = useDeliveryDetailsViewModel();
+  const { orderDetails, goBack, goToHome, getServiceIcon } =
+    useDeliveryDetailsViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
+        <TouchableOpacity onPress={goBack} style={styles.backButton}>
+          <Image source={Images.arrowLeft} style={styles.backIcon} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Order Details</Text>
         <TouchableOpacity onPress={goToHome}>
-          <Image
-            source={Images.homeSelected}
-            style={styles.homeIcon}
-          />
+          <Image source={Images.homeSelected} style={styles.homeIcon} />
         </TouchableOpacity>
       </View>
 
@@ -62,10 +48,7 @@ const DeliveryDetailsScreen = () => {
             </View>
             <View style={styles.timelineLine} />
             <View style={styles.timelineItem}>
-              <Image
-                source={Images.wayToPickUp}
-                style={styles.timelineIcon}
-              />
+              <Image source={Images.wayToPickUp} style={styles.timelineIcon} />
               <Text style={styles.timelineText}>Way to Pickup</Text>
             </View>
             <View style={styles.timelineLine} />
@@ -78,10 +61,7 @@ const DeliveryDetailsScreen = () => {
             </View>
             <View style={styles.timelineLine} />
             <View style={styles.timelineItem}>
-              <Image
-                source={Images.delivered}
-                style={styles.timelineIcon}
-              />
+              <Image source={Images.delivered} style={styles.timelineIcon} />
               <Text style={styles.timelineText}>Delivered</Text>
             </View>
           </View>
@@ -91,17 +71,11 @@ const DeliveryDetailsScreen = () => {
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Driver Details</Text>
           <View style={styles.driverRow}>
-            <Image
-              source={Images.user}
-              style={styles.driverImage}
-            />
+            <Image source={Images.user} style={styles.driverImage} />
             <View style={styles.driverInfo}>
               <Text style={styles.driverName}>{orderDetails.driverName}</Text>
               <View style={styles.ratingRow}>
-                <Image
-                  source={Images.fillRating}
-                  style={styles.starIcon}
-                />
+                <Image source={Images.fillRating} style={styles.starIcon} />
                 <Text style={styles.ratingText}>
                   {orderDetails.driverRating}
                 </Text>
@@ -120,12 +94,7 @@ const DeliveryDetailsScreen = () => {
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Transit & Receiver Details</Text>
           <View style={styles.addressRow}>
-            <View
-              style={[
-                styles.badge,
-                styles.pickupBadge,
-              ]}
-            >
+            <View style={[styles.badge, styles.pickupBadge]}>
               <Text style={[styles.badgeText, styles.pickupBadgeText]}>
                 PICKUP
               </Text>
@@ -133,12 +102,7 @@ const DeliveryDetailsScreen = () => {
             <Text style={styles.addressText}>{orderDetails.pickupAddress}</Text>
           </View>
           <View style={styles.addressRow}>
-            <View
-              style={[
-                styles.badge,
-                styles.dropoffBadge,
-              ]}
-            >
+            <View style={[styles.badge, styles.dropoffBadge]}>
               <Text style={[styles.badgeText, styles.dropoffBadgeText]}>
                 DROP OFF
               </Text>

@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { COLORS } from '../../../utils/colors';
 import { Rating } from 'react-native-ratings';
@@ -13,76 +14,137 @@ import styles from './styles';
 import { useMyReviewsViewModel } from './MyReviewsViewModel';
 import { Images } from '../../../utils/images';
 
-const MyReviewsScreen = () => {
-  const { goBack, reviewsData, averageRating, totalReviewsCount } = useMyReviewsViewModel();
+import Header from '../../../components/common/Header';
 
-  const renderItem = () => (
+const MyReviewsScreen = () => {
+  const {
+    goBack,
+    reviewsData,
+    averageRating,
+    totalReviewsCount,
+    ratingStats,
+    activeFilter,
+    setActiveFilter,
+    filters,
+  } = useMyReviewsViewModel();
+
+  const renderRatingBar = (rating: number, count: number) => {
+    const percentage =
+      totalReviewsCount > 0 ? (count / totalReviewsCount) * 100 : 0;
+    return (
+      <View key={rating} style={styles.ratingBarRow}>
+        <Text style={styles.ratingNumber}>{rating}</Text>
+        <Image source={Images.star} style={styles.smallStar} />
+        <View style={styles.progressBarBg}>
+          <View style={[styles.progressBarFill, { width: `${percentage}%` }]} />
+        </View>
+      </View>
+    );
+  };
+
+  const renderFilterTab = (rating: number) => {
+    const isActive = activeFilter === rating;
+    return (
+      <TouchableOpacity
+        key={rating}
+        style={[styles.filterTab, isActive && styles.activeFilterTab]}
+        onPress={() => setActiveFilter(rating)}
+      >
+        <Text style={[styles.filterText, isActive && styles.activeFilterText]}>
+          {rating}
+        </Text>
+        <Image
+          source={Images.star}
+          style={[styles.filterStar, isActive && styles.activeFilterStar]}
+        />
+      </TouchableOpacity>
+    );
+  };
+
+  const renderItem = ({ item }: { item: any }) => (
     <View style={styles.reviewCard}>
       <View style={styles.reviewHeader}>
-        <View style={styles.userInfo}>
-          <Image
-            source={Images.userPlaceholder}
-            style={styles.userImage}
-          />
-          <View>
-            <Text style={styles.userName}>Driver Name</Text>
-            <Text style={styles.date}>12 Oct 2023</Text>
+        <Image source={item.image} style={styles.userImage} />
+        <View style={styles.reviewInfo}>
+          <Text style={styles.userName}>{item.name}</Text>
+          <View style={styles.starsRow}>
+            {[1, 2, 3, 4, 5].map(star => (
+              <Image
+                key={star}
+                source={Images.star}
+                style={[
+                  styles.cardStar,
+                  {
+                    tintColor:
+                      star <= item.rating ? COLORS.SECONDARY : COLORS.BORDER,
+                  },
+                ]}
+              />
+            ))}
           </View>
         </View>
-        <Rating
-          type="custom"
-          ratingCount={5}
-          startingValue={4}
-          imageSize={15}
-          readonly
-          tintColor="#F9F9F9"
-          ratingBackgroundColor={COLORS.BORDER}
-        />
       </View>
-      <Text style={styles.reviewText}>
-        Great service! The package was delivered on time and the driver was very
-        professional.
-      </Text>
+      <Text style={styles.reviewText}>{item.comment}</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Reviews</Text>
-        <View style={styles.headerSpacer} />
-      </View>
-
-      <View style={styles.ratingSummary}>
-        <Text style={styles.averageRating}>{averageRating}</Text>
-        <View style={styles.ratingStars}>
-          <Rating
-            type="custom"
-            ratingCount={5}
-            startingValue={parseFloat(averageRating)}
-            imageSize={25}
-            readonly
-            tintColor={COLORS.WHITE}
-            ratingBackgroundColor={COLORS.BORDER}
-          />
-          <Text style={styles.totalReviews}>Based on {totalReviewsCount} reviews</Text>
-        </View>
+        <Image
+          source={Images.navShadow}
+          style={styles.navShadow}
+          resizeMode="stretch"
+        />
+        <Header type="step" title="My Reviews" onBack={goBack} />
       </View>
 
       <FlatList
         data={reviewsData}
         renderItem={renderItem}
-        keyExtractor={item => item.toString()}
-        contentContainerStyle={styles.listContent}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={
+          <View style={styles.listHeader}>
+            <View style={styles.overallRatingContainer}>
+              <Text style={styles.bigRatingText}>{averageRating}</Text>
+              <View style={styles.bigStarsRow}>
+                {[1, 2, 3, 4, 5].map(star => (
+                  <Image
+                    key={star}
+                    source={Images.star}
+                    style={[
+                      styles.bigStar,
+                      {
+                        tintColor:
+                          star <= parseFloat(averageRating)
+                            ? COLORS.SECONDARY
+                            : COLORS.BORDER,
+                      },
+                    ]}
+                  />
+                ))}
+              </View>
+            </View>
+
+            <View style={styles.breakdownContainer}>
+              {[5, 4, 3, 2, 1].map(rating =>
+                renderRatingBar(
+                  rating,
+                  ratingStats[rating as keyof typeof ratingStats],
+                ),
+              )}
+            </View>
+
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.filterContainer}
+            >
+              {filters.map(renderFilterTab)}
+            </ScrollView>
+          </View>
+        }
+        contentContainerStyle={styles.scrollContent}
       />
     </SafeAreaView>
   );

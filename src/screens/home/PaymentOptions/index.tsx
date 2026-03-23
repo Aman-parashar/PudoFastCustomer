@@ -1,92 +1,105 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
-import { usePaymentOptionsViewModel, PAYMENT_METHODS } from './PaymentOptionsViewModel';
+import {
+  usePaymentOptionsViewModel,
+  PAYMENT_METHODS,
+} from './PaymentOptionsViewModel';
 import { Images } from '../../../utils/images';
+import Stepper from '../../../components/common/Stepper';
+import CustomButton from '../../../components/common/CustomButton';
+import { deliverySteps } from '../../../utils/enum';
+
+import Header from '../../../components/common/Header';
+import CommonToggle from '../../../components/common/CommonToggle';
+import { CardType } from '../../../utils/data';
 
 const PaymentOptionsScreen = () => {
   const {
-    orderData,
+    paymentType,
+    setPaymentType,
     selectedMethod,
     selectMethod,
-    handlePlaceOrder,
+    handleNext,
     goBack,
   } = usePaymentOptionsViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={goBack} style={styles.backButton}>
-          <Image source={Images.arrowLeft} style={styles.backIcon} />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Payment Options</Text>
-        <View style={styles.headerSpacer} />
+        <Image
+          source={Images.navShadow}
+          style={styles.navShadow}
+          resizeMode="stretch"
+        />
+        <Header type="step" title="Payment Options" onBack={goBack} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.summaryCard}>
-          <Text style={styles.summaryTitle}>Order Summary</Text>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Total Miles</Text>
-            <Text style={styles.summaryValue}>{orderData?.miles || '5'} miles</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Service Type</Text>
-            <Text style={styles.summaryValue}>{orderData?.service}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Package Type</Text>
-            <Text style={styles.summaryValue}>{orderData?.itemType}</Text>
-          </View>
-          <View style={styles.divider} />
-          <View style={styles.summaryRow}>
-            <Text style={styles.totalLabel}>Total Amount</Text>
-            <Text style={styles.totalValue}>${orderData?.totalPrice?.toFixed(2)}</Text>
-          </View>
-        </View>
+      <Stepper currentStep={deliverySteps.PaymentSection} />
 
-        <Text style={styles.sectionTitle}>Select Payment Method</Text>
-        {PAYMENT_METHODS.map((method) => (
-          <TouchableOpacity
-            key={method.id}
-            style={[styles.methodCard, selectedMethod === method.id && styles.methodCardActive]}
-            onPress={() => selectMethod(method.id)}
-          >
-            <View style={styles.radioButton}>
-              <View style={[styles.radioInner, selectedMethod === method.id && styles.radioInnerActive]} />
-            </View>
-            <View style={styles.methodInfo}>
-              <Text style={styles.methodTitle}>{method.title}</Text>
-              <Text style={styles.methodExpiry}>{method.expiry}</Text>
-            </View>
-            <Text style={styles.cardType}>{method.type}</Text>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Payment Type Selection */}
+          <Text style={styles.sectionTitle}>Payment</Text>
+          <CommonToggle
+            options={CardType}
+            activeValue={paymentType}
+            onSelect={setPaymentType}
+            containerStyle={{ marginBottom: 25 }}
+          />
+
+          {/* Saved Card Section */}
+          <Text style={styles.sectionTitle}>Saved Card</Text>
+          {PAYMENT_METHODS.map(method => (
+            <TouchableOpacity
+              key={method.id}
+              style={[
+                styles.savedCardCard,
+                selectedMethod === method.id && styles.savedCardSelected,
+              ]}
+              onPress={() => selectMethod(method.id)}
+            >
+              <View style={styles.cardIconContainer}>
+                <Image source={Images.wallet} style={styles.cardIcon} />
+                <View style={styles.checkmarkBadge}>
+                  <Image
+                    source={Images.wayToPickUp}
+                    style={styles.checkmarkIcon}
+                  />
+                </View>
+              </View>
+              <View style={styles.cardInfo}>
+                <Text
+                  style={[
+                    styles.cardNumber,
+                    selectedMethod === method.id && styles.cardNumberSelected,
+                  ]}
+                >
+                  {method.title}
+                </Text>
+                <Text style={styles.cardExpiry}>{method.expiry}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+
+          <TouchableOpacity style={styles.addCardContainer}>
+            <Text style={styles.addCardText}>+ Add Card</Text>
           </TouchableOpacity>
-        ))}
+        </ScrollView>
+      </View>
 
-        <TouchableOpacity style={styles.addCardButton}>
-          <Text style={styles.addCardText}>+ Add New Card</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.confirmButton} onPress={handlePlaceOrder}>
-          <LinearGradient
-            colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-            style={styles.gradient}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-          >
-            <Text style={styles.confirmText}>PLACE ORDER</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </ScrollView>
+      <View style={styles.bottomContainer}>
+        <CustomButton
+          title="NEXT"
+          onPress={handleNext}
+          style={styles.nextButton}
+        />
+      </View>
     </SafeAreaView>
   );
 };

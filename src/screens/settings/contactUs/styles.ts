@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
   },
   header: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.BORDER,
+    backgroundColor: COLORS.WHITE,
+    zIndex: 10,
+  },
+  navShadow: {
+    position: 'absolute',
+    top: -40,
+    width: '100%',
+    height: 110,
   },
   backButton: {
     padding: 10,
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
   backIcon: {
     width: 20,
     height: 20,
+    resizeMode:'contain'
   },
   headerTitle: {
     fontSize: 18,
@@ -38,47 +40,23 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: 20,
     paddingTop: 30,
+    paddingBottom: 50,
   },
-  inputContainer: {
+  logo: {
+    width: 200,
+    height: 120,
+    alignSelf: 'center',
+    marginBottom: 40,
+  },
+  inputsWrapper: {
     marginBottom: 20,
   },
-  label: {
-    fontSize: 12,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.GRAY_TEXT,
-    marginBottom: 5,
-    marginLeft: 5,
+  textAreaContainer: {
+    marginTop: 0,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: COLORS.BORDER,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    height: 50,
-    fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: COLORS.BLACK,
-    backgroundColor: COLORS.WHITE,
-  },
-  textArea: {
-    height: 120,
-    paddingTop: 15,
-  },
-  submitButton: {
-    height: 50,
-    borderRadius: 25,
-    overflow: 'hidden',
-    marginTop: 30,
-  },
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  submitButtonText: {
-    color: COLORS.WHITE,
-    fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOLD,
+  buttonContainer: {
+    padding: 20,
+    paddingBottom: 30,
   },
 });
 

@@ -5,74 +5,76 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
 import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useTransitAndReceiverDetailsViewModel } from './TransitAndReceiverDetailsViewModel';
 import { Images } from '../../../utils/images';
+import Stepper from '../../../components/common/Stepper';
+import { CommonInput } from '../../../components/common/CommonInput';
+import CustomButton from '../../../components/common/CustomButton';
+import { deliverySteps } from '../../../utils/enum';
+import Header from '../../../components/common/Header';
 
 const TransitAndReceiverDetailsScreen = () => {
-  const {
-    orderData,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    countryCode,
-    handleNext,
-    goBack,
-  } = useTransitAndReceiverDetailsViewModel();
+  const { orderData, control, handleSubmit, handleNext, goBack } =
+    useTransitAndReceiverDetailsViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Transit & Receiver</Text>
-        <View style={styles.headerSpacer} />
+        <Image
+          source={Images.navShadow}
+          style={styles.navShadow}
+          resizeMode="stretch"
+        />
+        <Header
+          type="step"
+          title="Transit and Receiver Details"
+          onBack={goBack}
+        />
       </View>
+
+      <Stepper currentStep={deliverySteps.ReceiversDetails} />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
       >
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
           {/* Transit Details Summary */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Transit Details</Text>
-            <View style={styles.addressCard}>
+
+            {/* Pickup Address Card */}
+            <View style={[styles.addressCard, styles.pickupCard]}>
               <View style={styles.addressRow}>
                 <View style={[styles.dot, styles.dotPickup]} />
                 <View style={styles.addressInfo}>
-                  <Text style={styles.addressLabel}>PICKUP</Text>
-                  <Text style={styles.addressText} numberOfLines={1}>
-                    {orderData?.pickupAddress?.address || '123 Pickup St, Downtown'}
+                  <Text style={styles.addressLabel}>Pickup Address</Text>
+                  <Text style={styles.addressText} numberOfLines={2}>
+                    {orderData?.pickupAddress?.address ||
+                      'B103/4, Abc com, AA Road, BB area, CA City, USA'}
                   </Text>
                 </View>
               </View>
-              <View style={styles.verticalLine} />
+            </View>
+
+            {/* Drop off Address Card */}
+            <View style={[styles.addressCard, styles.dropoffCard]}>
               <View style={styles.addressRow}>
                 <View style={[styles.dot, styles.dotDropoff]} />
                 <View style={styles.addressInfo}>
-                  <Text style={styles.addressLabel}>DROP OFF</Text>
-                  <Text style={styles.addressText} numberOfLines={1}>
-                    {orderData?.dropAddress?.address || '456 Delivery Ave, Uptown'}
+                  <Text style={styles.addressLabel}>Drop off Address</Text>
+                  <Text style={styles.addressText} numberOfLines={2}>
+                    {orderData?.dropAddress?.address ||
+                      'A201,1, XYS Apartment.'}
                   </Text>
                 </View>
               </View>
@@ -81,71 +83,53 @@ const TransitAndReceiverDetailsScreen = () => {
 
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Receiver Details</Text>
-            
-            <View style={styles.row}>
-              <View style={[styles.inputContainer, styles.halfWidth, styles.marginRight10]}>
-                <Text style={styles.label}>First Name</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="First Name"
-                  value={firstName}
-                  onChangeText={setFirstName}
-                />
-              </View>
-              <View style={[styles.inputContainer, styles.halfWidth]}>
-                <Text style={styles.label}>Last Name</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Last Name"
-                  value={lastName}
-                  onChangeText={setLastName}
-                />
-              </View>
-            </View>
 
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Email Address</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Email Address"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
+            <CommonInput
+              control={control}
+              name="firstName"
+              inputlabel="First Name"
+              isLeftImage
+              leftImage={Images.useIcon}
+              customStyle={{ borderColor: '#F57C00', borderWidth: 1 }} // Orange border for first field as per image
+            />
 
-            <View style={styles.inputContainer}>
-              <Text style={styles.label}>Phone Number</Text>
-              <View style={styles.phoneInputRow}>
-                <TouchableOpacity style={styles.countryCodeSelector}>
-                  <Text style={styles.countryCodeText}>{countryCode}</Text>
-                  <Image source={Images.arrowLeft} style={styles.dropdownIcon} />
-                </TouchableOpacity>
-                <TextInput
-                  style={[styles.input, styles.halfWidth]}
-                  placeholder="Phone Number"
-                  value={phone}
-                  onChangeText={setPhone}
-                  keyboardType="phone-pad"
-                />
-              </View>
-            </View>
+            <CommonInput
+              control={control}
+              name="lastName"
+              inputlabel="Last Name"
+              isLeftImage
+              leftImage={Images.useIcon}
+              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
+            />
+
+            <CommonInput
+              control={control}
+              name="email"
+              inputlabel="Email Address"
+              isLeftImage
+              leftImage={Images.email}
+              keyboardType="email-address"
+              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
+            />
+
+            <CommonInput
+              control={control}
+              name="phone"
+              inputlabel="Phone Number"
+              isLeftImage
+              leftImage={Images.phone}
+              keyboardType="phone-pad"
+              isMobileNumber
+              countryCode="+1"
+              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
+            />
           </View>
 
-          <TouchableOpacity
+          <CustomButton
+            title="NEXT"
+            onPress={handleSubmit(handleNext)}
             style={styles.confirmButton}
-            onPress={handleNext}
-          >
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.confirmText}>NEXT</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

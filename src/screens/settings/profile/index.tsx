@@ -1,78 +1,50 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useProfileViewModel } from './ProfileViewModel';
 import { Images } from '../../../utils/images';
+import Header from '../../../components/common/Header';
+import CustomButton from '../../../components/common/CustomButton';
 
 const ProfileScreen = () => {
   const { goBack, navigateToEditProfile, user } = useProfileViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Profile</Text>
-        <TouchableOpacity
-          onPress={navigateToEditProfile}
-          style={styles.editButtonHeader}
-        >
-          <Image
-            source={Images.editIcon}
-            style={styles.editIconHeader}
-          />
-        </TouchableOpacity>
-      </View>
+      <Header type="step" title="Profile" onBack={goBack} />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.profileImageContainer}>
-          <Image
-            source={Images.userPlaceholder}
-            style={styles.profileImage}
-          />
+          <Image source={Images.userPlaceholder} style={styles.profileImage} />
         </View>
 
         <View style={styles.infoSection}>
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Name</Text>
-            <Text style={styles.value}>{user.fullName}</Text>
+            <Image source={Images.user} style={styles.infoIcon} />
+            <Text style={styles.valueText}>{user.fullName}</Text>
           </View>
-          
+
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Email</Text>
-            <Text style={styles.value}>{user.email}</Text>
+            <Image source={Images.email} style={styles.infoIcon} />
+            <Text style={styles.valueText}>{user.email}</Text>
           </View>
-          
+
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Phone Number</Text>
-            <Text style={styles.value}>{user.phone}</Text>
+            <Image source={Images.phone} style={styles.infoIcon} />
+            <Text style={styles.valueText}>{user.phone}</Text>
           </View>
-          
+
           <View style={styles.infoRow}>
-            <Text style={styles.label}>Address</Text>
-            <Text style={styles.value}>{user.address}</Text>
-          </View>
-          
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Driver Type</Text>
-            <Text style={styles.value}>{user.type}</Text>
+            <Image source={Images.addressIcon} style={styles.infoIcon} />
+            <Text style={styles.valueText}>{user.address}</Text>
           </View>
         </View>
       </ScrollView>
+
+      <View style={styles.buttonContainer}>
+        <CustomButton title="EDIT" onPress={navigateToEditProfile} />
+      </View>
     </SafeAreaView>
   );
 };

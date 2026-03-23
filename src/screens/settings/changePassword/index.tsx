@@ -16,107 +16,74 @@ import styles from './styles';
 import { useChangePasswordViewModel } from './ChangePasswordViewModel';
 import { Images } from '../../../utils/images';
 
+import Header from '../../../components/common/Header';
+import CustomButton from '../../../components/common/CustomButton';
+import { CommonInput } from '../../../components/common/CommonInput';
+
 const ChangePasswordScreen = () => {
-  const {
-    oldPassword,
-    setOldPassword,
-    newPassword,
-    setNewPassword,
-    confirmPassword,
-    setConfirmPassword,
-    showOldPassword,
-    showNewPassword,
-    showConfirmPassword,
-    handleSave,
-    goBack,
-    toggleOldPasswordVisibility,
-    toggleNewPasswordVisibility,
-    toggleConfirmPasswordVisibility,
-  } = useChangePasswordViewModel();
+  const { control, handleSave, handleSubmit, goBack } =
+    useChangePasswordViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Change Password</Text>
-        <View style={styles.headerRightPlaceholder} />
+        <Image
+          source={Images.navShadow}
+          style={styles.navShadow}
+          resizeMode="stretch"
+        />
+        <Header type="step" title="Change Password" onBack={goBack} />
       </View>
-
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardView}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Old Password"
-              value={oldPassword}
-              onChangeText={setOldPassword}
-              secureTextEntry={!showOldPassword}
+          <View style={styles.imageContainer}>
+            <Image
+              source={Images.changePassword}
+              style={styles.illustration}
+              resizeMode="contain"
             />
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={toggleOldPasswordVisibility}
-            >
-              <Text>{showOldPassword ? '👁️' : '👁️‍🗨️'}</Text>
-            </TouchableOpacity>
           </View>
 
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="New Password"
-              value={newPassword}
-              onChangeText={setNewPassword}
-              secureTextEntry={!showNewPassword}
+          <View style={styles.inputSection}>
+            <CommonInput
+              control={control}
+              name="oldPassword"
+              inputlabel="Old Password"
+              isLeftImage
+              leftImage={Images.password}
+              secureTextEntry
+              isRightImage
             />
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={toggleNewPasswordVisibility}
-            >
-              <Text>{showNewPassword ? '👁️' : '👁️‍🗨️'}</Text>
-            </TouchableOpacity>
-          </View>
 
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChangeText={setConfirmPassword}
-              secureTextEntry={!showConfirmPassword}
+            <CommonInput
+              control={control}
+              name="newPassword"
+              inputlabel="New Password"
+              isLeftImage
+              leftImage={Images.password}
+              secureTextEntry
+              isRightImage
             />
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={toggleConfirmPasswordVisibility}
-            >
-              <Text>{showConfirmPassword ? '👁️' : '👁️‍🗨️'}</Text>
-            </TouchableOpacity>
+
+            <CommonInput
+              control={control}
+              name="confirmPassword"
+              inputlabel="Confirm New Password"
+              isLeftImage
+              leftImage={Images.password}
+              secureTextEntry
+              isRightImage
+            />
           </View>
-
-          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.saveButtonText}>SAVE</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <View style={styles.buttonContainer}>
+        <CustomButton title="SAVE" onPress={handleSubmit(handleSave)} />
+      </View>
     </SafeAreaView>
   );
 };

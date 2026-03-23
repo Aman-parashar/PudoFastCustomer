@@ -1,110 +1,99 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import { Rating } from 'react-native-ratings';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useSettingsViewModel } from './SettingsViewModel';
 import { Images } from '../../../utils/images';
+import Header from '../../../components/common/Header';
+import CustomButton from '../../../components/common/CustomButton';
 
 const SettingsScreen = () => {
-  const { navigateToNotifications, navigateToProfile, logout, settingsItems } =
-    useSettingsViewModel();
+  const {
+    navigateToProfile,
+    handleLogout,
+    user,
+    settingsItems,
+    navigateToNotifications,
+  } = useSettingsViewModel();
+
+  const renderRatingStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <Image
+          key={i}
+          source={Images.fillRating}
+          style={[
+            styles.starIcon,
+            { tintColor: i <= Math.floor(rating) ? '#FFD700' : '#E0E0E0' },
+          ]}
+        />,
+      );
+    }
+    return stars;
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Image
-          source={Images.navShadow}
-          style={styles.navShadow}
-          resizeMode="stretch"
-        />
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>Settings</Text>
-          <TouchableOpacity onPress={navigateToNotifications}>
-            <Image
-              source={Images.notification}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.headerWrapper}>
+        <Header type="home" onNotificationPress={navigateToNotifications} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <TouchableOpacity
-          style={styles.profileSection}
-          onPress={navigateToProfile}
-        >
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Profile Info Section */}
+        <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
             <Image
               source={Images.userPlaceholder}
               style={styles.profileImage}
             />
-            <View style={styles.editButton}>
-              <Image
-                source={Images.editIcon}
-                style={styles.editIcon}
-              />
-            </View>
           </View>
-          <View style={styles.profileInfo}>
-            <Text style={styles.userName}>John Doe</Text>
-            <View style={styles.ratingContainer}>
-              <Rating
-                type="custom"
-                ratingCount={5}
-                startingValue={4}
-                imageSize={15}
-                readonly
-                tintColor={COLORS.WHITE}
-                ratingBackgroundColor={COLORS.BORDER}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
 
-        <View style={styles.settingsList}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.userName}>{user.fullName}</Text>
+            <View style={styles.ratingContainer}>
+              {renderRatingStars(user.rating)}
+            </View>
+          </View>
+
+          <TouchableOpacity
+            onPress={navigateToProfile}
+            style={styles.editIconContainer}
+          >
+            <Image
+              source={require('../../../assets/EditIcone.png')}
+              style={styles.editIcon}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Menu List */}
+        <View style={styles.menuContainer}>
           {settingsItems.map(item => (
             <TouchableOpacity
               key={item.id}
-              style={styles.settingsItem}
-              onPress={() => item.onPress && item.onPress()}
+              style={styles.menuItem}
+              onPress={item.onPress}
             >
-              <View style={styles.settingsItemLeft}>
-                <Image source={item.icon} style={styles.settingsIcon} />
-                <Text style={styles.settingsText}>{item.title}</Text>
-              </View>
-              <Image
-                source={Images.arrowRight}
-                style={styles.arrowIcon}
-              />
+              <Image source={item.icon} style={styles.menuIcon} />
+              <Text style={styles.menuTitle}>{item.title}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <TouchableOpacity style={styles.logoutButton} onPress={logout}>
-          <LinearGradient
-            colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-            style={styles.gradient}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-          >
-            <View style={styles.logoutContent}>
-              <Image
-                source={Images.logoutIcon}
-                style={styles.logoutIcon}
-              />
-              <Text style={styles.logoutText}>LOGOUT</Text>
-            </View>
-          </LinearGradient>
-        </TouchableOpacity>
+        {/* Logout Button */}
+        <View style={styles.logoutContainer}>
+          <CustomButton
+            title="LOGOUT"
+            onPress={handleLogout}
+            leftImage={Images.logoutIcon}
+            style={styles.logoutButton}
+            variant="solid"
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

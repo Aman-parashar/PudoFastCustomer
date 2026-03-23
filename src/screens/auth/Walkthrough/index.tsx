@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import styles, { width } from './styles';
 import { useWalkthroughViewModel } from './WalkthroughViewModel';
 import { Images } from '../../../utils/images';
@@ -27,7 +21,13 @@ const WalkthroughScreen = () => {
 
   const renderItem = ({ item, index }: any) => (
     <View style={styles.slide}>
-      <View style={{ height: dimensions.height * 0.3, justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        style={{
+          height: dimensions.height * 0.3,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Image
           source={item.image}
           style={styles.mainImage}
@@ -51,8 +51,12 @@ const WalkthroughScreen = () => {
 
           <Text style={styles.title}>{item.title}</Text>
           <Text style={styles.description}>{item.description}</Text>
-          <Button title={index === walkthroughData.length - 1 ? 'GET STARTED' : 'NEXT'} onPress={handleNext} style={{ width: '70%', marginTop: 10 }} textStyle={{ fontFamily: FONTS.SANTRAL_BOLD }} />
-
+          <Button
+            title={index === walkthroughData.length - 1 ? 'CONTINUE' : 'NEXT'}
+            onPress={handleNext}
+            style={{ width: '70%', marginTop: 10 }}
+            textStyle={{ fontFamily: FONTS.SANTRAL_BOLD, color: '#000' }}
+          />
 
           {index < walkthroughData.length - 1 && (
             <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>

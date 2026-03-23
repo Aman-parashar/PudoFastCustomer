@@ -65,6 +65,10 @@ export type RootStackParamList = {
     latitude: number;
     longitude: number;
   };
+  ReceivingOrderHistory: {
+    isFromSettings?: boolean;
+    title?: string;
+  };
 };
 
 export const RouteConstant = {
@@ -90,4 +94,6 @@ export const RouteConstant = {
   ItemDetails: 'ItemDetails',
   DeliverySelection: 'DeliverySelection',
   PaymentOptions: 'PaymentOptions',
+  DeliveryConfirmation: 'DeliveryConfirmation',
+  ReceivingOrderHistory: 'ReceivingOrderHistory',
 } as const;
