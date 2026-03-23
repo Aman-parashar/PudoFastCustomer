@@ -225,19 +225,23 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 {errors &&
                   errors[name]?.message !== '' &&
                   errors[name]?.message !== undefined && (
-                    <Text
-                      style={{
-                        color: COLORS.PRIMARY_RED,
-                        fontSize: 14,
+                    <View style={{ justifyContent: 'flex-end', position: 'absolute', bottom: -20 }}>
+                      <Text
+                        style={{
+                          color: COLORS.PRIMARY_RED,
+                          fontSize: 14,
 
-                        fontFamily: FONTS.SANTRAL_MEDIUM,
-                        textAlign: 'left',
-                        width: '100%',
+                          fontFamily: FONTS.SANTRAL_MEDIUM,
+                          textAlign: 'left',
+                          width: '100%',
 
 
-                      }}>
-                      {errors[name]?.message}
-                    </Text>
+
+
+                        }}>
+                        {errors[name]?.message}
+                      </Text>
+                    </View>
                   )}
               </View>
             );
@@ -250,7 +254,8 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginVertical: 10,
+    marginTop: 20,
+    marginBottom: 15,
     gap: 4,
     width: '100%',
     justifyContent: 'center',

@@ -80,7 +80,7 @@ const LoginScreen = () => {
               <Image source={Images.email} style={styles.emailIcon} resizeMode='center' />
             </Pressable>}
             {isMobile ? (
-              <CommonInput inputlabel="Phone" name="phone" control={control} customStyle={{ height: 60 }} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
+              <CommonInput inputlabel="Phone" name="phone" control={control} customStyle={{ height: 60, }} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
                 countryCode={countryCode}
                 keyboardType='phone-pad'
                 rules={Rules.Phone}
