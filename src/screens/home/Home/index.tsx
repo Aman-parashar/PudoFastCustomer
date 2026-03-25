@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import styles from './styles';
 import { useHomeViewModel } from './HomeViewModel';
 import { Images } from '../../../utils/images';
@@ -34,7 +32,9 @@ const HomeScreen = () => {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.mapContainer}>
-          <MapView
+          {/* TO-DO: Restore MapView once Google Maps API Key is provided */}
+          <Image source={Images.mapImage} style={styles.map} />
+          {/* <MapView
             style={styles.map}
             initialRegion={{
               latitude: 37.78825,
@@ -47,7 +47,7 @@ const HomeScreen = () => {
               coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
               image={Images.mapPinRed}
             />
-          </MapView>
+          </MapView> */}
         </View>
 
         <View style={styles.addressSection}>

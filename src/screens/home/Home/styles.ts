@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
+   width:"100%",
+   height:"100%"
   },
   addressSection: {
     paddingHorizontal: 20,

@@ -191,7 +191,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 />
                 {isRightImage && !secureTextEntry && (
                   <Image
-                    source={rightImage ? rightImage : Images.calendar}
+                    source={rightImage ? rightImage : Images.calender}
                     style={{
                       height: 24,
                       width: 24,
@@ -231,7 +231,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                       style={{
                         color: COLORS.PRIMARY_RED,
                         fontSize: 14,
-
+                        marginTop: 5,
                         fontFamily: FONTS.SANTRAL_MEDIUM,
                         textAlign: 'left',
                         width: '100%',

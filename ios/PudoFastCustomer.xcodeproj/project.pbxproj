@@ -31,19 +31,19 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PudoFastCustomer/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PudoFastCustomer/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = PudoFastCustomer/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3371A14A84874B60A65DEB63 /* Santral-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Thin.ttf"; path = "../src/assets/fonts/Santral-Thin.ttf"; sourceTree = "<group>"; };
-		45F3C57B1791424F8CE89D4C /* Santral-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-SemiBold.ttf"; path = "../src/assets/fonts/Santral-SemiBold.ttf"; sourceTree = "<group>"; };
-		4A6195E8371B47169D4E8F78 /* Santral-Hairline.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Hairline.ttf"; path = "../src/assets/fonts/Santral-Hairline.ttf"; sourceTree = "<group>"; };
-		646FBA6217464F4E8C65ECFC /* Santral-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraLight.ttf"; path = "../src/assets/fonts/Santral-ExtraLight.ttf"; sourceTree = "<group>"; };
+		3371A14A84874B60A65DEB63 /* Santral-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Thin.ttf"; path = "../src/assets/fonts/Santral-Thin.ttf"; sourceTree = "<group>"; };
+		45F3C57B1791424F8CE89D4C /* Santral-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-SemiBold.ttf"; path = "../src/assets/fonts/Santral-SemiBold.ttf"; sourceTree = "<group>"; };
+		4A6195E8371B47169D4E8F78 /* Santral-Hairline.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Hairline.ttf"; path = "../src/assets/fonts/Santral-Hairline.ttf"; sourceTree = "<group>"; };
+		646FBA6217464F4E8C65ECFC /* Santral-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraLight.ttf"; path = "../src/assets/fonts/Santral-ExtraLight.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PudoFastCustomer/AppDelegate.swift; sourceTree = "<group>"; };
-		7CB9FD157C8846D498D9D189 /* Santral-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Bold.ttf"; path = "../src/assets/fonts/Santral-Bold.ttf"; sourceTree = "<group>"; };
+		7CB9FD157C8846D498D9D189 /* Santral-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Bold.ttf"; path = "../src/assets/fonts/Santral-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PudoFastCustomer/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9A49FD197A1C464B9C284C48 /* Santral-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Light.ttf"; path = "../src/assets/fonts/Santral-Light.ttf"; sourceTree = "<group>"; };
-		9C4F5D6311B04A0889DC1210 /* Santral-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Medium.ttf"; path = "../src/assets/fonts/Santral-Medium.ttf"; sourceTree = "<group>"; };
-		A99272C955B54A8EB8B2C990 /* Santral-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Book.ttf"; path = "../src/assets/fonts/Santral-Book.ttf"; sourceTree = "<group>"; };
-		B04DAFAFB16442E09596CEDF /* Santral-Ultra.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Ultra.ttf"; path = "../src/assets/fonts/Santral-Ultra.ttf"; sourceTree = "<group>"; };
+		9A49FD197A1C464B9C284C48 /* Santral-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Light.ttf"; path = "../src/assets/fonts/Santral-Light.ttf"; sourceTree = "<group>"; };
+		9C4F5D6311B04A0889DC1210 /* Santral-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Medium.ttf"; path = "../src/assets/fonts/Santral-Medium.ttf"; sourceTree = "<group>"; };
+		A99272C955B54A8EB8B2C990 /* Santral-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Book.ttf"; path = "../src/assets/fonts/Santral-Book.ttf"; sourceTree = "<group>"; };
+		B04DAFAFB16442E09596CEDF /* Santral-Ultra.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-Ultra.ttf"; path = "../src/assets/fonts/Santral-Ultra.ttf"; sourceTree = "<group>"; };
 		D2CAFBDBE21B2F48575E1522 /* Pods-PudoFastCustomer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PudoFastCustomer.release.xcconfig"; path = "Target Support Files/Pods-PudoFastCustomer/Pods-PudoFastCustomer.release.xcconfig"; sourceTree = "<group>"; };
-		E4D50F1A9841401CA2F6AFE1 /* Santral-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraBold.ttf"; path = "../src/assets/fonts/Santral-ExtraBold.ttf"; sourceTree = "<group>"; };
+		E4D50F1A9841401CA2F6AFE1 /* Santral-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Santral-ExtraBold.ttf"; path = "../src/assets/fonts/Santral-ExtraBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -307,8 +307,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GH2MRMPHKK;
+				DEVELOPMENT_TEAM = 5BYG8SV2C9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PudoFastCustomer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
@@ -323,7 +325,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pudo.customer;
 				PRODUCT_NAME = PudoFastCustomer;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -338,8 +342,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GH2MRMPHKK;
+				DEVELOPMENT_TEAM = 5BYG8SV2C9;
 				INFOPLIST_FILE = PudoFastCustomer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -353,7 +359,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.pudo.customer;
 				PRODUCT_NAME = PudoFastCustomer;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

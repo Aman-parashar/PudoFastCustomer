@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import MapView from 'react-native-maps';
+// import MapView from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useChooseAddressViewModel } from './ChooseAddressViewModel';
@@ -49,7 +49,9 @@ const ChooseAddressScreen = () => {
       </View>
 
       <View style={styles.mapContainer}>
-        <MapView
+        {/* TO-DO: Restore MapView once Google Maps API Key is provided */}
+        <Image source={Images.mapImage} style={styles.map} />
+        {/* <MapView
           style={styles.map}
           initialRegion={{
             latitude: 37.78825,
@@ -57,7 +59,7 @@ const ChooseAddressScreen = () => {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
+        /> */}
       </View>
 
       <View style={styles.bottomContainer}>

@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   editIcon: {
     width: 50,
     height: 50,
-    tintColor: '#FB5184',
     resizeMode:'cover'
   },
   menuContainer: {

@@ -1,15 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   Image,
   Pressable,
-  FlatList,
   ImageBackground,
-  TextInput,
 } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useLoginViewModel } from './LoginViewModel';
@@ -18,37 +14,20 @@ import { Images } from '../../../utils/images';
 import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 import CustomButton from '../../../components/common/CustomButton';
 import { CommonInput } from '../../../components/common/CommonInput';
-import { useForm } from 'react-hook-form';
 import Header from '../../../components/common/Header';
-import { countryData } from '../../../utils/Country';
-import BottomSheetModalComponent from '../../../components/common/BottomSheetModal';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { getCountryByCode } from '../../../hooks/useCountry';
 import CountryPicker from '../../../components/common/CountryPicker';
 import { Rules } from '../../../utils/Rules';
 
 const LoginScreen = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [countryCode, setCountryCode] = useState('+61');
-  const [searchCountry, setSearchCountry] = useState('');
   const [showPicker, setShowPicker] = useState(false);
   const {
-    loginType,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    password,
-    setPassword,
-    showPassword,
     control,
     handleSubmit,
     handleLogin,
     navigateToSignUp,
     navigateToForgotPassword,
-    skipToHome,
-    toggleLoginType,
-    toggleShowPassword,
   } = useLoginViewModel();
 
   return (

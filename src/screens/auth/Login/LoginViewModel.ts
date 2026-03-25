@@ -9,15 +9,11 @@ export const useLoginViewModel = () => {
     password: string;
     phone: string;
   }
-  const {
-    control,
-    handleSubmit,
-
-  } = useForm<LoginFormValues>({
+  const { control, handleSubmit } = useForm<LoginFormValues>({
     defaultValues: {
-      email: "",
-      password: "",
-      phone: "",
+      email: '',
+      password: '',
+      phone: '',
     },
   });
 
@@ -28,8 +24,8 @@ export const useLoginViewModel = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (data: LoginFormValues) => {
-    console.log(data, "hscjsc")
-    // NavigationService.navigate(RouteConstant.Main);
+    console.log(data, 'hscjsc');
+    NavigationService.navigate(RouteConstant.Main);
   };
 
   const navigateToSignUp = () => {
@@ -68,6 +64,6 @@ export const useLoginViewModel = () => {
     toggleLoginType,
     toggleShowPassword,
     handleSubmit,
-    control
+    control,
   };
 };
