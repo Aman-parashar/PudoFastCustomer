@@ -8,26 +8,24 @@ import { Images } from '../../../utils/images';
 type DeliverySelectionRouteProp = RouteProp<RootStackParamList, 'DeliverySelection'>;
 
 export const SERVICES = [
-  { id: '1', title: 'Services', icon: Images.servicesWhite, basePrice: 15, estimatedTime: '35 Mins' },
-  { id: '2', title: 'Cyclist', icon: Images.cyclistWhite, basePrice: 10, estimatedTime: '20 Mins' },
-  { id: '3', title: 'Driver', icon: Images.driverWhiteTwo, basePrice: 25, estimatedTime: '12 Mins' },
+  { id: '1', title: 'Walker', icon: Images.walkerWhite, basePrice: 14, estimatedTime: '35 Mins' },
+  { id: '2', title: 'Cyclist', icon: Images.cyclistWhite, basePrice: 20, estimatedTime: '20 Mins' },
+  { id: '3', title: 'Driver', icon: Images.driver_Type_Selected, basePrice: 25, estimatedTime: '12 Mins' },
 ];
 
 export const useDeliverySelectionViewModel = () => {
   const route = useRoute<DeliverySelectionRouteProp>();
-  const { orderData } = route.params;
+  const { orderData } = route.params || {};
 
-  const [serviceType, setServiceType] = useState('Services');
+  const [serviceType, setServiceType] = useState('Walker');
   const [tripType, setTripType] = useState('one_way'); // one_way, two_way
   const [scheduleType, setScheduleType] = useState('on_demand'); // on_demand, scheduled
   const [selectedDate, setSelectedDate] = useState('Select Date');
   const [selectedTime, setSelectedTime] = useState('Select Time');
 
   const calculatePrice = (service: typeof SERVICES[0]) => {
-    const miles = parseFloat(orderData?.miles || '5');
-    const distanceCharge = miles * 1.5;
-    const total = service.basePrice + distanceCharge;
-    return tripType === 'two_way' ? total * 2 : total;
+    // Basic calculation for demo purposes. In a real app, from backend.
+    return service.basePrice;
   };
 
   const handleNext = () => {

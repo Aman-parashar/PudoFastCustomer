@@ -1,43 +1,37 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, SectionList, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { useHistoryViewModel } from './HistoryViewModel';
+import Header from '../../../components/common/Header';
+import CustomTabs from '../../../components/common/CustomTabs';
+import HistoryCard from '../../../components/common/HistoryCard';
 import { Images } from '../../../utils/images';
 
-const HistoryScreen = () => {
-  const { navigateToDeliveryDetails, historyData } = useHistoryViewModel();
+const TABS = [
+  { label: 'Upcoming', value: 'upcoming' },
+  { label: 'Completed', value: 'completed' },
+  { label: 'Cancelled', value: 'cancelled' },
+];
 
-  const renderItem = ({ item }: { item: any }) => (
-    <TouchableOpacity 
-      style={styles.card}
-      onPress={() => navigateToDeliveryDetails(`PF123${item}45`)}
-    >
-      <View style={styles.cardHeader}>
-        <Text style={styles.orderId}>Order #12345</Text>
-        <Text style={styles.status}>Delivered</Text>
-      </View>
-      <View style={styles.divider} />
-      <View style={styles.addressRow}>
-        <View style={styles.dotGreen} />
-        <Text style={styles.addressText}>123 Pickup St, City</Text>
-      </View>
-      <View style={styles.addressRow}>
-        <View style={styles.dotBlue} />
-        <Text style={styles.addressText}>456 Delivery Ave, City</Text>
-      </View>
-      <View style={styles.cardFooter}>
-        <Text style={styles.date}>12 Oct 2023, 10:30 AM</Text>
-        <Text style={styles.price}>$25.00</Text>
-      </View>
-    </TouchableOpacity>
-  );
+const HistoryScreen = () => {
+  const {
+    selectedTab,
+    setSelectedTab,
+    historyData,
+    onTrack,
+    onCancel,
+    onReview,
+    onReport,
+    navigateToDeliveryDetails,
+    navigateToNotifications,
+  } = useHistoryViewModel();
+
+  const route = useRoute<any>();
+  const navigation = useNavigation<any>();
+  const isFromSettings = route.params?.isFromSettings;
+  const headerTitle = route.params?.title || 'History';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,16 +41,44 @@ const HistoryScreen = () => {
           style={styles.navShadow}
           resizeMode="stretch"
         />
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>History</Text>
-        </View>
+        {isFromSettings ? (
+          <Header
+            type="step"
+            title={headerTitle}
+            onBack={() => navigation.goBack()}
+          />
+        ) : (
+          <Header type="home" onNotificationPress={navigateToNotifications} />
+        )}
       </View>
+      <CustomTabs
+        tabs={TABS}
+        activeTab={selectedTab}
+        onTabPress={setSelectedTab}
+      />
 
-      <FlatList
-        data={historyData}
-        renderItem={renderItem}
-        keyExtractor={item => item.toString()}
+      <SectionList
+        sections={historyData}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <HistoryCard
+            order={item}
+            onTrack={onTrack}
+            onCancel={onCancel}
+            onReview={onReview}
+            onReport={onReport}
+            onDetails={navigateToDeliveryDetails}
+          />
+        )}
+        renderSectionHeader={({ section: { title } }) => (
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>{title}</Text>
+            <View style={styles.sectionLine} />
+          </View>
+        )}
         contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+        stickySectionHeadersEnabled={false}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Text style={styles.emptyText}>No history found</Text>

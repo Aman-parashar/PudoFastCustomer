@@ -34,11 +34,24 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Santral-Medium.ttf</string>
+		<string>Santral-Light.ttf</string>
+		<string>Santral-Ultra.ttf</string>
+		<string>Santral-ExtraBold.ttf</string>
+		<string>Santral-ExtraLight.ttf</string>
+		<string>Santral-Bold.ttf</string>
+		<string>Santral-Hairline.ttf</string>
+		<string>Santral-Book.ttf</string>
+		<string>Santral-SemiBold.ttf</string>
+		<string>Santral-Thin.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>BootSplash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
@@ -56,18 +69,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Santral-Medium.ttf</string>
-		<string>Santral-Light.ttf</string>
-		<string>Santral-Ultra.ttf</string>
-		<string>Santral-ExtraBold.ttf</string>
-		<string>Santral-ExtraLight.ttf</string>
-		<string>Santral-Bold.ttf</string>
-		<string>Santral-Hairline.ttf</string>
-		<string>Santral-Book.ttf</string>
-		<string>Santral-SemiBold.ttf</string>
-		<string>Santral-Thin.ttf</string>
-	</array>
 </dict>
 </plist>

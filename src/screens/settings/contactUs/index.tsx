@@ -1,47 +1,32 @@
 import React from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useContactUsViewModel } from './ContactUsViewModel';
 import { Images } from '../../../utils/images';
+import Header from '../../../components/common/Header';
+import { CommonInput } from '../../../components/common/CommonInput';
+import CustomButton from '../../../components/common/CustomButton';
+import { COLORS } from '../../../utils/colors';
 
 const ContactUsScreen = () => {
-  const {
-    title,
-    setTitle,
-    subject,
-    setSubject,
-    description,
-    setDescription,
-    handleSubmit,
-    goBack,
-  } = useContactUsViewModel();
+  const { control, handleSubmit, handleSave, goBack } = useContactUsViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Contact Us</Text>
-        <View style={styles.headerRightPlaceholder} />
+        <Image
+          source={Images.navShadow}
+          style={styles.navShadow}
+          resizeMode="stretch"
+        />
+        <Header type="step" title="Contact Us" onBack={goBack} />
       </View>
 
       <KeyboardAvoidingView
@@ -49,51 +34,52 @@ const ContactUsScreen = () => {
         style={styles.keyboardView}
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Title</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Title"
-              value={title}
-              onChangeText={setTitle}
-            />
-          </View>
+          <Image
+            source={Images.logoImage}
+            style={styles.logo}
+            resizeMode="contain"
+            tintColor={COLORS.BUTTON_GRADIENT_PURPLE_START}
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Subject</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Subject"
-              value={subject}
-              onChangeText={setSubject}
+          <View style={styles.inputsWrapper}>
+            <CommonInput
+              control={control}
+              name="title"
+              inputlabel="Title"
+              isLeftImage={true}
+              leftImage={Images.titleIcon}
             />
-          </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Description</Text>
-            <TextInput
-              style={[styles.input, styles.textArea]}
-              placeholder="Description"
-              value={description}
-              onChangeText={setDescription}
-              multiline={true}
-              numberOfLines={6}
-              textAlignVertical="top"
+            <CommonInput
+              control={control}
+              name="subject"
+              inputlabel="Subject"
+              isLeftImage={true}
+              leftImage={Images.subjectIcon}
             />
-          </View>
 
-          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-            <LinearGradient
-              colors={[COLORS.PRIMARY, COLORS.SECONDARY]}
-              style={styles.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Text style={styles.submitButtonText}>SUBMIT</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+            <View style={styles.textAreaContainer}>
+              <CommonInput
+                control={control}
+                name="descriptions"
+                inputlabel="Descriptions"
+                isLeftImage={true}
+                leftImage={Images.descriptionIcon}
+                multiline={true}
+                customStyle={{
+                  height: 120,
+                  alignItems: 'flex-start',
+                  paddingTop: 15,
+                }}
+              />
+            </View>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <View style={styles.buttonContainer}>
+        <CustomButton title="SUBMIT" onPress={handleSubmit(handleSave)} />
+      </View>
     </SafeAreaView>
   );
 };

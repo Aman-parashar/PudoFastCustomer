@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
   },
   header: {
-    height: 60,
-    justifyContent: 'center',
+    backgroundColor: 'red',
+    zIndex: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
   },
   navShadow: {
     position: 'absolute',

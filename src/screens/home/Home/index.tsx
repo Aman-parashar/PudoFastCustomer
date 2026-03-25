@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { COLORS } from '../../../utils/colors';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -31,8 +25,11 @@ const HomeScreen = () => {
           style={styles.navShadow}
           resizeMode="stretch"
         />
-        <Header title="Pudo Fast" type='home' onNotificationPress={navigateToNotifications} />
-
+        <Header
+          title="Pudo Fast"
+          type="home"
+          onNotificationPress={navigateToNotifications}
+        />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -67,6 +64,7 @@ const HomeScreen = () => {
               <Image
                 source={Images.pickupGreenIcon}
                 style={styles.addressIcon}
+
               />
               <View style={styles.addressTextContainer}>
                 <Text style={styles.addressLabel}>Pickup Address</Text>
@@ -80,10 +78,7 @@ const HomeScreen = () => {
             onPress={() => navigateToChooseAddress('delivery')}
           >
             <View style={styles.addressRow}>
-              <Image
-                source={Images.dropBlueIcon}
-                style={styles.addressIcon}
-              />
+              <Image source={Images.dropBlueIcon} style={styles.addressIcon} />
               <View style={styles.addressTextContainer}>
                 <Text style={styles.addressLabel}>Delivery Address</Text>
                 <Text style={styles.addressValue}>Enter Address</Text>
@@ -91,7 +86,11 @@ const HomeScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <CustomButton title="CONTINUE" onPress={navigateToDeliveryMiles} style={{ marginTop: 10 }} />
+          <CustomButton
+            title="CONTINUE"
+            onPress={navigateToDeliveryMiles}
+            style={{ marginTop: 10 }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

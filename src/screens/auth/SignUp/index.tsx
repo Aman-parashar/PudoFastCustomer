@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -16,9 +16,12 @@ import CustomButton from '../../../components/common/CustomButton';
 import { useForm } from 'react-hook-form';
 import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
+import CountryPicker from '../../../components/common/CountryPicker';
 
 const SignUpScreen = () => {
   const { control } = useForm();
+  const [showPicker, setShowPicker] = useState(false);
+  const [countryCode, setCountryCode] = useState('+61');
   const {
     agreeTerms,
     handleSignUp,
@@ -86,6 +89,10 @@ const SignUpScreen = () => {
               leftImage={Images.phone}
               keyboardType="phone-pad"
               isMobileNumber
+              countryCode={countryCode}
+              onPressCountryCode={() => {
+                setShowPicker(true);
+              }}
             />
           </View>
 
@@ -143,6 +150,11 @@ const SignUpScreen = () => {
           </Pressable>
         </View>
       </KeyboardContainer>
+      <CountryPicker
+        showPicker={showPicker}
+        setShowPicker={setShowPicker}
+        onSelectCountry={setCountryCode}
+      />
     </Container>
   );
 };

@@ -2,9 +2,7 @@ import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
-
   Image,
-
   Pressable,
   FlatList,
   ImageBackground,
@@ -29,13 +27,11 @@ import { getCountryByCode } from '../../../hooks/useCountry';
 import CountryPicker from '../../../components/common/CountryPicker';
 import { Rules } from '../../../utils/Rules';
 
-
 const LoginScreen = () => {
-
   const [isMobile, setIsMobile] = useState(false);
-  const [countryCode, setCountryCode] = useState('+61')
-  const [searchCountry, setSearchCountry] = useState('')
-  const [showPicker, setShowPicker] = useState(false)
+  const [countryCode, setCountryCode] = useState('+61');
+  const [searchCountry, setSearchCountry] = useState('');
+  const [showPicker, setShowPicker] = useState(false);
   const {
     loginType,
     email,
@@ -55,50 +51,85 @@ const LoginScreen = () => {
     toggleShowPassword,
   } = useLoginViewModel();
 
-
   return (
     <Container subContainer={{ marginTop: -(useSafeAreaInsets().top + 5) }}>
-
-
-
       <KeyboardContainer style={styles.keyboardContainer}>
-        <ImageBackground
-          source={Images.loginBG}
-          style={styles.gradientHeader}
-        >
+        <ImageBackground source={Images.loginBG} style={styles.gradientHeader}>
           <Header type="auth" style={styles.transparentBackground} />
           <View style={styles.headerContent}>
             <Text style={styles.gradientHeaderTitle}>LOGIN</Text>
-            <Text style={styles.gradientHeaderSubTitle}>Ready to deliver with confidence? Take the first step now.</Text>
+            <Text style={styles.gradientHeaderSubTitle}>
+              Ready to deliver with confidence? Take the first step now.
+            </Text>
           </View>
           <View style={styles.headerSpacer} />
         </ImageBackground>
         <View style={styles.mainContent}>
-
           <View style={styles.inputContainer}>
-            {isMobile && <Pressable onPress={() => setIsMobile(false)} style={styles.emailContainer}>
-              <Image source={Images.email} style={styles.emailIcon} resizeMode='center' />
-            </Pressable>}
-            {isMobile ? (
-              <CommonInput inputlabel="Phone" name="phone" control={control} customStyle={{ height: 60, }} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
-                countryCode={countryCode}
-                keyboardType='phone-pad'
-                rules={Rules.Phone}
-                onPressCountryCode={() => {
-                  setShowPicker(true)
-
-                }} />
-            ) : (
-              <CommonInput inputlabel="Email" name="email" control={control} customStyle={{ height: 60 }} rules={Rules.Email} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.email} />
+            {isMobile && (
+              <Pressable
+                onPress={() => setIsMobile(false)}
+                style={styles.phoneContainer}
+              >
+                <Image
+                  source={Images.email}
+                  style={styles.emailIcon}
+                  resizeMode="contain"
+                />
+              </Pressable>
             )}
-            {!isMobile && <Pressable onPress={() => setIsMobile(true)}>
-              <Image source={Images.phone} style={styles.phoneIcon} resizeMode='center' />
-            </Pressable>}
+            {isMobile ? (
+              <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
+                countryCode={countryCode}
+                keyboardType="phone-pad"
+                rules={Rules.Phone}
+                errorStyle={{ position: 'absolute', bottom: -20 }}
+                onPressCountryCode={() => {
+                  setShowPicker(true);
+                }}
+              />
+            ) : (
+              <CommonInput
+                inputlabel="Email"
+                name="email"
+                control={control}
+
+                rules={Rules.Email}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.email}
+
+                errorStyle={{ position: 'absolute', bottom: -20 }}
+              />
+            )}
+            {!isMobile && (
+              <Pressable onPress={() => setIsMobile(true)} style={styles.phoneContainer}>
+                <Image
+                  source={Images.phone}
+                  style={styles.phoneIcon}
+                  resizeMode="contain"
+                />
+              </Pressable>
+            )}
           </View>
-          <CommonInput inputlabel="Password" name="password" control={control} isLeftImage leftImage={Images.password} secureTextEntry isRightImage />
+          <CommonInput
+            inputlabel="Password"
+            name="password"
+            control={control}
+            isLeftImage
+            leftImage={Images.password}
+            secureTextEntry
+            isRightImage
+            customStyle={{ marginTop: 8 }}
+          />
 
           <View style={styles.forgotPasswordContainer}>
-            <Text style={styles.forgotPasswordText} onPress={navigateToForgotPassword}>Forgot Password ?</Text>
+            <Text
+              style={styles.forgotPasswordText}
+              onPress={navigateToForgotPassword}
+            >
+              Forgot Password ?
+            </Text>
           </View>
 
           <CustomButton
@@ -116,21 +147,41 @@ const LoginScreen = () => {
           <View style={styles.footerContainer}>
             <View style={styles.socialButtonsContainer}>
               <Pressable>
-                <Image source={Images.facebookIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.facebookIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
               <Pressable>
-                <Image source={Images.googleIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.googleIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
               <Pressable>
-                <Image source={Images.appleIcon} style={styles.socialIcon} resizeMode='contain' />
+                <Image
+                  source={Images.appleIcon}
+                  style={styles.socialIcon}
+                  resizeMode="contain"
+                />
               </Pressable>
             </View>
-            <Text style={styles.signUpText}>Don't have an account? <Text style={styles.signUpLink} onPress={navigateToSignUp}>SIGN UP</Text></Text>
+            <Text style={styles.signUpText}>
+              Don't have an account?{' '}
+              <Text style={styles.signUpLink} onPress={navigateToSignUp}>
+                SIGN UP
+              </Text>
+            </Text>
           </View>
         </View>
       </KeyboardContainer>
-      <CountryPicker showPicker={showPicker} setShowPicker={setShowPicker} onSelectCountry={setCountryCode} />
-
+      <CountryPicker
+        showPicker={showPicker}
+        setShowPicker={setShowPicker}
+        onSelectCountry={setCountryCode}
+      />
     </Container>
   );
 };

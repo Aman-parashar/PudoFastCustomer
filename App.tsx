@@ -17,9 +17,7 @@ const App = () => {
       </Provider>
     </GestureHandlerRootView>
   );
-
 };
 //App.tsx
 
 export default App;
-

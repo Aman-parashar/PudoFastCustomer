@@ -12,7 +12,6 @@ import {
   StyleProp,
   TextStyle,
   ImageSourcePropType,
-  Dimensions,
   Platform
 } from 'react-native';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -21,6 +20,7 @@ import { Controller, useFormState } from 'react-hook-form';
 import { FONTS } from '../../utils/fonts';
 import { COLORS } from '../../utils/colors';
 import { Images } from '../../utils/images';
+import { dimensions } from '../../utils/constant';
 
 interface inputProps {
   inputlabel: string;
@@ -51,6 +51,7 @@ interface inputProps {
   formatText?: (text: string) => string;
   maxLength?: number;
   labelStyle?: StyleProp<TextStyle>;
+  errorStyle?: StyleProp<TextStyle>;
   isLeftImage?: boolean;
   leftImage?: ImageSourcePropType;
 
@@ -75,7 +76,6 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
       leftImage,
       containerStyle,
       textInputStyle,
-      addInfo = false,
       onRightImagePress,
       isLeftImage = false,
       rightImageStyle,
@@ -86,6 +86,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
       countryCode = '🇦🇺 +61',
       formatText,
       maxLength = undefined,
+      errorStyle,
       labelStyle,
     },
     ref,
@@ -93,7 +94,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
     const { errors }: any = useFormState({ control });
     const [secureEntry, setSecureEntry] = useState<boolean>(secureTextEntry);
     const inputRef = useRef<TextInput | null>(null);
-    const [showInfo, setShowInfo] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
 
     useImperativeHandle(ref, () => inputRef.current!);
 
@@ -102,12 +103,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
         'keyboardDidHide',
         () => {
           inputRef.current?.blur();
-          setShowInfo(false);
+
         },
       );
 
       const touchListener = Keyboard.addListener('keyboardDidShow', () => {
-        setShowInfo(false);
+
       });
 
       return () => {
@@ -117,7 +118,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
     }, []);
 
     const handlePressOutside = () => {
-      setShowInfo(false);
+      setIsFocused(false);
       Keyboard.dismiss();
     };
 
@@ -126,11 +127,10 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
         style={[styles.inputContainer, containerStyle]}
         onPress={handlePressOutside}>
         {label !== '' && (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.labelContainer}>
             <Text style={[styles.labelTextStyle, labelStyle]}>
               {`${label}${isMandatory ? '*' : ''}`}
             </Text>
-
           </View>
         )}
 
@@ -142,21 +142,21 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
             const inputContent = (
               <View
                 style={[
-
                   styles.commonContainerStyle,
                   !editable && { backgroundColor: COLORS.TRIBE_BACKGROUND },
                   secureTextEntry && styles.passwordInputStyle,
+                  isFocused && styles.focusedBorder,
                   customStyle,
-
                 ]}>
 
                 {isLeftImage && <Image
                   source={leftImage}
                   style={styles.leftImageStyle}
-                  resizeMode='center'
+                  resizeMode='contain'
                 />}
-                {isMobileNumber && <Pressable onPress={onPressCountryCode}>
+                {isMobileNumber && <Pressable onPress={onPressCountryCode} style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }} hitSlop={15}>
                   <Text >{countryCode}</Text>
+                  <Image source={Images.arrowRight} style={{ width: 10, height: 10, transform: [{ rotate: '90deg' }] }} resizeMode='contain' tintColor={COLORS.BLACK} />
                 </Pressable>}
                 <TextInput
                   ref={inputRef}
@@ -174,14 +174,16 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   style={[
                     styles.font,
                     textInputStyle,
-                    secureTextEntry && { width: '90%' },
+                    secureTextEntry && styles.passwordWidth,
                   ]}
                   editable={editable}
                   onFocus={() => {
-                    setShowInfo(false);
+                    setIsFocused(true);
+
                     onFocus?.();
                   }}
                   onBlur={() => {
+                    setIsFocused(false);
                     onBlur?.();
                   }}
                   pointerEvents={
@@ -190,13 +192,8 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 />
                 {isRightImage && !secureTextEntry && (
                   <Image
-                    source={rightImage ? rightImage : Images.calendar}
-                    style={{
-                      height: 24,
-                      width: 24,
-                      position: 'absolute',
-                      right: 10,
-                    }}
+                    source={rightImage ? rightImage : Images.calender}
+                    style={styles.rightCalendarIcon}
                   />
                 )}
                 {secureTextEntry && isRightImage && (
@@ -206,7 +203,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                     <Image
                       source={secureEntry ? Images.eye : Images.eyeOff}
                       style={styles.leftImageStyle}
-                      resizeMode='center'
+                      resizeMode='contain'
                     />
                   </Pressable>
                 )}
@@ -225,20 +222,9 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 {errors &&
                   errors[name]?.message !== '' &&
                   errors[name]?.message !== undefined && (
-                    <View style={{ justifyContent: 'flex-end', position: 'absolute', bottom: -20 }}>
+                    <View style={[styles.errorContainer, errorStyle]}>
                       <Text
-                        style={{
-                          color: COLORS.PRIMARY_RED,
-                          fontSize: 14,
-
-                          fontFamily: FONTS.SANTRAL_MEDIUM,
-                          textAlign: 'left',
-                          width: '100%',
-
-
-
-
-                        }}>
+                        style={styles.errorText}>
                         {errors[name]?.message}
                       </Text>
                     </View>
@@ -254,8 +240,8 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginTop: 20,
-    marginBottom: 15,
+
+    marginVertical: 10,
     gap: 4,
     width: '100%',
     justifyContent: 'center',
@@ -265,8 +251,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2
   },
   leftImageStyle: {
-    height: 24,
-    width: 24,
+    height: dimensions.width * .05,
+    width: dimensions.width * 0.05,
+    resizeMode: 'contain'
+
   },
   labelTextStyle: {
     fontSize: 14,
@@ -285,7 +273,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     gap: 5,
     borderColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
-    height: 57,
+    height: dimensions.width * .14,
     overflow: 'visible',
     ...Platform.select({
       ios: {
@@ -301,6 +289,8 @@ const styles = StyleSheet.create({
   },
   font: {
     fontSize: 14,
+
+    height: '100%',
     fontFamily: FONTS.SANTRAL_BOOK,
     color: COLORS.PRIMARY_BLACK,
     textAlignVertical: 'center',
@@ -313,14 +303,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   rightImageStyle: { position: 'absolute', right: 10 },
-  addInfoImage: {
-    height: 16,
-    width: 16,
-    marginLeft: 5,
+  passwordWidth: { width: '90%' },
+  rightCalendarIcon: {
+    height: 24,
+    width: 24,
+    position: 'absolute',
+    right: 10,
   },
-  messageInfoImage: {
-    height: Dimensions.get('window').height * 0.1,
-    width: Dimensions.get('window').width * 0.5,
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  focusedBorder: {
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+  errorContainer: {
+    justifyContent: 'flex-end',
+  },
+  errorText: {
+    color: COLORS.PRIMARY_RED,
+    fontSize: 14,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    textAlign: 'left',
+    width: '100%',
   },
 });
 
