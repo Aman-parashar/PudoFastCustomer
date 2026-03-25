@@ -1,7 +1,7 @@
-import {Alert, Linking, PermissionsAndroid, Platform} from 'react-native';
-import {storage} from '../helper/MMKVStorage';
-import {LocalStorage} from './LocalStorage';
-import { request, PERMISSIONS, RESULTS } from 'react-native-permissions'; 
+import { Alert, Linking, PermissionsAndroid, Platform } from 'react-native';
+import { storage } from '../helper/MMKVStorage';
+import { LocalStorage } from './LocalStorage';
+import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 export enum PermissionStatus {
   GRANTED = 'granted',
   DENIED = 'denied',
@@ -23,10 +23,10 @@ const showPermissionAlert = (
     title,
     message,
     [
-      {text: 'Cancel', style: 'cancel'},
-      {text: 'Open Settings', onPress},
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Open Settings', onPress },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 
@@ -34,155 +34,107 @@ const openSettings = () => {
   Linking.openSettings();
 };
 
-export const checkAndRequestCameraPermission =
+export const checkAndRequestLocationPermission =
   async (): Promise<PermissionResult> => {
     if (Platform.OS === 'ios') {
-      return {status: PermissionStatus.GRANTED};
+      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      if (result === RESULTS.GRANTED) {
+        return { status: PermissionStatus.GRANTED };
+      } else if (result === RESULTS.BLOCKED) {
+        showPermissionAlert(
+          'Location Permission Required',
+          'Please enable location access in Settings.',
+          openSettings,
+        );
+        return { status: PermissionStatus.BLOCKED };
+      }
+      return { status: PermissionStatus.DENIED };
     }
 
     try {
-      const granted = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
+      // ✅ Check BOTH Fine & Coarse
+      const fineGranted = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      const coarseGranted = await PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
       );
 
-      if (granted) {
-        storage.set(LocalStorage.cameraPermission, 'granted');
-        return {status: PermissionStatus.GRANTED};
+      if (fineGranted && coarseGranted) {
+        storage.set(LocalStorage.locationPermission, 'granted');
+        return { status: PermissionStatus.GRANTED };
       }
 
-      const hasAskedBefore = storage.getString(LocalStorage.cameraPermission);
-      if (hasAskedBefore) {
-        return {status: PermissionStatus.DENIED};
-      }
-
-      const result = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'Camera Permission',
-          message: 'App needs access to your camera to take photos.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-
-      if (result === PermissionsAndroid.RESULTS.GRANTED) {
-        storage.set(LocalStorage.cameraPermission, 'granted');
-        return {status: PermissionStatus.GRANTED};
-      } else if (result === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-        storage.set(LocalStorage.cameraPermission, 'blocked');
+      const hasAskedBefore = storage.getString(LocalStorage.locationPermission);
+      if (hasAskedBefore === 'blocked') {
         showPermissionAlert(
-          'Camera Permission Required',
-          'Please enable camera access in Settings to use this feature.',
+          'Location Permission Required',
+          'Please enable location access in Settings to use this feature.',
           openSettings,
         );
-        return {status: PermissionStatus.BLOCKED};
-      } else {
-        storage.set(LocalStorage.cameraPermission, 'denied');
-        return {status: PermissionStatus.DENIED};
+        return { status: PermissionStatus.BLOCKED };
       }
+      if (hasAskedBefore === 'granted') {
+        return { status: PermissionStatus.GRANTED };
+      }
+
+      // ✅ Request BOTH permissions together
+      const results = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      ]);
+
+      const fine = results[PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION];
+      const coarse = results[PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION];
+
+      if (
+        fine === PermissionsAndroid.RESULTS.GRANTED &&
+        coarse === PermissionsAndroid.RESULTS.GRANTED
+      ) {
+        storage.set(LocalStorage.locationPermission, 'granted');
+        return { status: PermissionStatus.GRANTED };
+
+      } else if (
+        fine === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN ||
+        coarse === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN
+      ) {
+        storage.set(LocalStorage.locationPermission, 'blocked');
+        showPermissionAlert(
+          'Location Permission Required',
+          'Please enable location access in Settings to use this feature.',
+          openSettings,
+        );
+        return { status: PermissionStatus.BLOCKED };
+
+      } else {
+        storage.set(LocalStorage.locationPermission, 'denied');
+        return { status: PermissionStatus.DENIED };
+      }
+
     } catch (err) {
-      console.warn('Camera permission error:', err);
+      console.warn('Location permission error:', err);
       return {
         status: PermissionStatus.UNAVAILABLE,
-        message: 'Failed to check camera permission',
+        message: 'Failed to check location permission', // ✅ Fixed message too
       };
     }
   };
 
-export const checkAndRequestImagePickerPermission =
-  async (): Promise<PermissionResult> => {
-  
-if (Platform.OS === 'ios') {
-  const result = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
-
-  if (result === RESULTS.GRANTED || result === RESULTS.LIMITED) {
-    return { status: PermissionStatus.GRANTED };
-  }
-
-  return { status: PermissionStatus.DENIED };
-}
-
-    try {
-      const androidVersion =
-        typeof Platform.Version === 'number'
-          ? Platform.Version
-          : parseInt(Platform.Version, 10);
-
-      const permission =
-        androidVersion >= 33
-          ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
-          : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
-
-      const granted = await PermissionsAndroid.check(permission);
-
-      if (granted) {
-        storage.set(LocalStorage.storagePermission, 'granted');
-        return {status: PermissionStatus.GRANTED};
-      }
-
-      const hasAskedBefore = storage.getString(LocalStorage.storagePermission);
-      if (hasAskedBefore) {
-        return {status: PermissionStatus.DENIED};
-      }
-
-      const result = await PermissionsAndroid.request(permission, {
-        title: 'Storage Permission',
-        message: 'App needs access to your storage to select photos.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      });
-
-      if (result === PermissionsAndroid.RESULTS.GRANTED) {
-        storage.set(LocalStorage.storagePermission, 'granted');
-        return {status: PermissionStatus.GRANTED};
-      } else if (result === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-        storage.set(LocalStorage.storagePermission, 'blocked');
-        showPermissionAlert(
-          'Storage Permission Required',
-          'Please enable storage access in Settings to use this feature.',
-          openSettings,
-        );
-        return {status: PermissionStatus.BLOCKED};
-      } else {
-        storage.set(LocalStorage.storagePermission, 'denied');
-        return {status: PermissionStatus.DENIED};
-      }
-    } catch (err) {
-      console.warn('Storage permission error:', err);
-      return {
-        status: PermissionStatus.UNAVAILABLE,
-        message: 'Failed to check storage permission',
-      };
-    }
-  };
 
 export const checkAndRequestAllPermissions = async (): Promise<void> => {
-  const cameraPermission = storage.getString(LocalStorage.cameraPermission);
-  const storagePermission = storage.getString(LocalStorage.storagePermission);
+  const locationPermission = storage.getString(LocalStorage.locationPermission);
+  // const storagePermission = storage.getString(LocalStorage.storagePermission);
 
-  if (!cameraPermission) {
-    const cameraResult = await checkAndRequestCameraPermission();
+  if (!locationPermission) {
+    const locationResult = await checkAndRequestLocationPermission();
 
-    if (cameraResult.status === PermissionStatus.BLOCKED) {
+    if (locationResult.status === PermissionStatus.BLOCKED) {
       showPermissionAlert(
-        'Camera Permission Required',
-        'Please enable camera access in Settings to use this feature.',
+        'Location Permission Required',
+        'Please enable location access in Settings to use this feature.',
         openSettings,
       );
     }
   }
 
-  if (!storagePermission) {
-    const storageResult = await checkAndRequestImagePickerPermission();
-
-    if (storageResult.status === PermissionStatus.BLOCKED) {
-      showPermissionAlert(
-        'Storage Permission Required',
-        'Please enable storage access in Settings to use this feature.',
-        openSettings,
-      );
-    }
-  }
 };
