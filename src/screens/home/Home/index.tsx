@@ -8,6 +8,7 @@ import { useHomeViewModel } from './HomeViewModel';
 import { Images } from '../../../utils/images';
 import CustomButton from '../../../components/common/CustomButton';
 import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
 
 const HomeScreen = () => {
   const {
@@ -57,7 +58,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.addressBox}
+            style={[styles.addressBox, { backgroundColor: COLORS.BOX_BLUE }]}
             onPress={() => navigateToChooseAddress('delivery')}
           >
             <View style={styles.addressRow}>
