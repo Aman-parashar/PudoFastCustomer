@@ -4,10 +4,26 @@ require Pod::Executable.execute_command('node', ['-p',
     "react-native/scripts/react_native_pods.rb",
     {paths: [process.argv[1]]},
   )', __dir__]).strip
-
+def node_require(script)
+require Pod::Executable.execute_command('node', ['-p',
+    "require.resolve(
+      '#{script}',
+    {paths: [process.argv[1]]},
+    )", __dir__]).strip
+end
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
+pod 'GoogleMaps'
+node_require('react-native-permissions/scripts/setup.rb')
 
+require File.join(File.dirname(`node --print "require.resolve('react-native-permissions/package.json')"`), "scripts/setup")
+setup_permissions([
+
+   'LocationAccuracy',
+   'LocationAlways',
+   'LocationWhenInUse',
+
+])
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green

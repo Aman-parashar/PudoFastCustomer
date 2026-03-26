@@ -10,9 +10,10 @@ export const LocalStorage = {
   email: 'email',
   fakePassword: 'fakePassword',
   userDetails: 'userDetails',
-  cameraPermission: 'cameraPermission',
+
   storagePermission: 'storagePermission',
   audioPermission: 'audioPermission',
+  locationPermission: 'locationPermission',
   createTribePayment: 'createTribePayment1',
   createTribeSubmission: 'createTribeSubmission',
   createTribeData: 'createTribeData',

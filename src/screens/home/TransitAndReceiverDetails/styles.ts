@@ -5,16 +5,20 @@ import { FONTS } from '../../../utils/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE,
+
+
+
   },
 
   scrollContent: {
     padding: 20,
     paddingBottom: 40,
+    width: '100%',
   },
   header: {
     backgroundColor: COLORS.WHITE,
     zIndex: 10,
+    width: '100%'
   },
   navShadow: {
     position: 'absolute',

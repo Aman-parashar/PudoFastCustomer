@@ -54,23 +54,10 @@ const styles = StyleSheet.create({
     height: 16,
     marginRight: 4,
   },
-  editIconContainer: {
-    // width: 44,
-    // height: 44,
-    // borderRadius: 22,
-    // // backgroundColor: COLORS.WHITE,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.15,
-    // shadowRadius: 5,
-    // elevation: 4,
-  },
+  editIconContainer: {},
   editIcon: {
     width: 50,
     height: 50,
-    resizeMode:'cover'
   },
   menuContainer: {
     paddingHorizontal: 20,

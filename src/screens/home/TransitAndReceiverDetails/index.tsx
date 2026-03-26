@@ -18,14 +18,16 @@ import { CommonInput } from '../../../components/common/CommonInput';
 import CustomButton from '../../../components/common/CustomButton';
 import { deliverySteps } from '../../../utils/enum';
 import Header from '../../../components/common/Header';
+import Container from '../../../components/common/Container';
+import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 
 const TransitAndReceiverDetailsScreen = () => {
   const { orderData, control, handleSubmit, handleNext, goBack } =
     useTransitAndReceiverDetailsViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+    <Container container={styles.container}>
+      {/* <View style={styles.header}>
         <Image
           source={Images.navShadow}
           style={styles.navShadow}
@@ -36,103 +38,101 @@ const TransitAndReceiverDetailsScreen = () => {
           title="Transit and Receiver Details"
           onBack={goBack}
         />
-      </View>
-
+      </View> */}
+      <Header
+        type="step"
+        title="Transit and Receiver Details"
+        onBack={goBack}
+      />
       <Stepper currentStep={deliverySteps.ReceiversDetails} />
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
+      <KeyboardContainer
+        style={styles.scrollContent}
       >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Transit Details Summary */}
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Transit Details</Text>
 
-            {/* Pickup Address Card */}
-            <View style={[styles.addressCard, styles.pickupCard]}>
-              <View style={styles.addressRow}>
-                <View style={[styles.dot, styles.dotPickup]} />
-                <View style={styles.addressInfo}>
-                  <Text style={styles.addressLabel}>Pickup Address</Text>
-                  <Text style={styles.addressText} numberOfLines={2}>
-                    {orderData?.pickupAddress?.address ||
-                      'B103/4, Abc com, AA Road, BB area, CA City, USA'}
-                  </Text>
-                </View>
-              </View>
-            </View>
+        {/* Transit Details Summary */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Transit Details</Text>
 
-            {/* Drop off Address Card */}
-            <View style={[styles.addressCard, styles.dropoffCard]}>
-              <View style={styles.addressRow}>
-                <View style={[styles.dot, styles.dotDropoff]} />
-                <View style={styles.addressInfo}>
-                  <Text style={styles.addressLabel}>Drop off Address</Text>
-                  <Text style={styles.addressText} numberOfLines={2}>
-                    {orderData?.dropAddress?.address ||
-                      'A201,1, XYS Apartment.'}
-                  </Text>
-                </View>
+          {/* Pickup Address Card */}
+          <View style={[styles.addressCard, styles.pickupCard]}>
+            <View style={styles.addressRow}>
+              <View style={[styles.dot, styles.dotPickup]} />
+              <View style={styles.addressInfo}>
+                <Text style={styles.addressLabel}>Pickup Address</Text>
+                <Text style={styles.addressText} numberOfLines={2}>
+                  {orderData?.pickupAddress?.address ||
+                    'B103/4, Abc com, AA Road, BB area, CA City, USA'}
+                </Text>
               </View>
             </View>
           </View>
 
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Receiver Details</Text>
-
-            <CommonInput
-              control={control}
-              name="firstName"
-              inputlabel="First Name"
-              isLeftImage
-              leftImage={Images.useIcon}
-              customStyle={{ borderColor: '#F57C00', borderWidth: 1 }} // Orange border for first field as per image
-            />
-
-            <CommonInput
-              control={control}
-              name="lastName"
-              inputlabel="Last Name"
-              isLeftImage
-              leftImage={Images.useIcon}
-              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
-            />
-
-            <CommonInput
-              control={control}
-              name="email"
-              inputlabel="Email Address"
-              isLeftImage
-              leftImage={Images.email}
-              keyboardType="email-address"
-              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
-            />
-
-            <CommonInput
-              control={control}
-              name="phone"
-              inputlabel="Phone Number"
-              isLeftImage
-              leftImage={Images.phone}
-              keyboardType="phone-pad"
-              isMobileNumber
-              countryCode="+1"
-              customStyle={{ borderColor: COLORS.BORDER, borderWidth: 1 }}
-            />
+          {/* Drop off Address Card */}
+          <View style={[styles.addressCard, styles.dropoffCard]}>
+            <View style={styles.addressRow}>
+              <View style={[styles.dot, styles.dotDropoff]} />
+              <View style={styles.addressInfo}>
+                <Text style={styles.addressLabel}>Drop off Address</Text>
+                <Text style={styles.addressText} numberOfLines={2}>
+                  {orderData?.dropAddress?.address ||
+                    'A201,1, XYS Apartment.'}
+                </Text>
+              </View>
+            </View>
           </View>
+        </View>
 
-          <CustomButton
-            title="NEXT"
-            onPress={handleSubmit(handleNext)}
-            style={styles.confirmButton}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Receiver Details</Text>
+
+          <CommonInput
+            control={control}
+            name="firstName"
+            inputlabel="First Name"
+            isLeftImage
+            leftImage={Images.useIcon}
           />
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+
+          <CommonInput
+            control={control}
+            name="lastName"
+            inputlabel="Last Name"
+            isLeftImage
+            leftImage={Images.useIcon}
+
+          />
+
+          <CommonInput
+            control={control}
+            name="email"
+            inputlabel="Email Address"
+            isLeftImage
+            leftImage={Images.email}
+            keyboardType="email-address"
+
+          />
+
+          <CommonInput
+            control={control}
+            name="phone"
+            inputlabel="Phone Number"
+            isLeftImage
+            leftImage={Images.phone}
+            keyboardType="phone-pad"
+            isMobileNumber
+            countryCode="+1"
+
+          />
+        </View>
+
+        <CustomButton
+          title="NEXT"
+          onPress={handleSubmit(handleNext)}
+          style={styles.confirmButton}
+        />
+      </KeyboardContainer>
+    </Container>
   );
 };
 

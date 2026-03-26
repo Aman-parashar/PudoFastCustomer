@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -19,11 +19,13 @@ import Header from '../../../components/common/Header';
 import CustomButton from '../../../components/common/CustomButton';
 import { CommonInput } from '../../../components/common/CommonInput';
 import { useForm } from 'react-hook-form';
+import CountryPicker from '../../../components/common/CountryPicker';
 
 const EditProfileScreen = () => {
   const { control, handleSave, handleSubmit, goBack } =
     useEditProfileViewModel();
-
+  const [showPicker, setShowPicker] = useState(false);
+  const [countryCode, setCountryCode] = useState('+61');
   return (
     <SafeAreaView style={styles.container}>
       <Header type="step" title="Edit Profile" onBack={goBack} />
@@ -76,6 +78,11 @@ const EditProfileScreen = () => {
               isLeftImage
               leftImage={Images.phone}
               keyboardType="phone-pad"
+              countryCode={countryCode}
+              isMobileNumber
+              onPressCountryCode={() => {
+                setShowPicker(true);
+              }}
             />
 
             <CommonInput
@@ -95,6 +102,11 @@ const EditProfileScreen = () => {
           onPress={handleSubmit(handleSave)}
         />
       </View>
+      <CountryPicker
+        showPicker={showPicker}
+        setShowPicker={setShowPicker}
+        onSelectCountry={setCountryCode}
+      />
     </SafeAreaView>
   );
 };

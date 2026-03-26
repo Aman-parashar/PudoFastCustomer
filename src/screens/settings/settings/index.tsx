@@ -64,7 +64,7 @@ const SettingsScreen = () => {
             style={styles.editIconContainer}
           >
             <Image
-              source={require('../../../assets/EditIcone.png')}
+              source={Images.editIcon}
               style={styles.editIcon}
             />
           </TouchableOpacity>

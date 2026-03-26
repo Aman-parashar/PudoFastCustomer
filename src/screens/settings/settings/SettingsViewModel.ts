@@ -2,6 +2,7 @@ import { Alert } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { Images } from '../../../utils/images';
+import { Share } from 'react-native';
 
 export const useSettingsViewModel = () => {
   const navigateToNotifications = () => {
@@ -9,7 +10,7 @@ export const useSettingsViewModel = () => {
   };
 
   const navigateToProfile = () => {
-    NavigationService.navigate(RouteConstant.Profile);
+    NavigationService.navigate(RouteConstant.EditProfile);
   };
 
   const handleLogout = () => {
@@ -51,7 +52,16 @@ export const useSettingsViewModel = () => {
       onPress: () => {},
     },
     { id: 5, title: 'Rate App', icon: Images.star, onPress: () => {} },
-    { id: 6, title: 'Share App', icon: Images.shareApp, onPress: () => {} },
+    {
+      id: 6,
+      title: 'Share App',
+      icon: Images.shareApp,
+      onPress: () => {
+        Share.share({
+          message: 'Hey! Download this app, You will like it.PUDO FAST App',
+        });
+      },
+    },
     {
       id: 7,
       title: 'FAQ',

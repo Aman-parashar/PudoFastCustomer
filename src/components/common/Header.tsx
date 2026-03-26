@@ -27,7 +27,7 @@ interface HeaderProps {
 
 const renderAuthHeader = (props: HeaderProps) => {
   return (
-    <View>
+    <View style={{ paddingHorizontal: 16, }}>
       <Pressable
         onPress={() => {
           NavigationService.goBack();
@@ -66,13 +66,23 @@ const renderStepHeader = (props: HeaderProps) => {
   const handleBack = onBack || (() => NavigationService.goBack());
 
   return (
-    <View style={styles.stepHeaderContainer}>
-      <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-        <Image source={Images.arrowLeft} style={styles.stepBackIcon} />
-      </TouchableOpacity>
-      <Text style={styles.headerTitle}>{title}</Text>
-      <View style={styles.headerSpacer} />
-    </View>
+    <>
+      <Image
+        source={Images.navShadow}
+        style={styles.navShadow}
+        resizeMode="stretch"
+      />
+      <View style={styles.stepHeaderContainer}>
+
+        <TouchableOpacity onPress={handleBack} style={styles.backButton}>
+          <Image source={Images.arrowLeft} style={styles.stepBackIcon} />
+        </TouchableOpacity>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={styles.headerTitle}>{title}</Text>
+        </View>
+        <View style={{ width: 40 }} />
+      </View>
+    </>
   );
 };
 
@@ -100,21 +110,28 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+
     backgroundColor: COLORS.WHITE,
     width: '100%',
+  },
+  navShadow: {
+    position: 'absolute',
+    top: -40,
+    width: '100%',
+    height: 110,
   },
   homeHeaderContainer: {
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 10, paddingHorizontal: 16,
   },
   stepHeaderContainer: {
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
+    paddingHorizontal: 16
   },
   icon: {
     width: 24,

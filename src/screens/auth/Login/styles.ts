@@ -8,6 +8,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.BACKGROUND,
   },
+  phoneContainer: {
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    paddingVertical: 15
+  },
+
   gradientHeaderTitle: {
     color: COLORS.SECONDARY,
     fontSize: 34,
@@ -51,9 +62,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   emailIcon: {
-    width: 5,
-    aspectRatio: 1 / 1.2,
-
+    width: 24,
+    height: 24,
 
   },
   emailContainer: {
@@ -67,12 +77,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   phoneIcon: {
-    width: 5,
-    aspectRatio: 1 / 1.2,
-    backgroundColor: COLORS.WHITE,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: COLORS.PRIMARY,
+    width: 24,
+    height: 24,
+
   },
   inputContainer: {
     flexDirection: 'row',
@@ -135,6 +142,8 @@ const styles = StyleSheet.create({
   },
   emailInputContainer: {
     flex: 1,
+    marginTop: 20,
+    marginBottom: 15,
   },
   headerContent: {
     paddingHorizontal: 16,

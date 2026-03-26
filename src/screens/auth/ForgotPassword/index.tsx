@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
+  Image,
   ImageBackground,
   Pressable,
 } from 'react-native';
@@ -17,9 +18,13 @@ import { useForm } from 'react-hook-form';
 import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
 import { dimensions } from '../../../utils/constant';
+import CountryPicker from '../../../components/common/CountryPicker';
 
 const ForgotPasswordScreen = () => {
   const { control } = useForm();
+  const [showPicker, setShowPicker] = useState(false);
+  const [countryCode, setCountryCode] = useState('+61');
+
   const [isMobile, setIsMobile] = useState(false);
   const {
     handleSend,
@@ -44,7 +49,7 @@ const ForgotPasswordScreen = () => {
           <View style={styles.inputContainer}>
             {isMobile && (
               <Pressable onPress={() => setIsMobile(false)} style={styles.emailToggleContainer}>
-                <ImageBackground source={Images.email} style={styles.emailIcon} resizeMode='center' />
+                <Image source={Images.email} style={styles.emailIcon} resizeMode='contain' />
               </Pressable>
             )}
             {isMobile ? (
@@ -55,8 +60,12 @@ const ForgotPasswordScreen = () => {
                 containerStyle={styles.emailInputContainer}
                 isLeftImage
                 leftImage={Images.phone}
+                countryCode={countryCode}
                 keyboardType="phone-pad"
                 isMobileNumber
+                onPressCountryCode={() => {
+                  setShowPicker(true);
+                }}
               />
             ) : (
               <CommonInput
@@ -70,8 +79,8 @@ const ForgotPasswordScreen = () => {
               />
             )}
             {!isMobile && (
-              <Pressable onPress={() => setIsMobile(true)}>
-                <ImageBackground source={Images.phone} style={styles.phoneToggleContainer} resizeMode='center' />
+              <Pressable onPress={() => setIsMobile(true)} style={styles.phoneContainer}>
+                <Image source={Images.phone} style={styles.phoneIcon} resizeMode='contain' />
               </Pressable>
             )}
           </View>
@@ -83,6 +92,11 @@ const ForgotPasswordScreen = () => {
           />
         </View>
       </KeyboardContainer>
+      <CountryPicker
+        showPicker={showPicker}
+        setShowPicker={setShowPicker}
+        onSelectCountry={setCountryCode}
+      />
     </Container>
   );
 };

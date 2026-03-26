@@ -11,13 +11,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useChooseAddressViewModel } from './ChooseAddressViewModel';
 import { Images } from '../../../utils/images';
+import Header from '../../../components/common/Header';
 
 const ChooseAddressScreen = () => {
   const { type, search, setSearch, goBack, confirmAddress } = useChooseAddressViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity
           onPress={goBack}
           style={styles.backButton}
@@ -25,14 +26,15 @@ const ChooseAddressScreen = () => {
           <Image
             source={Images.arrowLeft}
             style={styles.backIcon}
+
           />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>
           {type === 'pickup' ? 'Pickup Address' : 'Delivery Address'}
         </Text>
         <View style={styles.headerSpacer} />
-      </View>
-
+      </View> */}
+      <Header title={type === 'pickup' ? 'Pickup Address' : 'Delivery Address'} type="step" onBack={goBack} />
       <View style={styles.searchContainer}>
         <View style={styles.searchBox}>
           <Image

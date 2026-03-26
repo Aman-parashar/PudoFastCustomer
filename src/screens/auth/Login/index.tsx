@@ -48,28 +48,21 @@ const LoginScreen = () => {
             {isMobile && (
               <Pressable
                 onPress={() => setIsMobile(false)}
-                style={styles.emailContainer}
+                style={styles.phoneContainer}
               >
                 <Image
                   source={Images.email}
                   style={styles.emailIcon}
-                  resizeMode="center"
+                  resizeMode="contain"
                 />
               </Pressable>
             )}
             {isMobile ? (
-              <CommonInput
-                inputlabel="Phone"
-                name="phone"
-                control={control}
-                customStyle={{ height: 60 }}
-                containerStyle={styles.emailInputContainer}
-                isLeftImage
-                leftImage={Images.phone}
-                isMobileNumber
+              <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
                 countryCode={countryCode}
                 keyboardType="phone-pad"
                 rules={Rules.Phone}
+                errorStyle={{ position: 'absolute', bottom: -20 }}
                 onPressCountryCode={() => {
                   setShowPicker(true);
                 }}
@@ -79,19 +72,21 @@ const LoginScreen = () => {
                 inputlabel="Email"
                 name="email"
                 control={control}
-                customStyle={{ height: 60 }}
+
                 rules={Rules.Email}
                 containerStyle={styles.emailInputContainer}
                 isLeftImage
                 leftImage={Images.email}
+
+                errorStyle={{ position: 'absolute', bottom: -20 }}
               />
             )}
             {!isMobile && (
-              <Pressable onPress={() => setIsMobile(true)}>
+              <Pressable onPress={() => setIsMobile(true)} style={styles.phoneContainer}>
                 <Image
                   source={Images.phone}
                   style={styles.phoneIcon}
-                  resizeMode="center"
+                  resizeMode="contain"
                 />
               </Pressable>
             )}
@@ -104,6 +99,7 @@ const LoginScreen = () => {
             leftImage={Images.password}
             secureTextEntry
             isRightImage
+            customStyle={{ marginTop: 8 }}
           />
 
           <View style={styles.forgotPasswordContainer}>

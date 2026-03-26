@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: 'red',
     zIndex: 10,
-      borderBottomWidth: 1,
+    borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
   },
   navShadow: {
