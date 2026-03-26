@@ -1,29 +1,18 @@
-import axios from 'axios';
-
-const BASE_URL = 'https://api.pudofast.com'; // Placeholder, should be in config
-
-const apiClient = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import { apiService, API_ENDPOINTS } from '../apiService';
+import { LoginResponse } from '../types/api';
 
 export const AuthService = {
-  login: async (data: any) => {
-    try {
-      const response = await apiClient.post('/user/login', data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+  login: async (data: any): Promise<LoginResponse> => {
+    return await apiService.post<LoginResponse>(API_ENDPOINTS.LOGIN, data);
   },
-  signup: async (data: any) => {
-    try {
-      const response = await apiClient.post('/customer/signup', data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+  signup: async (data: any): Promise<LoginResponse> => {
+    return await apiService.post<LoginResponse>(API_ENDPOINTS.SIGNUP, data);
+  },
+  verifyOtp: async (data: any) => {
+    return await apiService.post(API_ENDPOINTS.VERIFY_OTP, data);
+  },
+  logout: async () => {
+    return await apiService.post(API_ENDPOINTS.LOGOUT);
   },
 };
+

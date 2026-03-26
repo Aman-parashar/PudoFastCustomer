@@ -6,6 +6,9 @@ import { StatusBar } from 'react-native';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { checkAndRequestAllPermissions } from './src/utils/permissions';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
@@ -25,12 +28,14 @@ const App = () => {
   }, []);
   return (
     <GestureHandlerRootView>
-      <Provider store={store}>
-        <StatusBar barStyle="dark-content" />
-        <BottomSheetModalProvider>
-          <AppNavigator />
-        </BottomSheetModalProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <StatusBar barStyle="dark-content" />
+          <BottomSheetModalProvider>
+            <AppNavigator />
+          </BottomSheetModalProvider>
+        </Provider>
+      </QueryClientProvider>
     </GestureHandlerRootView>
   );
 };
