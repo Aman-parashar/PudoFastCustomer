@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useRef } from 'react'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { Images } from '../../../utils/images'
 import styles from './styles'
 
@@ -17,6 +17,7 @@ const HomeMapView = (props: Props) => {
         <View style={styles.mapContainer}>
             <MapView
                 ref={mapRef}
+                provider={PROVIDER_GOOGLE}
                 style={styles.map}
                 initialRegion={{
                     latitude: 37.78825,

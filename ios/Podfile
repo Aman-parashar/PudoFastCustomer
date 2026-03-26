@@ -15,7 +15,8 @@ platform :ios, min_ios_version_supported
 prepare_react_native_project!
 pod 'GoogleMaps'
 node_require('react-native-permissions/scripts/setup.rb')
-
+rn_maps_path = '../node_modules/react-native-maps'
+pod 'react-native-maps/Google', :path => rn_maps_path
 require File.join(File.dirname(`node --print "require.resolve('react-native-permissions/package.json')"`), "scripts/setup")
 setup_permissions([
 

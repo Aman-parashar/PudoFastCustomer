@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   addressBox: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.BOX_GREEN,
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   addressValue: {
     fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOLD,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
     color: COLORS.BLACK,
     marginTop: 4,
   },
