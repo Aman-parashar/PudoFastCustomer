@@ -47,5 +47,6 @@ export default KeyboardContainer;
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+
   },
 });

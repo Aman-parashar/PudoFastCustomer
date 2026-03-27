@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
-import MapView, { Marker } from 'react-native-maps';
+import HomeMapView from './HomeMapView';
 import styles from './styles';
 import { useHomeViewModel } from './HomeViewModel';
 import { Images } from '../../../utils/images';
 import CustomButton from '../../../components/common/CustomButton';
 import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
 
 const HomeScreen = () => {
   const {
@@ -31,27 +25,15 @@ const HomeScreen = () => {
           style={styles.navShadow}
           resizeMode="stretch"
         />
-        <Header title="Pudo Fast" type='home' onNotificationPress={navigateToNotifications} />
-
+        <Header
+          title="Pudo Fast"
+          type="home"
+          onNotificationPress={navigateToNotifications}
+        />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.mapContainer}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            <Marker
-              coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
-              image={Images.mapPinRed}
-            />
-          </MapView>
-        </View>
+        <HomeMapView />
 
         <View style={styles.addressSection}>
           <Text style={styles.sectionTitle}>Address Details</Text>
@@ -76,14 +58,11 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.addressBox}
+            style={[styles.addressBox, { backgroundColor: COLORS.BOX_BLUE }]}
             onPress={() => navigateToChooseAddress('delivery')}
           >
             <View style={styles.addressRow}>
-              <Image
-                source={Images.dropBlueIcon}
-                style={styles.addressIcon}
-              />
+              <Image source={Images.dropBlueIcon} style={styles.addressIcon} />
               <View style={styles.addressTextContainer}>
                 <Text style={styles.addressLabel}>Delivery Address</Text>
                 <Text style={styles.addressValue}>Enter Address</Text>
@@ -91,7 +70,11 @@ const HomeScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <CustomButton title="CONTINUE" onPress={navigateToDeliveryMiles} style={{ marginTop: 10 }} />
+          <CustomButton
+            title="CONTINUE"
+            onPress={navigateToDeliveryMiles}
+            style={{ marginTop: 10 }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

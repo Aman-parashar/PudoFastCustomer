@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
   },
   header: {
-    height: 60,
-    justifyContent: 'center',
+    backgroundColor: 'red',
+    zIndex: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
   },
   navShadow: {
     position: 'absolute',
@@ -47,7 +49,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
+   width:"100%",
+   height:"100%"
   },
   addressSection: {
     paddingHorizontal: 20,
@@ -66,17 +70,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   addressBox: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.BOX_GREEN,
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
     borderWidth: 1,
     borderColor: COLORS.BORDER,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 2,
+    // elevation: 1,
   },
   addressRow: {
     flexDirection: 'row',
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
   },
   addressValue: {
     fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOLD,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
     color: COLORS.BLACK,
     marginTop: 4,
   },

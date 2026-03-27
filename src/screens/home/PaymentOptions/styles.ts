@@ -7,161 +7,113 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  header: {
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.BORDER,
-  },
-  backButton: {
-    padding: 10,
-  },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
-  },
-  headerSpacer: {
-    width: 40,
-  },
+
   scrollContent: {
     padding: 20,
   },
-  summaryCard: {
-    backgroundColor: '#F9F9F9',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 30,
-    borderWidth: 1,
-    borderColor: '#EEEEEE',
+  header: {
+    backgroundColor: COLORS.WHITE,
+    zIndex: 10,
   },
-  summaryTitle: {
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
-    marginBottom: 15,
+  navShadow: {
+    position: 'absolute',
+    top: -40,
+    width: '100%',
+    height: 110,
   },
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  summaryLabel: {
-    fontSize: 14,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: COLORS.TEXT_SECONDARY,
-  },
-  summaryValue: {
-    fontSize: 14,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.BLACK,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: COLORS.BORDER,
-    marginVertical: 15,
-  },
-  totalLabel: {
+  sectionTitle: {
     fontSize: 16,
     fontFamily: FONTS.SANTRAL_BOLD,
     color: COLORS.BLACK,
+    marginBottom: 15,
   },
-  totalValue: {
-    fontSize: 20,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.PRIMARY,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.BLACK,
-    marginBottom: 20,
-  },
-  methodCard: {
+
+  savedCardCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: COLORS.BORDER,
-    marginBottom: 15,
     backgroundColor: COLORS.WHITE,
+    borderRadius: 8,
+    padding: 15,
+    marginBottom: 15,
+    borderWidth: 1.5,
+    borderColor: 'transparent',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 3,
   },
-  methodCardActive: {
-    borderColor: COLORS.PRIMARY,
-    backgroundColor: 'rgba(119, 3, 117, 0.02)',
+  savedCardSelected: {
+    borderColor: '#FF00FF', // Pinkish purple as in image
   },
-  radioButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: COLORS.PRIMARY,
+  cardIconContainer: {
+    width: 60,
+    height: 40,
+    backgroundColor: '#58A5FF',
+    borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
+    position: 'relative',
   },
-  radioInner: {
+  cardIcon: {
+    width: 40,
+    height: 25,
+    resizeMode: 'contain',
+    tintColor: COLORS.WHITE,
+  },
+  checkmarkBadge: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#FFD700',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.WHITE,
+  },
+  checkmarkIcon: {
     width: 10,
     height: 10,
-    borderRadius: 5,
-    backgroundColor: 'transparent',
+    tintColor: COLORS.WHITE,
   },
-  radioInnerActive: {
-    backgroundColor: COLORS.PRIMARY,
-  },
-  methodInfo: {
+  cardInfo: {
     flex: 1,
   },
-  methodTitle: {
-    fontSize: 15,
-    fontFamily: FONTS.SANTRAL_MEDIUM,
-    color: COLORS.BLACK,
-  },
-  methodExpiry: {
-    fontSize: 12,
-    fontFamily: FONTS.SANTRAL_BOOK,
-    color: COLORS.TEXT_SECONDARY,
-    marginTop: 2,
-  },
-  cardType: {
-    fontSize: 14,
+  cardNumber: {
+    fontSize: 16,
     fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.GRAY_TEXT,
+    color: COLORS.BLACK,
+    letterSpacing: 1,
   },
-  addCardButton: {
-    padding: 10,
-    alignItems: 'center',
-    marginBottom: 30,
+  cardNumberSelected: {
+    color: '#FF00FF',
+  },
+  cardExpiry: {
+    fontSize: 12,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    color: '#999999',
+    marginTop: 4,
+  },
+  addCardContainer: {
+    alignSelf: 'flex-end',
+    marginTop: 10,
   },
   addCardText: {
     fontSize: 14,
     fontFamily: FONTS.SANTRAL_BOLD,
-    color: COLORS.PRIMARY,
+    color: COLORS.BUTTON_GRADIENT_PURPLE_START,
   },
-  confirmButton: {
-    height: 50,
-    borderRadius: 25,
-    overflow: 'hidden',
+  bottomContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    backgroundColor: COLORS.WHITE,
+  },
+  nextButton: {
     marginTop: 10,
-    marginBottom: 30,
-  },
-  gradient: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  confirmText: {
-    color: COLORS.WHITE,
-    fontSize: 16,
-    fontFamily: FONTS.SANTRAL_BOLD,
   },
 });
 

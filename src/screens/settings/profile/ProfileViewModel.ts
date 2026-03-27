@@ -12,10 +12,10 @@ export const useProfileViewModel = () => {
 
   const user = {
     fullName: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '+1 2345678900',
-    address: '123 Delivery St, Mytown, USA',
-    type: 'Driver',
+    email: 'samplemail@gmail.com',
+    phone: '+1 4578451412',
+    address: 'B103, Abs cir, nxh St',
+    type: 'Walker',
   };
 
   return {

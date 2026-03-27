@@ -54,15 +54,30 @@ const styles = StyleSheet.create({
     height: dimensions.height * 0.05,
   },
   emailToggleContainer: {
-    height: 60,
-    width: 50,
     backgroundColor: COLORS.WHITE,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: COLORS.PRIMARY,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
+    paddingVertical: 15
   },
+  phoneContainer: {
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: COLORS.PRIMARY,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    paddingVertical: 15
+  },
+  phoneIcon: {
+    width: 24,
+    height: 24
+  },
+
   phoneToggleContainer: {
     width: 50,
     height: 60,

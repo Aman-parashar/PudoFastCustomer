@@ -1,20 +1,24 @@
-import { useState } from 'react';
 import { Alert } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
+import { useForm } from 'react-hook-form';
+
+interface ContactUsFormData {
+  title: string;
+  subject: string;
+  descriptions: string;
+}
 
 export const useContactUsViewModel = () => {
-  const [title, setTitle] = useState('');
-  const [subject, setSubject] = useState('');
-  const [description, setDescription] = useState('');
+  const { control, handleSubmit } = useForm<ContactUsFormData>({
+    defaultValues: {
+      title: '',
+      subject: '',
+      descriptions: '',
+    },
+  });
 
-  const handleSubmit = () => {
-    if (!title || !subject || !description) {
-      Alert.alert('Error', 'Please fill all fields');
-      return;
-    }
-
-    // Handle Contact Us API integration here
-    Alert.alert('Success', 'Contact Us submiited successfully');
+  const handleSave = (data: ContactUsFormData) => {
+    Alert.alert('Success', 'Contact Us submitted successfully');
     NavigationService.goBack();
   };
 
@@ -23,13 +27,9 @@ export const useContactUsViewModel = () => {
   };
 
   return {
-    title,
-    setTitle,
-    subject,
-    setSubject,
-    description,
-    setDescription,
+    control,
     handleSubmit,
+    handleSave,
     goBack,
   };
 };

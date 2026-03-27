@@ -1,19 +1,29 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 
-export const useEditProfileViewModel = () => {
-  // Initializing state with dummy data
-  const [firstName, setFirstName] = useState('John');
-  const [lastName, setLastName] = useState('Doe');
-  const [email, setEmail] = useState('johndoe@example.com');
-  const [countryCode, _setCountryCode] = useState('+1');
-  const [phone, setPhone] = useState('2345678900');
-  const [address, setAddress] = useState('123 Delivery St, Mytown, USA');
+interface EditProfileForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+}
 
-  const handleSave = () => {
+export const useEditProfileViewModel = () => {
+  const { control, handleSubmit } = useForm<EditProfileForm>({
+    defaultValues: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'samplemail@gmail.com',
+      phone: '4578451412',
+      address: 'B103, Abs cir, nxh St',
+    },
+  });
+
+  const handleSave = (data: EditProfileForm) => {
     // Basic validation
-    if (!firstName || !lastName || !email || !phone || !address) {
+    if (!data.firstName || !data.lastName || !data.email || !data.phone || !data.address) {
       Alert.alert('Error', 'Please fill all fields');
       return;
     }
@@ -28,18 +38,9 @@ export const useEditProfileViewModel = () => {
   };
 
   return {
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    email,
-    setEmail,
-    countryCode,
-    phone,
-    setPhone,
-    address,
-    setAddress,
+    control,
     handleSave,
+    handleSubmit,
     goBack,
   };
 };

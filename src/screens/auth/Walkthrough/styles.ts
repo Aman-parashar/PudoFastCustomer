@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   },
   skipButton: {
     padding: 10,
+    marginTop:18
   },
   skipText: {
     color: COLORS.WHITE,
