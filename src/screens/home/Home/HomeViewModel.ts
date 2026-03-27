@@ -18,7 +18,12 @@ export const useHomeViewModel = () => {
   };
 
   const navigateToDeliveryMiles = () => {
-    NavigationService.navigate(RouteConstant.TransitAndReceiverDetails);
+    NavigationService.navigate(RouteConstant.TransitAndReceiverDetails, {
+      orderData: {
+        pickupAddress,
+        deliveryAddress,
+      },
+    });
   };
 
   return {

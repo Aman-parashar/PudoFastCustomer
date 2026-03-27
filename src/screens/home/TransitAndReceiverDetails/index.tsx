@@ -61,7 +61,7 @@ const TransitAndReceiverDetailsScreen = () => {
               <View style={styles.addressInfo}>
                 <Text style={styles.addressLabel}>Pickup Address</Text>
                 <Text style={styles.addressText} numberOfLines={2}>
-                  {orderData?.pickupAddress?.address ||
+                  {orderData?.pickupAddress ||
                     'B103/4, Abc com, AA Road, BB area, CA City, USA'}
                 </Text>
               </View>
@@ -75,7 +75,7 @@ const TransitAndReceiverDetailsScreen = () => {
               <View style={styles.addressInfo}>
                 <Text style={styles.addressLabel}>Drop off Address</Text>
                 <Text style={styles.addressText} numberOfLines={2}>
-                  {orderData?.dropAddress?.address ||
+                  {orderData?.deliveryAddress ||
                     'A201,1, XYS Apartment.'}
                 </Text>
               </View>
