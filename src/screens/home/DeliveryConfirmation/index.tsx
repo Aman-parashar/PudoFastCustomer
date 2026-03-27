@@ -412,8 +412,16 @@ const DeliveryConfirmationScreen = () => {
       <CommonModal
         visible={isSuccessModalVisible}
         onClose={handleCloseModal}
-        image={Images.cancelOrderImage}
-        message="Delivery Scheduled Successfully"
+        image={
+          orderData?.scheduleType === 'on_demand'
+            ? Images.searchingDriver
+            : Images.cancelOrderImage
+        }
+        message={
+          orderData?.scheduleType === 'on_demand'
+            ? 'Searching for Driver'
+            : 'Delivery Scheduled Successfully'
+        }
         tapToClose
       />
     </SafeAreaView>

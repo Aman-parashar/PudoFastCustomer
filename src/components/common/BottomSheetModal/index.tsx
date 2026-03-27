@@ -18,6 +18,8 @@ const BottomSheetModalComponent = ({
   close,
   onBackdropPress,
   snapPointsProp,
+  keyboardBehavior,
+  keyboardBlurBehavior,
 }: {
   height?: string;
   bottomSheetModalRef: any;
@@ -27,6 +29,8 @@ const BottomSheetModalComponent = ({
   close?: () => void;
   onBackdropPress?: () => void;
   snapPointsProp?: string[];
+  keyboardBehavior?: 'extend' | 'fillParent' | 'interactive';
+  keyboardBlurBehavior?: 'none' | 'restore';
 }) => {
   const snapPoints = useMemo(
     () =>
@@ -90,6 +94,8 @@ const BottomSheetModalComponent = ({
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
       animationConfigs={animationConfigs}
+      keyboardBehavior={keyboardBehavior}
+      keyboardBlurBehavior={keyboardBlurBehavior}
       style={[{}, style]}
       backdropComponent={props => (
         <BottomSheetBackdrop

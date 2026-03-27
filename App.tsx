@@ -7,6 +7,7 @@ import BootSplash from 'react-native-bootsplash';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { checkAndRequestAllPermissions } from './src/utils/permissions';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App = () => {
   useEffect(() => {
@@ -27,12 +28,14 @@ const App = () => {
   }, []);
   return (
     <GestureHandlerRootView>
-      <Provider store={store}>
-        <StatusBar barStyle="dark-content" />
-        <BottomSheetModalProvider>
-          <AppNavigator />
-        </BottomSheetModalProvider>
-      </Provider>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <StatusBar barStyle="dark-content" />
+          <BottomSheetModalProvider>
+            <AppNavigator />
+          </BottomSheetModalProvider>
+        </Provider>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 };

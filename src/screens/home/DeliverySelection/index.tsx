@@ -14,16 +14,26 @@ import { deliverySteps } from '../../../utils/enum';
 import Header from '../../../components/common/Header';
 import CommonToggle from '../../../components/common/CommonToggle';
 import { ScheduleType } from '../../../utils/data';
+import DatePicker from 'react-native-date-picker';
 
 const DeliverySelectionScreen = () => {
   const {
-    orderData,
     serviceType,
     setServiceType,
     tripType,
     setTripType,
     scheduleType,
     setScheduleType,
+    date,
+    setDate,
+    isDatePickerVisible,
+    setDatePickerVisible,
+    isTimePickerVisible,
+    setTimePickerVisible,
+    formatDate,
+    formatTimeHours,
+    formatTimeMinutes,
+    formatTimeAMPM,
     calculatePrice,
     handleNext,
     goBack,
@@ -116,6 +126,72 @@ const DeliverySelectionScreen = () => {
           ))}
         </View>
 
+        {scheduleType === 'scheduled' && (
+          <>
+            {/* Select date */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Select date</Text>
+              <TouchableOpacity
+                style={styles.dateBox}
+                onPress={() => setDatePickerVisible(true)}
+              >
+                <Text style={styles.dateText}>{formatDate(date)}</Text>
+                <Image
+                  source={Images.greenCalendar}
+                  style={styles.calendarIcon}
+                />
+              </TouchableOpacity>
+            </View>
+
+            {/* Select time */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Select time</Text>
+              <View style={styles.timeSection}>
+                <TouchableOpacity
+                  style={styles.timeBox}
+                  onPress={() => setTimePickerVisible(true)}
+                >
+                  <Text style={styles.timeText}>{formatTimeHours(date)}</Text>
+                  <Text style={styles.timeUnit}>h</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.colon}>:</Text>
+
+                <TouchableOpacity
+                  style={styles.timeBox}
+                  onPress={() => setTimePickerVisible(true)}
+                >
+                  <Text style={styles.timeText}>{formatTimeMinutes(date)}</Text>
+                  <Text style={styles.timeUnit}>m</Text>
+                </TouchableOpacity>
+
+                <View style={styles.ampmContainer}>
+                  <Text
+                    style={[
+                      styles.ampmText,
+                      formatTimeAMPM(date) === 'AM'
+                        ? styles.ampmActive
+                        : styles.ampmInactive,
+                    ]}
+                  >
+                    AM
+                  </Text>
+                  <Text
+                    style={[
+                      styles.ampmText,
+                      formatTimeAMPM(date) === 'PM'
+                        ? styles.ampmActive
+                        : styles.ampmInactive,
+                    ]}
+                  >
+                    PM
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </>
+        )}
+
         {/* Trip Type */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Trip type</Text>
@@ -136,6 +212,34 @@ const DeliverySelectionScreen = () => {
           style={styles.nextButton}
         />
       </ScrollView>
+
+      <DatePicker
+        modal
+        open={isDatePickerVisible}
+        date={date}
+        mode="date"
+        onConfirm={selectedDate => {
+          setDatePickerVisible(false);
+          setDate(selectedDate);
+        }}
+        onCancel={() => {
+          setDatePickerVisible(false);
+        }}
+      />
+
+      <DatePicker
+        modal
+        open={isTimePickerVisible}
+        date={date}
+        mode="time"
+        onConfirm={selectedTime => {
+          setTimePickerVisible(false);
+          setDate(selectedTime);
+        }}
+        onCancel={() => {
+          setTimePickerVisible(false);
+        }}
+      />
     </SafeAreaView>
   );
 };
