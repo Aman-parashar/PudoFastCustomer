@@ -54,7 +54,7 @@ interface inputProps {
   errorStyle?: StyleProp<TextStyle>;
   isLeftImage?: boolean;
   leftImage?: ImageSourcePropType;
-
+  flag?: string;
 }
 
 export const CommonInput = React.forwardRef<TextInput, inputProps>(
@@ -83,11 +83,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
       onBlur,
       isMobileNumber = false,
       onPressCountryCode,
-      countryCode = '🇦🇺 +61',
+      countryCode = ' +1',
       formatText,
       maxLength = undefined,
       errorStyle,
       labelStyle,
+      flag = 'https://pudo-app.s3.amazonaws.com/flag/united-states.png',
     },
     ref,
   ) => {
@@ -155,6 +156,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   resizeMode='contain'
                 />}
                 {isMobileNumber && <Pressable onPress={onPressCountryCode} style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }} hitSlop={15}>
+                  {flag && <Image source={{ uri: flag }} style={styles.flagStyle} resizeMode="contain" />}
                   <Text >{countryCode}</Text>
                   <Image source={Images.arrowRight} style={{ width: 10, height: 10, transform: [{ rotate: '90deg' }] }} resizeMode='contain' tintColor={COLORS.BLACK} />
                 </Pressable>}
@@ -320,13 +322,22 @@ const styles = StyleSheet.create({
   },
   errorContainer: {
     justifyContent: 'flex-end',
+
+    marginTop: 8,
+
+
   },
   errorText: {
     color: COLORS.PRIMARY_RED,
     fontSize: 14,
     fontFamily: FONTS.SANTRAL_MEDIUM,
     textAlign: 'left',
-    width: '100%',
+
+  },
+  flagStyle: {
+    width: 24,
+    height: 16,
+    borderRadius: 2,
   },
 });
 

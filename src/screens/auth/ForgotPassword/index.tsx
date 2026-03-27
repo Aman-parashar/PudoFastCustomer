@@ -23,7 +23,7 @@ import CountryPicker from '../../../components/common/CountryPicker';
 const ForgotPasswordScreen = () => {
   const { control } = useForm();
   const [showPicker, setShowPicker] = useState(false);
-  const [countryCode, setCountryCode] = useState('+61');
+  const [countryCode, setCountryCode] = useState('+1');
 
   const [isMobile, setIsMobile] = useState(false);
   const {

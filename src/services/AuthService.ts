@@ -1,5 +1,5 @@
 import { apiService, API_ENDPOINTS } from '../apiService';
-import { LoginResponse } from '../types/api';
+import { ApiResponse, Country, LoginResponse } from '../types/api';
 
 export const AuthService = {
   login: async (data: any): Promise<LoginResponse> => {
@@ -13,6 +13,9 @@ export const AuthService = {
   },
   logout: async () => {
     return await apiService.post(API_ENDPOINTS.LOGOUT);
+  },
+  getCountries: async (): Promise<ApiResponse<Country[]>> => {
+    return await apiService.post<ApiResponse<Country[]>>(API_ENDPOINTS.GET_COUNTRIES, {});
   },
 };
 

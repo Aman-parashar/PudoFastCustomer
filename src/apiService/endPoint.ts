@@ -1,6 +1,6 @@
 export const API_ENDPOINTS = {
     LOGIN: 'user/login',
-    SIGNUP: 'customer/signup',
+    SIGNUP: 'user/signup',
     VERIFY_OTP: 'user/verify-otp',
     RESEND_OTP: 'user/resend-otp',
     FORGOT_PASSWORD: 'user/forgot-password',
@@ -14,4 +14,5 @@ export const API_ENDPOINTS = {
 
     GET_NOTIFICATIONS: 'notifications/all',
     LOGOUT: 'user/logout',
+    GET_COUNTRIES: 'user/country_list',
 };

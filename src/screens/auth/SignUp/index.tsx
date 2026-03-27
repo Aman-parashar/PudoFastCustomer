@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -13,20 +13,24 @@ import Container from '../../../components/common/Container';
 import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 import { CommonInput } from '../../../components/common/CommonInput';
 import CustomButton from '../../../components/common/CustomButton';
-import { useForm } from 'react-hook-form';
+import { Rules } from '../../../utils/Rules';
+import CountryPicker from '../../../components/common/CountryPicker';
 import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
-import CountryPicker from '../../../components/common/CountryPicker';
 
 const SignUpScreen = () => {
-  const { control } = useForm();
-  const [showPicker, setShowPicker] = useState(false);
-  const [countryCode, setCountryCode] = useState('+61');
   const {
+    control,
+    handleSubmit,
     agreeTerms,
+    selectedCountry,
+    setSelectedCountry,
+    showPicker,
+    setShowPicker,
     handleSignUp,
     navigateToLogin,
     toggleAgreeTerms,
+    isPending,
   } = useSignUpViewModel();
 
   return (
@@ -48,8 +52,9 @@ const SignUpScreen = () => {
           <View style={styles.inputContainer}>
             <CommonInput
               inputlabel="First Name"
-              name="firstName"
+              name="first_name"
               control={control}
+              rules={{ required: 'First name is required' }}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.user}
@@ -59,8 +64,9 @@ const SignUpScreen = () => {
           <View style={styles.inputContainer}>
             <CommonInput
               inputlabel="Last Name"
-              name="lastName"
+              name="last_name"
               control={control}
+              rules={{ required: 'Last name is required' }}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.user}
@@ -72,6 +78,7 @@ const SignUpScreen = () => {
               inputlabel="Email Address"
               name="email"
               control={control}
+              rules={Rules.Email}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.email}
@@ -84,12 +91,14 @@ const SignUpScreen = () => {
               inputlabel="Phone Number"
               name="phone"
               control={control}
+              rules={Rules.Phone}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.phone}
               keyboardType="phone-pad"
               isMobileNumber
-              countryCode={countryCode}
+              countryCode={selectedCountry?.country_code || "+1"}
+              flag={selectedCountry?.flag}
               onPressCountryCode={() => {
                 setShowPicker(true);
               }}
@@ -101,6 +110,7 @@ const SignUpScreen = () => {
               inputlabel="Address"
               name="address"
               control={control}
+              rules={Rules.Address}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.addressIcon}
@@ -112,6 +122,7 @@ const SignUpScreen = () => {
               inputlabel="Password"
               name="password"
               control={control}
+              rules={Rules.Password}
               containerStyle={styles.emailInputContainer}
               isLeftImage
               leftImage={Images.password}
@@ -138,8 +149,9 @@ const SignUpScreen = () => {
 
           <CustomButton
             title="SIGN UP"
-            onPress={handleSignUp}
+            onPress={handleSubmit(handleSignUp)}
             style={styles.signUpButton}
+            loading={isPending}
           />
 
           <Pressable onPress={navigateToLogin}>
@@ -153,7 +165,7 @@ const SignUpScreen = () => {
       <CountryPicker
         showPicker={showPicker}
         setShowPicker={setShowPicker}
-        onSelectCountry={setCountryCode}
+        onSelectCountry={setSelectedCountry}
       />
     </Container>
   );

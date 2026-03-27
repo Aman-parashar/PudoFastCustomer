@@ -1,31 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { AuthService } from '../../../services/AuthService';
-import { ApiError } from '../../../types/api';
+import { ApiError, LoginFormValues, SocialLoginType } from '../../../types/api';
 import { DeviceData } from '../../../utils/device';
 
 export const useLoginViewModel = () => {
-  enum SocialLoginType {
-    google = "G",
-    facebook = "F",
-    apple = "A",
-    simple = "S"
-  }
 
-  interface LoginFormValues {
-    login_type: keyof SocialLoginType;
-    login_with: "email" | "phone";
-    country_code: string;
-    email: string;
-    phone: string;
-    password: string;
-    social_id?: string;
-    device_type: string;
-  }
   const {
     control,
     handleSubmit,
@@ -47,7 +31,7 @@ export const useLoginViewModel = () => {
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
     onSuccess: (data) => {
-      console.log('Login Success:', data, DeviceData.device_type);
+
       if (data.success) {
         // Handle session token as in iOS: storage.set('token', data.data.token);
         NavigationService.navigate(RouteConstant.Main);
@@ -65,14 +49,26 @@ export const useLoginViewModel = () => {
       } else if (error.status === 404) {
         Alert.alert('User not found', 'No account exists with this information.');
       } else {
-        console.log(DeviceData.device_type, 'Login Error:', error);
+
         // Alert.alert('Error', message);
       }
     },
   });
 
   const handleLogin = (data: LoginFormValues) => {
-    loginMutation.mutate(data);
+    const payload: LoginFormValues = {
+      login_type: SocialLoginType.simple,
+      login_with: data.email ? "email" : "phone",
+      country_code: data.country_code ?? "+1",
+      email: data.email ?? "",
+      phone: data.phone ?? "",
+      password: data.password,
+
+      device_type: Platform.OS === 'ios' ? 'I' : 'A',
+      device_token: DeviceData.device_token
+    }
+    console.log(payload, 'payload', DeviceData.device_token,);
+    loginMutation.mutate(payload);
   };
 
   const navigateToSignUp = () => {

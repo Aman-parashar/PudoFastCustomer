@@ -7,6 +7,8 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { checkAndRequestAllPermissions } from './src/utils/permissions';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
+import ToastConfig from './src/utils/ToastConfig';
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,12 @@ const App = () => {
           <StatusBar barStyle="dark-content" />
           <BottomSheetModalProvider>
             <AppNavigator />
+            <Toast
+              config={ToastConfig}
+              position="top"
+              visibilityTime={2000}
+              swipeable={false}
+            />
           </BottomSheetModalProvider>
         </Provider>
       </QueryClientProvider>

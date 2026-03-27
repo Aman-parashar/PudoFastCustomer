@@ -21,10 +21,11 @@ import Header from '../../../components/common/Header';
 
 import CountryPicker from '../../../components/common/CountryPicker';
 import { Rules } from '../../../utils/Rules';
+import { Country } from '../../../types/api';
 
 const LoginScreen = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [countryCode, setCountryCode] = useState('+61');
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
   const [showPicker, setShowPicker] = useState(false);
   const {
@@ -67,7 +68,8 @@ const LoginScreen = () => {
             )}
             {isMobile ? (
               <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
-                countryCode={countryCode}
+                countryCode={selectedCountry?.country_code || "+61"}
+                flag={selectedCountry?.flag}
                 keyboardType="phone-pad"
                 rules={Rules.Phone}
                 errorStyle={{ position: 'absolute', bottom: -20 }}
@@ -168,7 +170,7 @@ const LoginScreen = () => {
       <CountryPicker
         showPicker={showPicker}
         setShowPicker={setShowPicker}
-        onSelectCountry={setCountryCode}
+        onSelectCountry={setSelectedCountry}
       />
     </Container>
   );

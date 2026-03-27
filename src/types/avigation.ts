@@ -22,7 +22,7 @@ export type RootStackParamList = {
   DeliverySelection: { orderData: any };
   PaymentOptions: { orderData: any };
   ForgotPassword: { type: 'email' | 'phone' };
-  OTPVerification: { type: 'email' | 'phone'; value: string };
+  OTPVerification: { type: 'email' | 'phone'; value: string; userData?: any; fromScreen?: string };
   NewPassword: { userId: string };
   DeliveryConfirmation: { orderData: any; fromHistory?: boolean };
   ReceivingOrderHistory?: { isFromSettings?: boolean; title?: string };

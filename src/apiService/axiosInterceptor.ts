@@ -59,12 +59,13 @@ apiClient.interceptors.response.use(
 
         // 2. Otherwise, decrypt the response body (matching iOS behavior)
         const decryptedData = decryptToJSON(response.data);
+        console.log(decryptedData, "ecekrjlcelrkm")
         return decryptedData;
     },
     error => {
         const status = error?.response?.status;
         const errorData = error?.response?.data;
-        
+
         let message = error.message;
 
         // Decrypt error message if encrypted
