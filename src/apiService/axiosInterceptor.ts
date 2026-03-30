@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
-import { storage } from '../helper/MMKVStorage';
+import { storage, StorageMMKV } from '../helper/MMKVStorage';
 import { encryptData, decryptToJSON } from '../utils/crypto';
 
 export const BASE_URL = 'http://192.168.1.82:5502/api/v2/';
@@ -78,7 +78,7 @@ apiClient.interceptors.response.use(
 
         if (status === 401) {
             Alert.alert('Session expired', 'Please log in again.');
-            storage.delete('token');
+            StorageMMKV.removeItem('token');
         }
 
         return Promise.reject({

@@ -12,14 +12,15 @@ import Container from '../../../components/common/Container';
 import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 import { CommonInput } from '../../../components/common/CommonInput';
 import CustomButton from '../../../components/common/CustomButton';
-import { useForm } from 'react-hook-form';
 import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
 
 const NewPasswordScreen = () => {
-  const { control } = useForm();
   const {
+    control,
+    handleSubmit,
     handleSetPassword,
+    isPending,
   } = useNewPasswordViewModel();
 
   return (
@@ -66,8 +67,9 @@ const NewPasswordScreen = () => {
 
           <CustomButton
             title="SET PASSWORD"
-            onPress={handleSetPassword}
+            onPress={handleSubmit(handleSetPassword) as any}
             style={styles.submitButton}
+            loading={isPending}
           />
         </View>
       </KeyboardContainer>

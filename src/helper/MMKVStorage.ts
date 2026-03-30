@@ -6,7 +6,11 @@ export const storage = new createMMKV(undefined);
 export const StorageMMKV = {
   removeItem: key => {
     try {
-      storage.delete(key);
+      if (typeof storage.delete === 'function') {
+        storage.delete(key);
+      } else if (typeof (storage as any).removeItem === 'function') {
+        (storage as any).removeItem(key);
+      }
     } catch (error) {
       console.error('Error removing item:', error);
     }

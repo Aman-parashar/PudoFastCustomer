@@ -29,13 +29,17 @@ import { RouteConstant } from './Constant';
 import NavigationService from './NavigationService';
 import NotificationScreen from '../screens/notification';
 import DeliveryConfirmationScreen from '../screens/home/DeliveryConfirmation';
+import { storage } from '../helper/MMKVStorage';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
+  const token = storage.getString('token');
+  const initialRoute = token ? RouteConstant.Main : RouteConstant.Walkthrough;
+
   return (
     <NavigationContainer ref={ref => NavigationService.setTopLevelNavigator(ref)}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={initialRoute}>
         <Stack.Screen name={RouteConstant.Walkthrough} component={WalkthroughScreen} />
         <Stack.Screen name={RouteConstant.Start} component={StartScreen} />
         <Stack.Screen name={RouteConstant.Login} component={LoginScreen} />

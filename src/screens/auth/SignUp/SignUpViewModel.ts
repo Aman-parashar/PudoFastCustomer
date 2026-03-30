@@ -8,6 +8,7 @@ import { AuthService } from '../../../services/AuthService';
 import { ApiError, ApiResponse, ApiStatusCode, Country, SignUpRequest, SocialLoginType } from '../../../types/api';
 import { DeviceData } from '../../../utils/device';
 import Toast from 'react-native-toast-message';
+import { storage } from '../../../helper/MMKVStorage';
 
 
 export const useSignUpViewModel = () => {
@@ -39,6 +40,13 @@ export const useSignUpViewModel = () => {
           type: 'success',
           text1: res.message || 'Signup successful!',
         });
+        
+        // Save the token so Verify OTP endpoint recognizes the session
+        if (res.data && res.data.token) {
+          console.log('token saved successfully===', res.data.token)
+           storage.set('token', res.data.token);
+        }
+
         // Navigate to OTP Verification
         NavigationService.navigate(RouteConstant.OTPVerification, {
           type: 'phone',
@@ -85,7 +93,7 @@ export const useSignUpViewModel = () => {
 
       version: DeviceData.version || "1.0.0",
     }
-
+console.log("signup payload", payload)
     signupMutation.mutate(payload);
   };
 

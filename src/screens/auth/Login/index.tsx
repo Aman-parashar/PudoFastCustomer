@@ -25,17 +25,17 @@ import { Country } from '../../../types/api';
 
 const LoginScreen = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
-  const [showPicker, setShowPicker] = useState(false);
   const {
-
     control,
     handleSubmit,
     handleLogin,
     navigateToSignUp,
     navigateToForgotPassword,
-
+    selectedCountry,
+    setSelectedCountry,
+    showPicker,
+    setShowPicker,
     isPending,
   } = useLoginViewModel();
 

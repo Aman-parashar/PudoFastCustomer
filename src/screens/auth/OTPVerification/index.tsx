@@ -29,6 +29,7 @@ const OTPVerificationScreen = () => {
     handleResend,
     handleVerify,
     formatTime,
+    isPending,
   } = useOTPViewModel();
 
   return (
@@ -82,6 +83,7 @@ const OTPVerificationScreen = () => {
             title="VERIFY"
             onPress={handleVerify}
             style={styles.verifyButton}
+            loading={isPending}
           />
         </View>
       </KeyboardContainer>

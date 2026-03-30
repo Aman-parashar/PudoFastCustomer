@@ -2,6 +2,7 @@ import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { Images } from '../../../utils/images';
 import { Share } from 'react-native';
+import { StorageMMKV } from '../../../helper/MMKVStorage';
 
 export const useSettingsViewModel = () => {
   const navigateToNotifications = () => {
@@ -13,7 +14,8 @@ export const useSettingsViewModel = () => {
   };
 
   const handleLogout = () => {
-    NavigationService.navigate(RouteConstant.Start);
+    StorageMMKV.clearAll();
+    NavigationService.reset(RouteConstant.Login);
   };
 
   const user = {

@@ -5,8 +5,10 @@ import { Alert, Platform } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { AuthService } from '../../../services/AuthService';
-import { ApiError, LoginFormValues, SocialLoginType } from '../../../types/api';
+import { ApiError, LoginFormValues, SocialLoginType, Country } from '../../../types/api';
 import { DeviceData } from '../../../utils/device';
+import Toast from 'react-native-toast-message';
+import { storage } from '../../../helper/MMKVStorage';
 
 export const useLoginViewModel = () => {
 
@@ -26,14 +28,20 @@ export const useLoginViewModel = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [showPicker, setShowPicker] = useState(false);
 
   // React Query Mutation - Like the shared 'ApiManager' logic in iOS
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
     onSuccess: (data) => {
+      if (data.code == '1') {
+         Toast.show({ type: 'success', text1: data.message || 'Login successfully' });
+         
+         if (data.data?.token) {
+           storage.set('token', data.data.token);
+         }
 
-      if (data.success) {
-        // Handle session token as in iOS: storage.set('token', data.data.token);
         NavigationService.navigate(RouteConstant.Main);
       } else {
         Alert.alert('Login failed', data.message || 'Check your credentials.');
@@ -59,7 +67,7 @@ export const useLoginViewModel = () => {
     const payload: LoginFormValues = {
       login_type: SocialLoginType.simple,
       login_with: data.email ? "email" : "phone",
-      country_code: data.country_code ?? "+1",
+      country_code: selectedCountry?.country_code ?? "+1",
       email: data.email ?? "",
       phone: data.phone ?? "",
       password: data.password,
@@ -108,6 +116,10 @@ export const useLoginViewModel = () => {
     toggleShowPassword,
     handleSubmit,
     control,
+    selectedCountry,
+    setSelectedCountry,
+    showPicker,
+    setShowPicker,
     isPending: loginMutation.isPending,
   };
 };
