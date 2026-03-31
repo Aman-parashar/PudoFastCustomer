@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { storage, StorageMMKV } from '../helper/MMKVStorage';
 import { encryptData, decryptToJSON } from '../utils/crypto';
 
-export const BASE_URL = 'http://192.168.1.82:5502/api/v2/';
+export const BASE_URL = 'https://pudofast.com:5502/api/v2/';
 export const LOCKBOX_URL = 'https://api.igloodeveloper.co/v2';
 const API_KEY_RAW = "PUDOFAST13012023";
 const IGLOO_API_KEY = "JxluSj8jbxIQFXiCWj6O41.4WjPXIY7LKGdGCznRbxjpfxmZpvSZM5iFgGC0mu8";

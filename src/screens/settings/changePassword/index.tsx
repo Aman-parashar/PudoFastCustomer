@@ -21,7 +21,7 @@ import CustomButton from '../../../components/common/CustomButton';
 import { CommonInput } from '../../../components/common/CommonInput';
 
 const ChangePasswordScreen = () => {
-  const { control, handleSave, handleSubmit, goBack } =
+  const { control, handleSave, handleSubmit, goBack, isLoading } =
     useChangePasswordViewModel();
 
   return (
@@ -82,7 +82,7 @@ const ChangePasswordScreen = () => {
       </KeyboardAvoidingView>
 
       <View style={styles.buttonContainer}>
-        <CustomButton title="SAVE" onPress={handleSubmit(handleSave)} />
+        <CustomButton title="SAVE" onPress={handleSubmit(handleSave)} loading={isLoading} />
       </View>
     </SafeAreaView>
   );

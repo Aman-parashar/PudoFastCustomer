@@ -1,5 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { Alert } from 'react-native';
+import { useMutation } from '@tanstack/react-query';
+import { AuthService } from '../../../services/AuthService';
+import Toast from 'react-native-toast-message';
 import NavigationService from '../../../navigation/NavigationService';
 
 interface ChangePasswordForm {
@@ -17,8 +20,22 @@ export const useChangePasswordViewModel = () => {
     },
   });
 
+  const changePasswordMutation = useMutation({
+    mutationFn: AuthService.changePassword,
+    onSuccess: (data: any) => {
+      if (data?.code == '1') {
+        Toast.show({ type: 'success', text1: data?.message || 'Password changed successfully' });
+        NavigationService.goBack();
+      } else {
+        Alert.alert('Error', data?.message || 'Failed to change password');
+      }
+    },
+    onError: (error: any) => {
+      Alert.alert('Error', error?.message || 'Something went wrong while changing password.');
+    },
+  });
+
   const handleSave = (data: ChangePasswordForm) => {
-    // Basic validation
     if (!data.oldPassword || !data.newPassword || !data.confirmPassword) {
       Alert.alert('Error', 'Please fill all fields');
       return;
@@ -28,9 +45,13 @@ export const useChangePasswordViewModel = () => {
       return;
     }
 
-    // Handle change password api
-    Alert.alert('Success', 'Password changed successfully');
-    NavigationService.goBack();
+    const payload = {
+      old_password: data.oldPassword,
+      new_password: data.newPassword,
+      confirm_password: data.confirmPassword,
+    };
+
+    changePasswordMutation.mutate(payload);
   };
 
   const goBack = () => {
@@ -42,5 +63,6 @@ export const useChangePasswordViewModel = () => {
     handleSave,
     handleSubmit,
     goBack,
+    isLoading: changePasswordMutation.isPending,
   };
 };

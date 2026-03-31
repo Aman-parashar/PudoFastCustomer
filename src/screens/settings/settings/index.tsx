@@ -14,6 +14,7 @@ const SettingsScreen = () => {
     user,
     settingsItems,
     navigateToNotifications,
+    isLoggingOut,
   } = useSettingsViewModel();
 
   const renderRatingStars = (rating: number) => {
@@ -92,6 +93,7 @@ const SettingsScreen = () => {
             leftImage={Images.logoutIcon}
             style={styles.logoutButton}
             variant="solid"
+            loading={isLoggingOut}
           />
         </View>
       </ScrollView>

@@ -21,7 +21,9 @@ export const AuthService = {
     return response;
   },
   logout: async () => {
-    return await apiService.post(API_ENDPOINTS.LOGOUT);
+    const response = await apiService.post(API_ENDPOINTS.LOGOUT);
+    console.log("Logout API Response:", response);
+    return response;
   },
   getCountries: async (): Promise<ApiResponse<Country[]>> => {
     const response = await apiService.post<ApiResponse<Country[]>>(API_ENDPOINTS.GET_COUNTRIES, {});
@@ -36,6 +38,11 @@ export const AuthService = {
   resetPassword: async (data: any) => {
     const response = await apiService.post(API_ENDPOINTS.RESET_PASSWORD, data);
     console.log("Reset Password API Response:", response);
+    return response;
+  },
+  changePassword: async (data: any) => {
+    const response = await apiService.post(API_ENDPOINTS.CHANGE_PASSWORD, data);
+    console.log("Change Password API Response:", response);
     return response;
   },
 };

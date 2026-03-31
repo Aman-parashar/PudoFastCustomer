@@ -1,8 +1,11 @@
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { Images } from '../../../utils/images';
-import { Share } from 'react-native';
+import { Share, Alert } from 'react-native';
 import { StorageMMKV } from '../../../helper/MMKVStorage';
+import { useMutation } from '@tanstack/react-query';
+import { AuthService } from '../../../services/AuthService';
+import Toast from 'react-native-toast-message';
 
 export const useSettingsViewModel = () => {
   const navigateToNotifications = () => {
@@ -13,9 +16,37 @@ export const useSettingsViewModel = () => {
     NavigationService.navigate(RouteConstant.EditProfile);
   };
 
+  const logoutMutation = useMutation({
+    mutationFn: AuthService.logout,
+    onSuccess: (data: any) => {
+      if (data?.code == '1') {
+        Toast.show({ type: 'success', text1: data?.message || 'Logged out successfully' });
+      }
+      StorageMMKV.clearAll();
+      NavigationService.reset(RouteConstant.Login);
+    },
+    onError: (error: any) => {
+      Alert.alert('Logout failed', error?.message || 'Something went wrong while logging out.');
+    }
+  });
+
   const handleLogout = () => {
-    StorageMMKV.clearAll();
-    NavigationService.reset(RouteConstant.Login);
+    Alert.alert(
+      'Logout',
+      'Do you really want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => logoutMutation.mutate(),
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const user = {
@@ -43,5 +74,6 @@ export const useSettingsViewModel = () => {
     handleLogout,
     user,
     settingsItems,
+    isLoggingOut: logoutMutation.isPending,
   };
 };

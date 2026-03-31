@@ -14,5 +14,6 @@ export const API_ENDPOINTS = {
 
     GET_NOTIFICATIONS: 'notifications/all',
     LOGOUT: 'user/logout',
+    CHANGE_PASSWORD: 'user/change_password',
     GET_COUNTRIES: 'user/country_list',
 };
