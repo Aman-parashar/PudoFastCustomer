@@ -76,6 +76,8 @@ export type LoginResponse = ApiResponse<{
   user: User;
   token: string;
 }>;
+export interface UserProfileResponse {
+}
 
 
 

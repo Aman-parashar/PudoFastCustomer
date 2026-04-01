@@ -10,6 +10,7 @@ import CustomButton from '../../../components/common/CustomButton';
 const ProfileScreen = () => {
   const { goBack, navigateToEditProfile, user } = useProfileViewModel();
 
+
   return (
     <SafeAreaView style={styles.container}>
       <Header type="step" title="Profile" onBack={goBack} />

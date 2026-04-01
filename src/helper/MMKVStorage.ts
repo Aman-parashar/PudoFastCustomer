@@ -1,15 +1,13 @@
 import { createMMKV } from 'react-native-mmkv';
 
-export const storage = new createMMKV(undefined);
+export const storage = createMMKV();
 
 //HELPER FUNCTIONS TO BE USED THROUGHOUT APP
 export const StorageMMKV = {
-  removeItem: key => {
+  removeItem: (key: string) => {
     try {
-      if (typeof storage.delete === 'function') {
-        storage.delete(key);
-      } else if (typeof (storage as any).removeItem === 'function') {
-        (storage as any).removeItem(key);
+      if ('remove' in storage) {
+        storage.remove(key);
       }
     } catch (error) {
       console.error('Error removing item:', error);

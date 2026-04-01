@@ -23,6 +23,8 @@ setup_permissions([
    'LocationAccuracy',
    'LocationAlways',
    'LocationWhenInUse',
+   'Camera',
+   'PhotoLibrary'
 
 ])
 linkage = ENV['USE_FRAMEWORKS']

@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
+import NavigationService from '../navigation/NavigationService';
 import { storage, StorageMMKV } from '../helper/MMKVStorage';
 import { encryptData, decryptToJSON } from '../utils/crypto';
-
-export const BASE_URL = 'https://pudofast.com:5502/api/v2/';
-export const LOCKBOX_URL = 'https://api.igloodeveloper.co/v2';
-const API_KEY_RAW = "PUDOFAST13012023";
-const IGLOO_API_KEY = "JxluSj8jbxIQFXiCWj6O41.4WjPXIY7LKGdGCznRbxjpfxmZpvSZM5iFgGC0mu8";
+import { RouteConstant } from '../navigation/Constant';
+import { BASE_URL, LOCKBOX_URL, API_KEY_RAW, IGLOO_API_KEY } from '../config/AppConfig';
 
 const apiClient = axios.create({
     baseURL: BASE_URL,
@@ -39,6 +37,13 @@ apiClient.interceptors.request.use(
             }
         }
 
+        if (__DEV__) {
+            console.log(`[API REQUEST] ${config.method?.toUpperCase()} ${config.url}`, {
+                baseURL: config.baseURL,
+                headers: config.headers,
+                data: config.data
+            });
+        }
         return config;
     },
     error => {
@@ -59,7 +64,11 @@ apiClient.interceptors.response.use(
 
         // 2. Otherwise, decrypt the response body (matching iOS behavior)
         const decryptedData = decryptToJSON(response.data);
-        console.log(decryptedData, "ecekrjlcelrkm")
+        
+        if (__DEV__) {
+             console.log(`[API RESPONSE] ${response.config.url}`, decryptedData);
+        }
+        
         return decryptedData;
     },
     error => {
@@ -79,6 +88,7 @@ apiClient.interceptors.response.use(
         if (status === 401) {
             Alert.alert('Session expired', 'Please log in again.');
             StorageMMKV.removeItem('token');
+            NavigationService.reset(RouteConstant.Login);
         }
 
         return Promise.reject({

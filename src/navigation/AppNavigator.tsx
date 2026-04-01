@@ -36,6 +36,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const AppNavigator = () => {
   const token = storage.getString('token');
   const initialRoute = token ? RouteConstant.Main : RouteConstant.Walkthrough;
+  // const initialRoute = RouteConstant.Login;
 
   return (
     <NavigationContainer ref={ref => NavigationService.setTopLevelNavigator(ref)}>

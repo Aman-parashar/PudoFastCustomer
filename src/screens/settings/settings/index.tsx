@@ -6,17 +6,21 @@ import { useSettingsViewModel } from './SettingsViewModel';
 import { Images } from '../../../utils/images';
 import Header from '../../../components/common/Header';
 import CustomButton from '../../../components/common/CustomButton';
+import { useProfileData } from '../../../hooks/userProfile';
+import { UserData } from '../../../models/User';
 
 const SettingsScreen = () => {
   const {
     navigateToProfile,
     handleLogout,
-    user,
+
     settingsItems,
     navigateToNotifications,
     isLoggingOut,
   } = useSettingsViewModel();
-
+  const { data } = useProfileData()
+  const user: UserData = data!
+  console.log(user, "user")
   const renderRatingStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -48,20 +52,20 @@ const SettingsScreen = () => {
         <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
             <Image
-              source={Images.userPlaceholder}
+              source={user?.profile_image ? { uri: user.profile_image } : Images.userPlaceholder}
               style={styles.profileImage}
             />
           </View>
 
           <View style={styles.infoContainer}>
-            <Text style={styles.userName}>{user.fullName}</Text>
+            <Text style={styles.userName}>{user?.full_name}</Text>
             <View style={styles.ratingContainer}>
-              {renderRatingStars(user.rating)}
+              {renderRatingStars(user?.total_rating)}
             </View>
           </View>
 
           <TouchableOpacity
-            onPress={navigateToProfile}
+            onPress={() => { navigateToProfile(user) }}
             style={styles.editIconContainer}
           >
             <Image

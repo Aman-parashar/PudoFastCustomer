@@ -7,6 +7,7 @@ import { AuthService } from '../../services/AuthService'
 import { Country } from '../../types/api'
 import { FONTS } from '../../utils/fonts'
 import { COLORS } from '../../utils/colors'
+import { ReactQuaryConst } from '../../navigation/Constant'
 
 type Props = {
     showPicker: boolean,
@@ -19,7 +20,7 @@ const CountryPicker = ({ showPicker, setShowPicker, onSelectCountry }: Props) =>
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
     const { data: countries, isLoading } = useQuery({
-        queryKey: ['countries'],
+        queryKey: [ReactQuaryConst.COUNTRIES],
         queryFn: AuthService.getCountries,
         select: (response) => response.data,
     });
@@ -75,8 +76,8 @@ const CountryPicker = ({ showPicker, setShowPicker, onSelectCountry }: Props) =>
                                 bottomSheetModalRef?.current?.close()
                                 setShowPicker(false)
                             }}>
-                            <Image 
-                                source={{ uri: item?.flag }} 
+                            <Image
+                                source={{ uri: item?.flag }}
                                 style={styles.flagImage}
                                 resizeMode="contain"
                             />

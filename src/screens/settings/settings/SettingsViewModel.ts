@@ -6,14 +6,15 @@ import { StorageMMKV } from '../../../helper/MMKVStorage';
 import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../services/AuthService';
 import Toast from 'react-native-toast-message';
+import { UserData } from '../../../models/User';
 
 export const useSettingsViewModel = () => {
   const navigateToNotifications = () => {
     NavigationService.navigate(RouteConstant.Notification);
   };
 
-  const navigateToProfile = () => {
-    NavigationService.navigate(RouteConstant.EditProfile);
+  const navigateToProfile = (user: UserData) => {
+    NavigationService.navigate(RouteConstant.EditProfile, { user });
   };
 
   const logoutMutation = useMutation({

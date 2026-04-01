@@ -7,7 +7,7 @@ export const API_ENDPOINTS = {
     RESET_PASSWORD: 'user/create_password',
 
     GET_PROFILE: 'user/profile',
-    UPDATE_PROFILE: 'user/update-profile',
+    UPDATE_PROFILE: 'user/edit_profile',
 
     GET_HISTORY: 'order/history',
     ORDER_DETAILS: 'order/details/',
@@ -16,4 +16,9 @@ export const API_ENDPOINTS = {
     LOGOUT: 'user/logout',
     CHANGE_PASSWORD: 'user/change_password',
     GET_COUNTRIES: 'user/country_list',
+
+
+    //Profile
+    USER_DETAILS: 'user/userdetails',
+
 };

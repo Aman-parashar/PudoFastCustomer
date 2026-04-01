@@ -1,4 +1,4 @@
-
+import { UserData } from '../models/User';
 
 export type RootStackParamList = {
   OnboardingScreen: undefined;
@@ -37,7 +37,7 @@ export type RootStackParamList = {
   TermsNPolicies: undefined;
   FilterScreen: undefined;
   SearchScreen: undefined;
-  EditProfile: undefined;
+
   AboutAppScreen: undefined;
   FollowersFollowingScreen: undefined;
   CommentScreen: undefined;
@@ -57,6 +57,9 @@ export type RootStackParamList = {
   GroupDetailScreen: undefined;
   CreatePollScreen: undefined;
   CreateAccount: undefined;
+  EditProfile: {
+    user: UserData;
+  },
   Condition: {
     title: string;
     content: string;
@@ -97,3 +100,8 @@ export const RouteConstant = {
   DeliveryConfirmation: 'DeliveryConfirmation',
   ReceivingOrderHistory: 'ReceivingOrderHistory',
 } as const;
+
+export const ReactQuaryConst = {
+  COUNTRIES: 'countries',
+  USER_DATA: 'userData',
+}

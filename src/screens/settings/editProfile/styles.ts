@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../../utils/colors';
-import { FONTS } from '../../../utils/fonts';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,6 +48,48 @@ const styles = StyleSheet.create({
   buttonContainer: {
     padding: 20,
     paddingBottom: 30,
+  },
+  sheetContainer: {
+    paddingHorizontal: 20,
+  },
+  actionGroup: {
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 15,
+    overflow: 'hidden',
+    gap: 0,
+  },
+  actionButton: {
+    height: 55,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#E0E0E0',
+  },
+  actionText: {
+    fontSize: 18,
+    color: '#007AFF',
+    fontWeight: '500',
+  },
+  cancelButton: {
+    height: 55,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 15,
+    marginTop: 10,
+  },
+  cancelText: {
+    fontSize: 18,
+    color: '#007AFF',
+    fontWeight: '600',
+  },
+  transparentBackground: {
+    backgroundColor: 'transparent',
+  },
+  actionContainer: {
+    gap: 10,
   },
 });
 

@@ -9,6 +9,7 @@ import { ApiError, LoginFormValues, SocialLoginType, Country } from '../../../ty
 import { DeviceData } from '../../../utils/device';
 import Toast from 'react-native-toast-message';
 import { storage } from '../../../helper/MMKVStorage';
+import { ApiStatusCode } from '../../../types/api';
 
 export const useLoginViewModel = () => {
 
@@ -35,15 +36,20 @@ export const useLoginViewModel = () => {
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
     onSuccess: (data) => {
-      if (data.code == '1') {
-         Toast.show({ type: 'success', text1: data.message || 'Login successfully' });
-         
-         if (data.data?.token) {
-           storage.set('token', data.data.token);
-         }
+      if (data.code == ApiStatusCode.SUCCESS) {
+        Toast.show({ type: 'success', text1: data.message || 'Login successfully' });
+
+        if (data.data?.token) {
+          storage.set('token', data.data.token);
+        }
 
         NavigationService.navigate(RouteConstant.Main);
-      } else {
+      }
+      else if (data.code == ApiStatusCode.INVALID_OR_FAIL && data.message == "rest_keywords_email_send_failed") {
+        Toast.show({ type: 'error', text1: "Please verify the email" });
+
+      }
+      else {
         Alert.alert('Login failed', data.message || 'Check your credentials.');
       }
     },

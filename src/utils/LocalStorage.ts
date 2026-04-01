@@ -14,6 +14,8 @@ export const LocalStorage = {
   storagePermission: 'storagePermission',
   audioPermission: 'audioPermission',
   locationPermission: 'locationPermission',
+  cameraPermission: 'cameraPermission',
+  photoLibraryPermission: 'photoLibraryPermission',
   createTribePayment: 'createTribePayment1',
   createTribeSubmission: 'createTribeSubmission',
   createTribeData: 'createTribeData',
