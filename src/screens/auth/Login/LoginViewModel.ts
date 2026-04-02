@@ -77,7 +77,7 @@ export const useLoginViewModel = () => {
       email: data.email ?? "",
       phone: data.phone ?? "",
       password: data.password,
-
+      user_type: "customer",
       device_type: Platform.OS === 'ios' ? 'I' : 'A',
       device_token: DeviceData.device_token
     }

@@ -50,6 +50,7 @@ export interface LoginFormValues {
   social_id?: string;
   device_type: string;
   device_token: string
+  user_type: "customer" | "driver";
 }
 export interface SignUpRequest {
   first_name: string,

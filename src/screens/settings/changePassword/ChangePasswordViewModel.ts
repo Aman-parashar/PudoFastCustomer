@@ -50,7 +50,6 @@ export const useChangePasswordViewModel = () => {
       new_password: data.newPassword,
       confirm_password: data.confirmPassword,
     };
-
     changePasswordMutation.mutate(payload);
   };
 

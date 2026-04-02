@@ -62,9 +62,9 @@ export const useSettingsViewModel = () => {
     { id: 4, title: 'Payment Methods', icon: Images.paymentMethodIcon, onPress: () => { } },
     { id: 5, title: 'Rate App', icon: Images.star, onPress: () => { } },
     { id: 6, title: 'Share App', icon: Images.shareApp, onPress: () => { Share.share({ message: "Hey! Download this app, You will like it.PUDO FAST App" }) } },
-    { id: 7, title: 'FAQ', icon: Images.faqIcon, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'FAQ', url: 'https://pudofast.com/pudofast/home/faq' }) },
-    { id: 8, title: 'Terms & Conditions', icon: Images.terms, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'Terms & Conditions', url: 'https://pudofast.com/pudofast/home/termscondition' }) },
-    { id: 9, title: 'Privacy Policy', icon: Images.privacy, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'Privacy Policy', url: 'https://pudofast.com/pudofast/home/privacy_policy' }) },
+    { id: 7, title: 'FAQ', icon: Images.faqIcon, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'FAQ', url: 'https://www.pudofast.com/pudofast/home/faq' }) },
+    { id: 8, title: 'Terms & Conditions', icon: Images.terms, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'Terms & Conditions', url: 'https://www.pudofast.com/pudofast/termscondition' }) },
+    { id: 9, title: 'Privacy Policy', icon: Images.privacy, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'Privacy Policy', url: 'https://www.pudofast.com/pudofast/privacy_policy' }) },
     { id: 10, title: 'About Us', icon: Images.aboutUs, onPress: () => NavigationService.navigate(RouteConstant.WebViewScreen, { title: 'About Us', url: 'https://pudofast.com/pudofast/home/aboutus' }) },
     { id: 11, title: 'Contact Us', icon: Images.contactUsIcon, onPress: () => NavigationService.navigate(RouteConstant.ContactUs) },
   ];
