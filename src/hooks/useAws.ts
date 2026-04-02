@@ -1,16 +1,6 @@
 import AWS from 'aws-sdk';
 import { AWS_CONFIG } from '../config/AppConfig';
 
-// Initialize AWS config using consolidated AppConfig
-AWS.config.update({
-  accessKeyId: AWS_CONFIG.ACCESS_KEY,
-  secretAccessKey: AWS_CONFIG.SECRET_KEY,
-  region: AWS_CONFIG.REGION,
-  signatureVersion: 'v4',
-});
-
-const s3 = new AWS.S3();
-
 /**
  * Upload files to S3 bucket
  * @param files Array of file objects with uri, type, and name
@@ -20,6 +10,14 @@ export const uploadImagesToS3 = async (
   files: { uri: string; type: string; name: string }[],
 ): Promise<string[]> => {
   const uploadedUrls: string[] = [];
+
+  // 1. Initialize AWS S3 client locally with fresh config
+  const s3 = new AWS.S3({
+    accessKeyId: AWS_CONFIG.ACCESS_KEY,
+    secretAccessKey: AWS_CONFIG.SECRET_KEY,
+    region: AWS_CONFIG.REGION,
+    signatureVersion: 'v4',
+  });
 
   for (const file of files) {
     try {
@@ -50,5 +48,3 @@ export const uploadImagesToS3 = async (
 
   return uploadedUrls;
 };
-
-export default s3;
