@@ -1,10 +1,11 @@
 import { countryData } from '../utils/Country';
 
 export const getCountryByCode = (quary: string) => {
-  console.log('country dsata==>', countryData);
+  const searchTerm = quary.trim().toLowerCase();
+  if (!searchTerm) return countryData;
 
-  if (!quary.trim()) return countryData;
   return countryData.filter(country =>
-    country.phonecode.toString().includes(quary),
+    country.name.toLowerCase().includes(searchTerm) ||
+    country.phonecode.includes(searchTerm),
   );
 };

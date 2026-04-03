@@ -1,76 +1,147 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import MapView from 'react-native-maps';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import MapView, { Circle, Region } from 'react-native-maps';
+// @ts-ignore
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Geocoder from 'react-native-geocoding';
+
 import styles from './styles';
 import { useChooseAddressViewModel } from './ChooseAddressViewModel';
 import { Images } from '../../../utils/images';
-import Header from '../../../components/common/Header';
+import { COLORS } from '../../../utils/colors';
 
-const ChooseAddressScreen = () => {
-  const { type, search, setSearch, goBack, confirmAddress } = useChooseAddressViewModel();
+const ChooseAddressScreen: React.FC = () => {
+  const { type, search, setSearch, goBack, confirmAddress } =
+    useChooseAddressViewModel();
+
+  const initialRegion: Region = {
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
+  };
+
+  const [region, setRegion] = useState<Region>(initialRegion);
+  const [address, setAddress] = useState<string>('');
+
+  // 👉 debounce timer ref
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // 🔁 Reverse Geocode function
+  const getAddressFromLatLng = async (lat: number, lng: number) => {
+    try {
+      const res = await Geocoder.from(lat, lng);
+      const formattedAddress: string =
+        res.results[0]?.formatted_address || 'Address not found';
+      setAddress(formattedAddress);
+    } catch (error) {
+      console.log('Geocoding error:', error);
+      setAddress('Unable to fetch address');
+    }
+  };
+
+  // 📍 When map stops moving (debounced)
+  const handleRegionChangeComplete = (newRegion: Region) => {
+    setRegion(newRegion);
+    console.log('new region----->', newRegion);
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      getAddressFromLatLng(newRegion.latitude, newRegion.longitude);
+    }, 600); // ⏱ 600ms debounce
+  };
+
+  // 🚀 Load initial address
+  useEffect(() => {
+    // 👉 Initialize Geocoder
+    Geocoder.init('AIzaSyBQxXusfTXnTAqcTOk26ajk4V6ng4Ndhrc');
+    getAddressFromLatLng(initialRegion.latitude, initialRegion.longitude);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.backButton}
-        >
-          <Image
-            source={Images.arrowLeft}
-            style={styles.backIcon}
+    <View style={styles.container}>
+      {/* MapView */}
+      <MapView
+        style={styles.map}
+        initialRegion={initialRegion}
+        onRegionChangeComplete={handleRegionChangeComplete}
+      >
+        <Circle
+          center={region}
+          radius={500}
+          strokeWidth={1}
+          strokeColor="rgba(104, 19, 111, 0.3)"
+          fillColor="rgba(104, 19, 111, 0.1)"
+        />
+      </MapView>
 
-          />
+      {/* 📍 Fixed Center Marker */}
+      <View
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          marginLeft: -20,
+          marginTop: -40,
+        }}
+      >
+        <Image
+          source={Images.mapPinRed}
+          style={{ width: 40, height: 40, resizeMode: 'contain' }}
+        />
+      </View>
+
+      {/* Header Overlay */}
+      <View style={styles.headerOverlay}>
+        <TouchableOpacity onPress={goBack} style={styles.backButtonCircle}>
+          <Image source={Images.arrowLeft} style={styles.backIcon} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>
-          {type === 'pickup' ? 'Pickup Address' : 'Delivery Address'}
-        </Text>
-        <View style={styles.headerSpacer} />
-      </View> */}
-      <Header title={type === 'pickup' ? 'Pickup Address' : 'Delivery Address'} type="step" onBack={goBack} />
-      <View style={styles.searchContainer}>
+        <Text style={styles.headerTitleCenter}>Select Address</Text>
+      </View>
+
+      {/* Search Overlay */}
+      <View style={styles.searchOverlay}>
         <View style={styles.searchBox}>
-          <Image
-            source={Images.search}
-            style={styles.searchIcon}
-          />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search Address"
+            placeholder="Search"
+            placeholderTextColor={COLORS.PLACEHOLDER_TEXTCOLOR}
             value={search}
             onChangeText={setSearch}
           />
         </View>
       </View>
 
-      <View style={styles.mapContainer}>
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
+      {/* 🎯 Current Location Button (logic can be added later) */}
+      <TouchableOpacity style={styles.floatingLocationButton}>
+        <MaterialCommunityIcons
+          name="crosshairs-gps"
+          size={24}
+          color={COLORS.BLACK}
         />
-      </View>
+      </TouchableOpacity>
 
-      <View style={styles.bottomContainer}>
+      {/* Bottom Address Card */}
+      <View style={styles.bottomCard}>
+        <Text style={styles.cardTitle}>
+          {type === 'pickup' ? 'Pickup address' : 'Delivery address'}
+        </Text>
+
+        <Text style={styles.cardAddress}>
+          {address || 'Fetching address...'}
+        </Text>
+
         <TouchableOpacity
-          style={styles.confirmButton}
-          onPress={confirmAddress}
+          style={styles.doneButton}
+          onPress={() => confirmAddress(address)}
         >
-          <Text style={styles.confirmText}>CONFIRM ADDRESS</Text>
+          <Text style={styles.doneText}>Done</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

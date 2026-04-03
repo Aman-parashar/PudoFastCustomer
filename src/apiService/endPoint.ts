@@ -21,4 +21,9 @@ export const API_ENDPOINTS = {
     //Profile
     USER_DETAILS: 'user/userdetails',
 
+    // Feedback
+    GET_REVIEWS: 'service/my_rate_review',
+    APP_RATE: 'service/app_rate',
+    CONTACT_US: 'service/contact_us',
+
 };

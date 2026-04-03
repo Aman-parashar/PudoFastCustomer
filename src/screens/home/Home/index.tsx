@@ -9,14 +9,30 @@ import { Images } from '../../../utils/images';
 import CustomButton from '../../../components/common/CustomButton';
 import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
-
+import AddressBottomSheet from '../../../components/home/AddressBottomSheet';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 
 const HomeScreen = () => {
   const {
+    pickupAddress,
+    setPickupAddress,
+    deliveryAddress,
+    setDeliveryAddress,
     navigateToNotifications,
     navigateToChooseAddress,
     navigateToDeliveryMiles,
   } = useHomeViewModel();
+
+  const [addressType, setAddressType] = React.useState<'pickup' | 'delivery'>(
+    'delivery',
+  );
+
+  const bottomSheetModalRef = React.useRef<BottomSheetModal>(null);
+
+  const handleOpenBottomSheet = (type: 'pickup' | 'delivery') => {
+    setAddressType(type);
+    bottomSheetModalRef.current?.present();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,30 +60,33 @@ const HomeScreen = () => {
 
           <TouchableOpacity
             style={styles.addressBox}
-            onPress={() => navigateToChooseAddress('pickup')}
+            onPress={() => handleOpenBottomSheet('pickup')}
           >
             <View style={styles.addressRow}>
               <Image
                 source={Images.pickupGreenIcon}
                 style={styles.addressIcon}
-
               />
               <View style={styles.addressTextContainer}>
                 <Text style={styles.addressLabel}>Pickup Address</Text>
-                <Text style={styles.addressValue}>Enter Address</Text>
+                <Text style={styles.addressValue} numberOfLines={1}>
+                  {pickupAddress}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.addressBox, { backgroundColor: COLORS.BOX_BLUE }]}
-            onPress={() => navigateToChooseAddress('delivery')}
+            onPress={() => handleOpenBottomSheet('delivery')}
           >
             <View style={styles.addressRow}>
               <Image source={Images.dropBlueIcon} style={styles.addressIcon} />
               <View style={styles.addressTextContainer}>
                 <Text style={styles.addressLabel}>Delivery Address</Text>
-                <Text style={styles.addressValue}>Enter Address</Text>
+                <Text style={styles.addressValue} numberOfLines={1}>
+                  {deliveryAddress}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -79,6 +98,25 @@ const HomeScreen = () => {
           />
         </View>
       </ScrollView>
+      <AddressBottomSheet
+        bottomSheetModalRef={bottomSheetModalRef}
+        onSave={address => {
+          if (addressType === 'pickup') {
+            setPickupAddress(address);
+          } else {
+            setDeliveryAddress(address);
+          }
+        }}
+        onChooseFromMap={() =>
+          navigateToChooseAddress(addressType, address => {
+            if (addressType === 'pickup') {
+              setPickupAddress(address);
+            } else {
+              setDeliveryAddress(address);
+            }
+          })
+        }
+      />
     </SafeAreaView>
   );
 };

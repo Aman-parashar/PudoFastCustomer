@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  ImageBackground,
-
-} from 'react-native';
+import { View, Text, Image, Pressable, ImageBackground } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
@@ -67,8 +60,15 @@ const LoginScreen = () => {
               </Pressable>
             )}
             {isMobile ? (
-              <CommonInput inputlabel="Phone" name="phone" control={control} containerStyle={styles.emailInputContainer} isLeftImage leftImage={Images.phone} isMobileNumber
-                countryCode={selectedCountry?.country_code || "+61"}
+              <CommonInput
+                inputlabel="Phone"
+                name="phone"
+                control={control}
+                containerStyle={styles.emailInputContainer}
+                isLeftImage
+                leftImage={Images.phone}
+                isMobileNumber
+                countryCode={selectedCountry?.country_code || '+61'}
                 flag={selectedCountry?.flag}
                 keyboardType="phone-pad"
                 rules={Rules.Phone}
@@ -82,17 +82,18 @@ const LoginScreen = () => {
                 inputlabel="Email"
                 name="email"
                 control={control}
-
                 rules={Rules.Email}
                 containerStyle={styles.emailInputContainer}
                 isLeftImage
                 leftImage={Images.email}
-
                 errorStyle={{ position: 'absolute', bottom: -20 }}
               />
             )}
             {!isMobile && (
-              <Pressable onPress={() => setIsMobile(true)} style={styles.phoneContainer}>
+              <Pressable
+                onPress={() => setIsMobile(true)}
+                style={styles.phoneContainer}
+              >
                 <Image
                   source={Images.phone}
                   style={styles.phoneIcon}

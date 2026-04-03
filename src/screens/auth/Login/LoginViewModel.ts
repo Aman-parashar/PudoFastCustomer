@@ -12,15 +12,19 @@ import { storage } from '../../../helper/MMKVStorage';
 import { ApiStatusCode } from '../../../types/api';
 
 export const useLoginViewModel = () => {
-
+  interface LoginFormInputs {
+    email: string;
+    password: string;
+    phone: string;
+  }
   const {
     control,
     handleSubmit,
-  } = useForm<LoginFormValues>({
+  } = useForm<LoginFormInputs>({
     defaultValues: {
-      email: "",
-      password: "",
-      phone: "",
+      email: '',
+      password: '',
+      phone: '',
     },
   });
 
@@ -69,7 +73,7 @@ export const useLoginViewModel = () => {
     },
   });
 
-  const handleLogin = (data: LoginFormValues) => {
+  const handleLogin = (data: LoginFormInputs) => {
     const payload: LoginFormValues = {
       login_type: SocialLoginType.simple,
       login_with: data.email ? "email" : "phone",

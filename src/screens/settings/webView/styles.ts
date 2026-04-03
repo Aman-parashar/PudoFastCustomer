@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
   backButton: {
     padding: 10,
     marginLeft: -10,
+   
   },
   backIcon: {
     width: 20,
     height: 20,
+     resizeMode:'contain'
   },
   headerTitle: {
     fontSize: 18,

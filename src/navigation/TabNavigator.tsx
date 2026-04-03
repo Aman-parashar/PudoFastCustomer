@@ -30,14 +30,18 @@ const HomeIcon = (props: any) => (
 const HistoryIcon = (props: any) => (
   <TabIcon
     {...props}
-    iconSource={props.focused ? Images.historySelected : Images.historyUnSelected}
+    iconSource={
+      props.focused ? Images.historySelected : Images.historyUnSelected
+    }
   />
 );
 
 const SettingsIcon = (props: any) => (
   <TabIcon
     {...props}
-    iconSource={props.focused ? Images.settingSelected : Images.settingUnSelected}
+    iconSource={
+      props.focused ? Images.settingSelected : Images.settingUnSelected
+    }
   />
 );
 
@@ -53,7 +57,7 @@ const TabNavigator = () => {
         tabBarStyle: [
           styles.tabBar,
           {
-            height: 65 + (insets.bottom > 0 ? insets.bottom - 10 : 0),
+            height: 68 + (insets.bottom > 0 ? insets.bottom - 10 : 0),
             paddingBottom: insets.bottom > 0 ? insets.bottom : 10,
           },
         ],

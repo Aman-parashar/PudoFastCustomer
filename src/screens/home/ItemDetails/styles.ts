@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowRadius: 1,
   },
   itemIcon: {
     width: 30,

@@ -16,7 +16,7 @@ import CustomButton from '../../../components/common/CustomButton';
 import { COLORS } from '../../../utils/colors';
 
 const ContactUsScreen = () => {
-  const { control, handleSubmit, handleSave, goBack } = useContactUsViewModel();
+  const { control, handleSubmit, handleSave, goBack, isSubmitting } = useContactUsViewModel();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -78,7 +78,7 @@ const ContactUsScreen = () => {
       </KeyboardAvoidingView>
 
       <View style={styles.buttonContainer}>
-        <CustomButton title="SUBMIT" onPress={handleSubmit(handleSave)} />
+        <CustomButton title="SUBMIT" onPress={handleSubmit(handleSave)} loading={isSubmitting} />
       </View>
     </SafeAreaView>
   );
