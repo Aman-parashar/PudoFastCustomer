@@ -104,4 +104,5 @@ export const RouteConstant = {
 export const ReactQuaryConst = {
   COUNTRIES: 'countries',
   USER_DATA: 'userData',
+  GET_SERVICE: 'getService',
 }

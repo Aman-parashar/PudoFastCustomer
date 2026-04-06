@@ -54,14 +54,10 @@ const styles = StyleSheet.create({
     height: 16,
     marginRight: 4,
   },
-  editIconContainer: {
-
-  },
+  editIconContainer: {},
   editIcon: {
     width: 50,
     height: 50,
-
-
   },
   menuContainer: {
     paddingHorizontal: 20,

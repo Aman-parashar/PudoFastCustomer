@@ -38,9 +38,8 @@ const CountryPicker = ({ showPicker, setShowPicker, onSelectCountry }: Props) =>
         const modalRef = bottomSheetModalRef?.current;
         if (showPicker) {
             modalRef?.present()
-        }
-        return () => {
-            modalRef?.close()
+        } else {
+            modalRef?.dismiss()
         }
     }, [showPicker])
 
@@ -60,7 +59,7 @@ const CountryPicker = ({ showPicker, setShowPicker, onSelectCountry }: Props) =>
                     data={filteredCountries}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.contentContainer}
-                    ListEmptyComponent={<View style={styles.emptyContainer}><Text>No Country Found</Text></View>}
+                    ListEmptyComponent={<View style={styles.emptyContainer}><Text style={styles.emptyText}>No Country Found</Text></View>}
                     ListHeaderComponent={<TextInput
                         placeholder='Search Country'
                         value={searchCountry}

@@ -27,10 +27,12 @@ const CommonToggle: React.FC<CommonToggleProps> = ({
   buttonStyle,
   textStyle,
 }) => {
+  console.log(activeValue, 'activeValueactiveValue')
   return (
     <View style={[styles.container, containerStyle]}>
       {options.map((option) => {
         const isActive = option.value === activeValue;
+        console.log(isActive, 'isActive', option.value, activeValue)
         return (
           <TouchableOpacity
             key={option.value}

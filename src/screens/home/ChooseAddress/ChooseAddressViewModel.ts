@@ -5,15 +5,17 @@ import NavigationService from '../../../navigation/NavigationService';
 
 export const useChooseAddressViewModel = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'ChooseAddress'>>();
-  const { type } = route.params;
+  const { type, onSelect } = route.params;
   const [search, setSearch] = useState('');
 
   const goBack = () => {
     NavigationService.goBack();
   };
 
-  const confirmAddress = () => {
-    // Handle persistent storage or state update here
+  const confirmAddress = (address: { address: string, latitude: number, longitude: number }) => {
+    if (onSelect) {
+      onSelect(address);
+    }
     NavigationService.goBack();
   };
 

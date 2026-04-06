@@ -2,14 +2,9 @@ import React from 'react';
 import {
   View,
   Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
+
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 import styles from './styles';
 import { useTransitAndReceiverDetailsViewModel } from './TransitAndReceiverDetailsViewModel';
 import { Images } from '../../../utils/images';
@@ -20,6 +15,7 @@ import { deliverySteps } from '../../../utils/enum';
 import Header from '../../../components/common/Header';
 import Container from '../../../components/common/Container';
 import KeyboardContainer from '../../../components/layout/KeyboardContainer';
+import { Rules } from '../../../utils/Rules';
 
 const TransitAndReceiverDetailsScreen = () => {
   const { orderData, control, handleSubmit, handleNext, goBack } =
@@ -61,8 +57,7 @@ const TransitAndReceiverDetailsScreen = () => {
               <View style={styles.addressInfo}>
                 <Text style={styles.addressLabel}>Pickup Address</Text>
                 <Text style={styles.addressText} numberOfLines={2}>
-                  {orderData?.pickupAddress?.address ||
-                    'B103/4, Abc com, AA Road, BB area, CA City, USA'}
+                  {orderData?.pickupLocation.address}
                 </Text>
               </View>
             </View>
@@ -75,8 +70,7 @@ const TransitAndReceiverDetailsScreen = () => {
               <View style={styles.addressInfo}>
                 <Text style={styles.addressLabel}>Drop off Address</Text>
                 <Text style={styles.addressText} numberOfLines={2}>
-                  {orderData?.dropAddress?.address ||
-                    'A201,1, XYS Apartment.'}
+                  {orderData?.deliveryLocation.address}
                 </Text>
               </View>
             </View>
@@ -92,6 +86,7 @@ const TransitAndReceiverDetailsScreen = () => {
             inputlabel="First Name"
             isLeftImage
             leftImage={Images.useIcon}
+            rules={Rules.Name}
           />
 
           <CommonInput
@@ -100,6 +95,7 @@ const TransitAndReceiverDetailsScreen = () => {
             inputlabel="Last Name"
             isLeftImage
             leftImage={Images.useIcon}
+            rules={Rules.Name}
 
           />
 
@@ -110,6 +106,7 @@ const TransitAndReceiverDetailsScreen = () => {
             isLeftImage
             leftImage={Images.email}
             keyboardType="email-address"
+            rules={Rules.Email}
 
           />
 
@@ -122,6 +119,7 @@ const TransitAndReceiverDetailsScreen = () => {
             keyboardType="phone-pad"
             isMobileNumber
             countryCode="+1"
+            rules={Rules.Phone}
 
           />
         </View>

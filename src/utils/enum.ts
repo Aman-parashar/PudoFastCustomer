@@ -5,3 +5,15 @@ export const deliverySteps = {
     PaymentSection: 4,
     DeliveryConfirmation: 5
 }
+
+export enum servicePrices {
+    walker = 14.00,
+    cyclist = 20.00,
+    driver = 25.00
+}
+
+export enum serviceType {
+    walker = "Walker",
+    cyclist = "Cyclist",
+    driver = "Driver"
+}

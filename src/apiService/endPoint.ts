@@ -21,4 +21,8 @@ export const API_ENDPOINTS = {
     //Profile
     USER_DETAILS: 'user/userdetails',
 
+    //service
+    SERVICE_TYPE_LIST: 'service/servicetype_list',
+    GET_DRIVER_TIME: 'service/get_drivertime',
+
 };

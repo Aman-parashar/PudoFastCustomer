@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
     elevation: 2,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowRadius: 1,
   },
   itemIcon: {
     width: 30,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    // marginBottom: 12,
   },
   addMoreText: {
     fontSize: 12,
@@ -114,6 +114,174 @@ const styles = StyleSheet.create({
 
   keyboardAvoid: {
     flex: 1,
+  },
+  centerView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalView: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    width: '85%',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 8,
+    overflow: 'hidden',
+  },
+  modalHeader: {
+    width: '100%',
+    paddingVertical: 18,
+    borderBottomWidth: 1,
+    borderColor: '#f0f0f0',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontFamily: FONTS.SANTRAL_BOLD,
+    fontSize: 20,
+    color: COLORS.BLACK,
+  },
+  modalBody: {
+    padding: 24,
+    width: '100%',
+  },
+  modalLabel: {
+    fontFamily: FONTS.SANTRAL_BOLD,
+    fontSize: 18,
+    color: COLORS.BLACK,
+    marginBottom: 10,
+  },
+  serviceButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.WHITE,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    height: 56,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+    marginBottom: 10
+  },
+  serviceButtonText: {
+    flex: 1,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    fontSize: 16,
+    color: '#ccc',
+  },
+  modalFooter: {
+    flexDirection: 'row',
+    gap: 15,
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  noButton: {
+    flex: 1,
+    height: 50,
+    borderRadius: 8,
+    borderWidth: 1.5,
+    borderColor: '#770375',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  yesButton: {
+    flex: 1,
+    height: 50,
+    borderRadius: 8,
+    backgroundColor: '#770375',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noButtonText: {
+    fontFamily: FONTS.SANTRAL_BOLD,
+    fontSize: 16,
+    color: '#770375',
+  },
+  yesButtonText: {
+    fontFamily: FONTS.SANTRAL_BOLD,
+    fontSize: 16,
+    color: COLORS.WHITE,
+  },
+  dropdownArrow: {
+    width: 14,
+    height: 14,
+    tintColor: '#999',
+    transform: [{ rotate: '90deg' }],
+  },
+  pickerContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  pickerContent: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingBottom: 40,
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  pickerItem: {
+    width: '100%',
+
+    backgroundColor: COLORS.WHITE,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+    marginVertical: 5,
+    padding: 10
+
+
+
+  },
+  pickerItemText: {
+    fontSize: 16,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    color: '#999',
+  },
+  pickerItemSelected: {
+    backgroundColor: '#f5f5f5',
+    width: '100%',
+  },
+  pickerItemSelectedText: {
+    color: '#333',
+    fontFamily: FONTS.SANTRAL_BOLD,
+  },
+  pickerIndicator: {
+    width: 40,
+    height: 4,
+    backgroundColor: '#ddd',
+    borderRadius: 2,
+    marginVertical: 15,
+  },
+  serviceSelectedText: {
+    color: '#333',
   },
 });
 

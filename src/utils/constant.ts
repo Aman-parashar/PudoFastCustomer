@@ -10,6 +10,7 @@ export const dimensions = {
 
 export const landscapeMode = 'landscape';
 export const portraitMode = 'portrait';
+export const pricePerMile = 1.5;
 export const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51RRw12KK7KsIbaa0Ypr2fc4y1dRWFu7GD6hkltedR9as33JlJWooEoNmPOFkk28HQOQ0jQC5zTuQxPhLcBEBKqyX00dALFwrx2';
 export const backGroundImage = {

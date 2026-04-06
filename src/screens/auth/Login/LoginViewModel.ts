@@ -18,9 +18,9 @@ export const useLoginViewModel = () => {
     handleSubmit,
   } = useForm<LoginFormValues>({
     defaultValues: {
-      email: "",
-      password: "",
-      phone: "",
+      email: '',
+      password: '',
+      phone: '',
     },
   });
 

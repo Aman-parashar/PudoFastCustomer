@@ -70,7 +70,49 @@ export interface SignUpRequest {
   longitude: string,
   version: string
 }
+export interface Address {
+  address: string;
+  area: string;
+  block: string;
+  latitude: number;
+  longitude: number;
+  building_name: string;
+  city: string;
+  zip_code: string;
+  country: string;
+}
 
+export interface ServiceType {
+  id: number;
+  name: string;
+}
+
+export interface CreateDeliveryRequest {
+  payment_method: "Card" | "Cash";
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  country_code: string;
+  pickup_type: "General" | "Secured" | "Special";
+  item_type: "Document" | "Box" | "Services";
+  trip_type: "one_way" | "two_way";
+  type_of_service: "on_demand" | "scheduled";
+  delivery_type: "Services" | "Cyclist" | "Driver";
+  price: string | number;
+  pickup_address: Address;
+  drop_address: Address;
+  distance: string | number;
+  time: string | number;
+  item: string[];
+  service_id?: string | number;
+  Description?: string;
+  driver_note?: string;
+  schedule_date?: string; // YYYY-MM-DD
+  schedule_time?: string; // HH:mm
+  card_id?: string | number;
+  promocode_id?: number;
+}
 
 export type LoginResponse = ApiResponse<{
   user: User;

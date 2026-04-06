@@ -25,7 +25,6 @@ import { Country } from '../../../types/api';
 
 const LoginScreen = () => {
   const [isMobile, setIsMobile] = useState(false);
-
   const {
     control,
     handleSubmit,

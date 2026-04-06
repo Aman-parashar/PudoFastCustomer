@@ -13,6 +13,7 @@ interface FormValues {
   phone: string;
 }
 
+
 export const useTransitAndReceiverDetailsViewModel = () => {
   const route = useRoute<TransitAndReceiverDetailsRouteProp>();
   const { orderData } = route.params || {};
@@ -29,12 +30,12 @@ export const useTransitAndReceiverDetailsViewModel = () => {
   const handleNext = (data: FormValues) => {
     const updatedOrderData = {
       ...orderData,
-      receiver: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-      }
+
+      first_name: data.firstName,
+      last_name: data.lastName,
+      email: data.email,
+      phone: data.phone,
+
     };
     NavigationService.navigate(RouteConstant.ItemDetails, { orderData: updatedOrderData });
   };

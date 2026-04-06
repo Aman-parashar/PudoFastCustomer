@@ -103,9 +103,75 @@ const styles = StyleSheet.create({
     color: '#E2B235',
   },
   nextButton: {
-    marginTop: 70
+    marginTop: 30,
   },
-
+  dateBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#FBFBFB',
+    borderRadius: 8,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  dateText: {
+    fontSize: 16,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    color: COLORS.BLACK,
+  },
+  calendarIcon: {
+    width: 20,
+    height: 20,
+    tintColor: '#4CAF50',
+  },
+  timeSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+  },
+  timeBox: {
+    flex: 1,
+    backgroundColor: '#FBFBFB',
+    borderRadius: 8,
+    padding: 15,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 5,
+  },
+  timeText: {
+    fontSize: 18,
+    fontFamily: FONTS.SANTRAL_BOLD,
+    color: COLORS.BLACK,
+  },
+  timeUnit: {
+    fontSize: 14,
+    fontFamily: FONTS.SANTRAL_MEDIUM,
+    color: COLORS.BLACK,
+    marginTop: 2,
+  },
+  colon: {
+    fontSize: 24,
+    fontFamily: FONTS.SANTRAL_BOLD,
+    color: COLORS.BLACK,
+  },
+  ampmContainer: {
+    justifyContent: 'center',
+    gap: 2,
+  },
+  ampmText: {
+    fontSize: 12,
+    fontFamily: FONTS.SANTRAL_BOLD,
+  },
+  ampmActive: {
+    color: '#4CAF50',
+  },
+  ampmInactive: {
+    color: '#D1D1D1',
+  },
 });
 
 export default styles;

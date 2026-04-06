@@ -5,9 +5,9 @@ export type RootStackParamList = {
   SignUp: undefined;
   Main: undefined;
   Notification: undefined;
-  ChooseAddress: { type: 'pickup' | 'delivery' };
+  ChooseAddress: { type: 'pickup' | 'delivery'; onSelect?: (address: { address: string, latitude: number, longitude: number }) => void };
   DeliveryMiles: undefined;
-  TransitAndReceiverDetails: { orderData?: any };
+  TransitAndReceiverDetails: { orderData?: { pickupLocation: { address: string, latitude: number, longitude: number }, deliveryLocation: { address: string, latitude: number, longitude: number } } };
   MyReviews: undefined;
   ChangePassword: undefined;
   Terms: undefined;

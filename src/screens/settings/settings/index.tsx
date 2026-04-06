@@ -20,7 +20,7 @@ const SettingsScreen = () => {
   } = useSettingsViewModel();
   const { data } = useProfileData()
   const user: UserData = data!
-  console.log(user, "user")
+
   const renderRatingStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {

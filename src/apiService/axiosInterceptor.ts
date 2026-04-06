@@ -16,6 +16,7 @@ apiClient.interceptors.request.use(
         const isLockbox = config.url?.includes(LOCKBOX_URL);
         const token = storage.getString('token');
 
+
         if (isLockbox) {
             // IGloo / Lockbox API
             config.headers['X-IGLOOCOMPANY-APIKEY'] = IGLOO_API_KEY;
@@ -64,11 +65,11 @@ apiClient.interceptors.response.use(
 
         // 2. Otherwise, decrypt the response body (matching iOS behavior)
         const decryptedData = decryptToJSON(response.data);
-        
+
         if (__DEV__) {
-             console.log(`[API RESPONSE] ${response.config.url}`, decryptedData);
+            console.log(`[API RESPONSE] ${response.config.url}`, decryptedData);
         }
-        
+
         return decryptedData;
     },
     error => {

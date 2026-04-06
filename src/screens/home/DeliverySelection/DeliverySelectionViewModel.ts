@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../../types/avigation';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { Images } from '../../../utils/images';
+import * as AppConfig from '../../../config/AppConfig';
+import { pricePerMile } from '../../../utils/constant';
+import axios from 'axios';
+import { scheduleTime } from "../../../utils/device"
+import { APiError, ApiResponse } from '../../../types/api';
+import { useMutation } from '@tanstack/react-query';
+import { servicePrices, serviceType as serviceTypeEnum } from '../../../utils/enum';
+import { DeliveryService } from '../../../services/DeliveryService';
 
 type DeliverySelectionRouteProp = RouteProp<RootStackParamList, 'DeliverySelection'>;
 
@@ -17,17 +25,101 @@ export const useDeliverySelectionViewModel = () => {
   const route = useRoute<DeliverySelectionRouteProp>();
   const { orderData } = route.params || {};
 
-  const [serviceType, setServiceType] = useState('Walker');
-  const [tripType, setTripType] = useState('one_way'); // one_way, two_way
-  const [scheduleType, setScheduleType] = useState('on_demand'); // on_demand, scheduled
-  const [selectedDate, setSelectedDate] = useState('Select Date');
-  const [selectedTime, setSelectedTime] = useState('Select Time');
+  const [serviceType, setServiceType] = useState(serviceTypeEnum.walker);
+  const [tripType, setTripType] = useState<'one_way' | 'two_way'>('one_way'); // one_way, two_way
+  const [scheduleType, setScheduleType] = useState<'on_demand' | 'scheduled'>('on_demand'); // on_demand, scheduled
+  const [date, setDate] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisible] = useState(false);
+  const [deliveryDetails, setDeliveryDetails] = useState({
+
+  })
+  useEffect(() => {
+    const pickUp = `${orderData?.pickupLocation.latitude},${orderData?.pickupLocation.longitude}`;
+    const delivery = `${orderData?.deliveryLocation.latitude},${orderData?.deliveryLocation.longitude}`;
+    getDistanceinMeters(pickUp, delivery)
+    console.log('dcneicjn')
+    getDriverTime.mutate({
+      latitude: orderData?.pickupLocation.latitude,
+      longitude: orderData?.pickupLocation.longitude,
+      delivery_type: serviceType === serviceTypeEnum.walker ? 'Services' : serviceType
+
+
+    })
+  }, [])
+  const formatDate = (d: Date) => {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const day = d.getDate();
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const formatTimeHours = (d: Date) => {
+    let hours = d.getHours();
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    return hours < 10 ? '0' + hours : hours.toString();
+  };
+
+  const formatTimeMinutes = (d: Date) => {
+    const minutes = d.getMinutes();
+    return minutes < 10 ? '0' + minutes : minutes.toString();
+  };
+
+  const formatTimeAMPM = (d: Date) => {
+    const hours = d.getHours();
+    return hours >= 12 ? 'PM' : 'AM';
+  };
 
   const calculatePrice = (service: typeof SERVICES[0]) => {
     // Basic calculation for demo purposes. In a real app, from backend.
     return service.basePrice;
   };
+  const getServicePrice = () => {
+    switch (serviceType) {
+      case serviceTypeEnum.walker:
+        return servicePrices.walker
+      case serviceTypeEnum.cyclist:
+        return servicePrices.cyclist
+      case serviceTypeEnum.driver:
+        return servicePrices.driver
+    }
+  }
+  const getDistanceinMeters = async (pickup: string, dropoff: string) => {
+    try {
+      const data = await axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${pickup}&destination=${dropoff}&key=${AppConfig.GOOGLE_MAPS_KEY}&units=imperial`)
+      const distance = data.data.routes[0].legs[0].distance.value
+      const distanceInMiles = Number(distance * 0.000621371).toFixed(2)
+      let time = data.data.routes[0].legs[0].duration.text
+      let price = Number((Number(distanceInMiles) * pricePerMile).toFixed(2))
+      price = price + getServicePrice()
+      price = tripType == 'one_way' ? price : price * 2
+      setDeliveryDetails({
+        distance: distanceInMiles,
+        time: time,
+        price: price
+      })
 
+
+    } catch (e) {
+      console.log("error", e)
+    }
+
+  }
+  const getDriverTime = useMutation({
+    mutationFn: DeliveryService.getDriverTime,
+    onSuccess: (data) => {
+
+    },
+    onError: (error: APiError) => {
+      console.log("error", error)
+    }
+
+  })
   const handleNext = () => {
     const selectedService = SERVICES.find(s => s.title === serviceType);
     const updatedOrderData = {
@@ -35,8 +127,15 @@ export const useDeliverySelectionViewModel = () => {
       service: serviceType,
       tripType: tripType,
       scheduleType: scheduleType,
-      scheduleDetails: scheduleType === 'scheduled' ? { date: selectedDate, time: selectedTime } : null,
-      totalPrice: calculatePrice(selectedService!),
+      time: deliveryDetails.time,
+      schedule_time: scheduleType === 'scheduled' ? scheduleTime(date) : "",
+      schedule_date: scheduleType === 'scheduled' ? formatDate(date) : "",
+
+      // scheduleDetails: scheduleType === 'scheduled' ? {
+      //   date: formatDate(date),
+      //   time: `${formatTimeHours(date)}:${formatTimeMinutes(date)} ${formatTimeAMPM(date)}`
+      // } : null,
+      ...deliveryDetails
     };
     NavigationService.navigate(RouteConstant.PaymentOptions, { orderData: updatedOrderData });
   };
@@ -53,12 +152,19 @@ export const useDeliverySelectionViewModel = () => {
     setTripType,
     scheduleType,
     setScheduleType,
-    selectedDate,
-    setSelectedDate,
-    selectedTime,
-    setSelectedTime,
+    date,
+    setDate,
+    isDatePickerVisible,
+    setDatePickerVisible,
+    isTimePickerVisible,
+    setTimePickerVisible,
+    formatDate,
+    formatTimeHours,
+    formatTimeMinutes,
+    formatTimeAMPM,
     calculatePrice,
     handleNext,
     goBack,
+
   };
 };

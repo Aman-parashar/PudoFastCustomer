@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
+   width:"100%",
+   height:"100%"
   },
   addressSection: {
     paddingHorizontal: 20,
@@ -74,11 +76,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: COLORS.BORDER,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 2,
+    // elevation: 1,
   },
   addressRow: {
     flexDirection: 'row',

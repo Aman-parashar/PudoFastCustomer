@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,15 +7,16 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
+  Modal,
 } from 'react-native';
-import { COLORS } from '../../../utils/colors';
 import { FONTS } from '../../../utils/fonts';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import {
   useItemDetailsViewModel,
   ITEM_TYPES,
-  PickupType,
+
 } from './ItemDetailsViewModel';
 import { Images } from '../../../utils/images';
 import Stepper from '../../../components/common/Stepper';
@@ -39,7 +40,15 @@ const ItemDetailsScreen = () => {
     setSelectedItemType,
     handleNext,
     goBack,
+    serviceData
   } = useItemDetailsViewModel();
+  const [visible, setVisible] = React.useState(false);
+  const [pickerVisible, setPickerVisible] = React.useState(false);
+  const [selectedService, setSelectedService] = React.useState<{ id: number, name: string }>();
+  useEffect(() => {
+    setSelectedService(serviceData?.[0])
+
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -72,7 +81,7 @@ const ItemDetailsScreen = () => {
               leftImage={Images.descriptionBlue}
               multiline
               customStyle={{
-                height: 100,
+                height: 150,
                 alignItems: 'flex-start',
                 paddingTop: 10,
               }}
@@ -94,7 +103,7 @@ const ItemDetailsScreen = () => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Item Type</Text>
             <View style={styles.itemTypeRow}>
-              {ITEM_TYPES.map(item => (
+              {ITEM_TYPES.map((item) => (
                 <TouchableOpacity
                   key={item.id}
                   style={[
@@ -104,7 +113,12 @@ const ItemDetailsScreen = () => {
                       borderColor: item.color,
                     },
                   ]}
-                  onPress={() => setSelectedItemType(item.title)}
+                  onPress={() => {
+                    setSelectedItemType(item.title);
+                    if (item.id === '3') {
+                      setVisible(true);
+                    }
+                  }}
                 >
                   <Image
                     source={item.img}
@@ -133,9 +147,7 @@ const ItemDetailsScreen = () => {
           <View style={styles.section}>
             <View style={styles.sectionHeaderRow}>
               <Text style={styles.sectionTitle}>Add items</Text>
-              <TouchableOpacity onPress={addItemField}>
-                <Text style={styles.addMoreText}>+ Add more items</Text>
-              </TouchableOpacity>
+
             </View>
 
             {fields.map((field, index) => (
@@ -145,7 +157,7 @@ const ItemDetailsScreen = () => {
                   <CommonInput
                     control={control}
                     name={`items.${index}.name`}
-                    inputlabel={index === 0 ? 'Certificates' : 'Item Name'}
+                    inputlabel={'Item Name'}
                     containerStyle={{
                       marginVertical: 0,
                       flex: 1,
@@ -159,20 +171,96 @@ const ItemDetailsScreen = () => {
                       backgroundColor: 'transparent',
                     }}
                   />
-                  {fields.length > 1 && (
+                  {(
                     <TouchableOpacity
                       onPress={() => removeItemField(index)}
                       style={styles.deleteButton}
                     >
                       <Image
-                        source={Images.chatUnSelected}
+                        source={Images.delete}
                         style={styles.deleteIcon}
                       />
                     </TouchableOpacity>
                   )}
                 </View>
+
               </View>
             ))}
+            <Pressable onPress={addItemField} hitSlop={10} style={{ alignItems: 'flex-end', padding: 5, marginTop: 5 }}>
+              <Text style={styles.addMoreText}>+ Add more items</Text>
+            </Pressable>
+            <View style={styles.centerView}>
+              <Modal
+                visible={visible}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => { setVisible(false), setPickerVisible(false) }}
+              >
+                <View style={styles.centerView}>
+                  <View style={styles.modalView}>
+                    <View style={styles.modalHeader}>
+                      <Text style={styles.modalTitle}>Service Select</Text>
+                    </View>
+                    <View style={styles.modalBody}>
+                      <Text style={styles.modalLabel}>Service</Text>
+                      <Pressable
+                        style={styles.serviceButton}
+                        onPress={() => setPickerVisible(true)}
+                      >
+                        <Text style={[
+                          styles.serviceButtonText,
+                          selectedService?.name !== '' && styles.serviceSelectedText
+                        ]}>
+                          {selectedService?.name || 'Select service'}
+                        </Text>
+                        <Image
+                          source={Images.arrowRight}
+                          style={styles.dropdownArrow}
+                        />
+                      </Pressable>
+                      {pickerVisible && serviceData?.map((item) => (
+                        <Pressable
+                          key={item?.id}
+                          style={[
+                            styles.pickerItem,
+                            selectedService === item && styles.pickerItemSelected
+                          ]}
+                          onPress={() => {
+                            setSelectedService(item);
+                            setPickerVisible(false);
+                          }}
+                        >
+                          <Text style={[
+                            styles.pickerItemText,
+                            selectedService?.id === item.id && styles.pickerItemSelectedText
+                          ]}>
+                            {item.name}
+                          </Text>
+                        </Pressable>
+                      ))}
+                      <View style={styles.modalFooter}>
+                        <Pressable
+                          style={styles.noButton}
+                          onPress={() => { setVisible(false), setPickerVisible(false) }}
+                        >
+                          <Text style={styles.noButtonText}>NO</Text>
+                        </Pressable>
+                        <Pressable
+                          style={styles.yesButton}
+                          onPress={() => {
+                            setVisible(false);
+                            /* TODO: Set selected service name to form */
+                          }}
+                        >
+                          <Text style={styles.yesButtonText}>YES</Text>
+                        </Pressable>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+
+            </View>
           </View>
 
           <CustomButton

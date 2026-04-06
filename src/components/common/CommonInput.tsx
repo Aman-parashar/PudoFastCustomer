@@ -12,7 +12,7 @@ import {
   StyleProp,
   TextStyle,
   ImageSourcePropType,
-  Platform
+  Platform,
 } from 'react-native';
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Controller, useFormState } from 'react-hook-form';
@@ -104,13 +104,10 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
         'keyboardDidHide',
         () => {
           inputRef.current?.blur();
-
         },
       );
 
-      const touchListener = Keyboard.addListener('keyboardDidShow', () => {
-
-      });
+      const touchListener = Keyboard.addListener('keyboardDidShow', () => { });
 
       return () => {
         keyboardHideListener.remove();
@@ -126,7 +123,8 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
     return (
       <Pressable
         style={[styles.inputContainer, containerStyle]}
-        onPress={handlePressOutside}>
+        onPress={handlePressOutside}
+      >
         {label !== '' && (
           <View style={styles.labelContainer}>
             <Text style={[styles.labelTextStyle, labelStyle]}>
@@ -201,11 +199,12 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                 {secureTextEntry && isRightImage && (
                   <Pressable
                     style={[styles.rightImageStyle, rightImageStyle]}
-                    onPress={() => setSecureEntry(!secureEntry)}>
+                    onPress={() => setSecureEntry(!secureEntry)}
+                  >
                     <Image
                       source={secureEntry ? Images.eye : Images.eyeOff}
                       style={styles.leftImageStyle}
-                      resizeMode='contain'
+                      resizeMode="contain"
                     />
                   </Pressable>
                 )}
@@ -225,8 +224,7 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   errors[name]?.message !== '' &&
                   errors[name]?.message !== undefined && (
                     <View style={[styles.errorContainer, errorStyle]}>
-                      <Text
-                        style={styles.errorText}>
+                      <Text style={styles.errorText}>
                         {errors[name]?.message}
                       </Text>
                     </View>
@@ -242,7 +240,6 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
 
 const styles = StyleSheet.create({
   inputContainer: {
-
     marginVertical: 10,
     gap: 4,
     width: '100%',
@@ -250,13 +247,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.WHITE,
 
-    paddingHorizontal: 2
+    paddingHorizontal: 2,
   },
   leftImageStyle: {
-    height: dimensions.width * .05,
+    height: dimensions.width * 0.05,
     width: dimensions.width * 0.05,
-    resizeMode: 'contain'
-
+    resizeMode: 'contain',
   },
   labelTextStyle: {
     fontSize: 14,
@@ -275,7 +271,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     gap: 5,
     borderColor: COLORS.BUTTON_GRADIENT_PURPLE_START,
-    height: dimensions.width * .14,
+    height: dimensions.width * 0.14,
     overflow: 'visible',
     ...Platform.select({
       ios: {
@@ -297,7 +293,7 @@ const styles = StyleSheet.create({
     color: COLORS.PRIMARY_BLACK,
     textAlignVertical: 'center',
 
-    flex: 1
+    flex: 1,
   },
   passwordInputStyle: {
     flexDirection: 'row',
