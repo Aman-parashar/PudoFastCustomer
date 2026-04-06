@@ -1,6 +1,9 @@
 import { Alert } from 'react-native';
 import NavigationService from '../../../navigation/NavigationService';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import Toast from 'react-native-toast-message';
+import { ProfileService } from '../../../services/ProfileService';
 
 interface ContactUsFormData {
   title: string;
@@ -17,9 +20,33 @@ export const useContactUsViewModel = () => {
     },
   });
 
+  const contactUsMutation = useMutation({
+    mutationFn: (data: any) => {
+        return ProfileService.contactUs({
+            title: data.title,
+            subject: data.subject,
+            description: data.descriptions,
+        });
+    },
+    onSuccess: (data: any) => {
+      Toast.show({ 
+        type: 'success', 
+        text1: 'Submitted', 
+        text2: data?.message || 'Your request has been sent successfully.' 
+      });
+      NavigationService.goBack();
+    },
+    onError: (error: any) => {
+      Alert.alert('Error', error?.message || 'Something went wrong while submitting.');
+    },
+  });
+
   const handleSave = (data: ContactUsFormData) => {
-    Alert.alert('Success', 'Contact Us submitted successfully');
-    NavigationService.goBack();
+    if (!data.title.trim() || !data.subject.trim() || !data.descriptions.trim()) {
+        Alert.alert('Error', 'Please fill in all fields');
+        return;
+    }
+    contactUsMutation.mutate(data);
   };
 
   const goBack = () => {
@@ -31,5 +58,6 @@ export const useContactUsViewModel = () => {
     handleSubmit,
     handleSave,
     goBack,
+    isSubmitting: contactUsMutation.isPending,
   };
 };

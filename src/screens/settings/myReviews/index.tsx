@@ -26,6 +26,7 @@ const MyReviewsScreen = () => {
     activeFilter,
     setActiveFilter,
     filters,
+    isLoading,
   } = useMyReviewsViewModel();
 
   const renderRatingBar = (rating: number, count: number) => {
@@ -42,7 +43,7 @@ const MyReviewsScreen = () => {
     );
   };
 
-  const renderFilterTab = (rating: number) => {
+  const renderFilterTab = (rating: number | 'All') => {
     const isActive = activeFilter === rating;
     return (
       <TouchableOpacity
@@ -145,6 +146,17 @@ const MyReviewsScreen = () => {
           </View>
         }
         contentContainerStyle={styles.scrollContent}
+        ListEmptyComponent={() => (
+          isLoading ? (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+              <Text>Loading reviews...</Text>
+            </View>
+          ) : (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+              <Text>No reviews found</Text>
+            </View>
+          )
+        )}
       />
     </SafeAreaView>
   );

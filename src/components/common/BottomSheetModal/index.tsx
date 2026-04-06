@@ -36,7 +36,6 @@ const BottomSheetModalComponent = ({
   containerStyle?: StyleProp<ViewStyle>;
   backgroundStyle?: StyleProp<ViewStyle>;
 }) => {
-
   const snapPoints = useMemo(
     () =>
       snapPointsProp ?? [
@@ -77,7 +76,6 @@ const BottomSheetModalComponent = ({
   const handleSheetChanges = useCallback(
     (index: number) => {
       if (index === -1) {
-
         close?.();
       }
     },
@@ -100,7 +98,6 @@ const BottomSheetModalComponent = ({
       onChange={handleSheetChanges}
       animationConfigs={animationConfigs}
       handleComponent={showHeader}
-
       style={[{}, style]}
       backgroundStyle={backgroundStyle}
       backdropComponent={props => (
@@ -110,17 +107,19 @@ const BottomSheetModalComponent = ({
           appearsOnIndex={1}
           opacity={0.7} // Set the desired opacity for the dull effect
           onPress={onBackdropPress}
-
-
         />
-      )}>
+      )}
+    >
       <BottomSheetView>{stickyHeader && stickyHeader()}</BottomSheetView>
       <BottomSheetScrollView
         keyboardShouldPersistTaps={true}
-        contentContainerStyle={[{
-          flexGrow: 1,
-
-        }, containerStyle]}>
+        contentContainerStyle={[
+          {
+            flexGrow: 1,
+          },
+          containerStyle,
+        ]}
+      >
         {children}
       </BottomSheetScrollView>
       <View style={{ height: 10 }} />

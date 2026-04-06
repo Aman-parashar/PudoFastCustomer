@@ -62,7 +62,7 @@ const renderHomeHeader = ({ onNotificationPress, notificationColor }: HeaderProp
 };
 
 const renderStepHeader = (props: HeaderProps) => {
-  const { title, onBack } = props;
+  const { title, onBack, rightComponent } = props;
   const handleBack = onBack || (() => NavigationService.goBack());
 
   return (
@@ -80,7 +80,9 @@ const renderStepHeader = (props: HeaderProps) => {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.headerTitle}>{title}</Text>
         </View>
-        <View style={{ width: 40 }} />
+        <View style={{ width: 60, alignItems: 'flex-end', justifyContent: 'center' }}>
+          {rightComponent}
+        </View>
       </View>
     </>
   );

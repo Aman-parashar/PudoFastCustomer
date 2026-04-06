@@ -24,5 +24,9 @@ export const API_ENDPOINTS = {
     //service
     SERVICE_TYPE_LIST: 'service/servicetype_list',
     GET_DRIVER_TIME: 'service/get_drivertime',
+    // Feedback
+    GET_REVIEWS: 'service/my_rate_review',
+    APP_RATE: 'service/app_rate',
+    CONTACT_US: 'service/contact_us',
 
 };

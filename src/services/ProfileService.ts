@@ -21,6 +21,26 @@ export const ProfileService = {
         }
 
         return res?.data;
-    }
+    },
 
+    rateApp: async (rate: number): Promise<any> => {
+        const res = await apiService.post(API_ENDPOINTS.APP_RATE, { rate });
+        if (res?.code !== ApiStatusCode.SUCCESS) {
+            throw new Error(res?.message || "Something went wrong");
+        }
+        return res;
+    },
+
+    getMyReviews: async (rating: string): Promise<any> => {
+        const res = await apiService.post(API_ENDPOINTS.GET_REVIEWS, { rating });
+        return res;
+    },
+
+    contactUs: async (data: any): Promise<any> => {
+        const res = await apiService.post(API_ENDPOINTS.CONTACT_US, data);
+        if (res?.code !== ApiStatusCode.SUCCESS) {
+            throw new Error(res?.message || "Something went wrong");
+        }
+        return res;
+    }
 }

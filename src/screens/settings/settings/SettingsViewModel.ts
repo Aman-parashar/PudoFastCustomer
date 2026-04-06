@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { useState } from 'react';
 import NavigationService from '../../../navigation/NavigationService';
 import { RouteConstant } from '../../../navigation/Constant';
 import { Images } from '../../../utils/images';
@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../../services/AuthService';
 import Toast from 'react-native-toast-message';
 import { UserData } from '../../../models/User';
+import { ProfileService } from '../../../services/ProfileService';
 
 export const useSettingsViewModel = () => {
   const navigateToNotifications = () => {
@@ -56,6 +57,27 @@ export const useSettingsViewModel = () => {
     rating: 4.0,
   };
 
+  const [rateModalVisible, setRateModalVisible] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
+
+  const rateAppMutation = useMutation({
+    mutationFn: (rate: number) => ProfileService.rateApp(rate),
+    onSuccess: (data: any) => {
+      setRateModalVisible(false);
+      setSelectedRating(0);
+      Toast.show({
+        type: 'success',
+        text1: 'Thank you!',
+        text2: data?.message || 'Your rating has been submitted.',
+      });
+    },
+    onError: (err: any) => {
+      Alert.alert('Error', err?.message || 'Failed to submit rating');
+    },
+  });
+
+  const submitRating = () => rateAppMutation.mutate(selectedRating);
+
   const settingsItems = [
     {
       id: 1,
@@ -85,7 +107,12 @@ export const useSettingsViewModel = () => {
       icon: Images.paymentMethodIcon,
       onPress: () => { },
     },
-    { id: 5, title: 'Rate App', icon: Images.star, onPress: () => { } },
+    {
+      id: 5, title: 'Rate App', icon: Images.star, onPress: () => {
+        setSelectedRating(0);
+        setRateModalVisible(true);
+      }
+    },
     {
       id: 6,
       title: 'Share App',
@@ -175,5 +202,11 @@ export const useSettingsViewModel = () => {
     user,
     settingsItems,
     isLoggingOut: logoutMutation.isPending,
+    rateModalVisible,
+    setRateModalVisible,
+    selectedRating,
+    setSelectedRating,
+    submitRating,
+    isSubmittingRating: rateAppMutation.isPending,
   };
 };

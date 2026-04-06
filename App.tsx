@@ -50,6 +50,7 @@ const App = () => {
         </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
+
   );
 };
 //App.tsx

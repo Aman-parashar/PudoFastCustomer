@@ -146,18 +146,45 @@ export const CommonInput = React.forwardRef<TextInput, inputProps>(
                   secureTextEntry && styles.passwordInputStyle,
                   isFocused && styles.focusedBorder,
                   customStyle,
-                ]}>
-
-                {isLeftImage && <Image
-                  source={leftImage}
-                  style={styles.leftImageStyle}
-                  resizeMode='contain'
-                />}
-                {isMobileNumber && <Pressable onPress={onPressCountryCode} style={{ flexDirection: 'row', gap: 5, alignItems: 'center' }} hitSlop={15}>
-                  {flag && <Image source={{ uri: flag }} style={styles.flagStyle} resizeMode="contain" />}
-                  <Text >{countryCode}</Text>
-                  <Image source={Images.arrowRight} style={{ width: 10, height: 10, transform: [{ rotate: '90deg' }] }} resizeMode='contain' tintColor={COLORS.BLACK} />
-                </Pressable>}
+                ]}
+              >
+                {isLeftImage && (
+                  <Image
+                    source={leftImage}
+                    style={styles.leftImageStyle}
+                    resizeMode="contain"
+                  />
+                )}
+                {isMobileNumber && (
+                  <Pressable
+                    onPress={onPressCountryCode}
+                    style={{
+                      flexDirection: 'row',
+                      gap: 5,
+                      alignItems: 'center',
+                    }}
+                    hitSlop={15}
+                  >
+                    {flag && (
+                      <Image
+                        source={{ uri: flag }}
+                        style={styles.flagStyle}
+                        resizeMode="contain"
+                      />
+                    )}
+                    <Text>{countryCode}</Text>
+                    <Image
+                      source={Images.arrowRight}
+                      style={{
+                        width: 10,
+                        height: 10,
+                        transform: [{ rotate: '90deg' }],
+                      }}
+                      resizeMode="contain"
+                      tintColor={COLORS.BLACK}
+                    />
+                  </Pressable>
+                )}
                 <TextInput
                   ref={inputRef}
                   allowFontScaling={false}
@@ -320,15 +347,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
 
     marginTop: 8,
-
-
   },
   errorText: {
     color: COLORS.PRIMARY_RED,
     fontSize: 14,
     fontFamily: FONTS.SANTRAL_MEDIUM,
     textAlign: 'left',
-
   },
   flagStyle: {
     width: 24,
