@@ -68,10 +68,8 @@ export type RootStackParamList = {
     latitude: number;
     longitude: number;
   };
-  ReceivingOrderHistory: {
-    isFromSettings?: boolean;
-    title?: string;
-  };
+  Chat: { orderId: string };
+  OrderTrack: undefined;
 };
 
 export const RouteConstant = {
@@ -99,6 +97,8 @@ export const RouteConstant = {
   PaymentOptions: 'PaymentOptions',
   DeliveryConfirmation: 'DeliveryConfirmation',
   ReceivingOrderHistory: 'ReceivingOrderHistory',
+  OrderTrack: 'OrderTrack',
+  Chat: 'Chat',
 } as const;
 
 export const ReactQuaryConst = {

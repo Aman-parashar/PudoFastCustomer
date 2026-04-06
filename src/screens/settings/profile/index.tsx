@@ -6,13 +6,13 @@ import { useProfileViewModel } from './ProfileViewModel';
 import { Images } from '../../../utils/images';
 import Header from '../../../components/common/Header';
 import CustomButton from '../../../components/common/CustomButton';
+import Container from '../../../components/common/Container';
 
 const ProfileScreen = () => {
   const { goBack, navigateToEditProfile, user } = useProfileViewModel();
 
-
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <Header type="step" title="Profile" onBack={goBack} />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -46,7 +46,7 @@ const ProfileScreen = () => {
       <View style={styles.buttonContainer}>
         <CustomButton title="EDIT" onPress={navigateToEditProfile} />
       </View>
-    </SafeAreaView>
+    </Container>
   );
 };
 

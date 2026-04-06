@@ -19,6 +19,8 @@ import { deliverySteps } from '../../../utils/enum';
 
 import Header from '../../../components/common/Header';
 import CommonModal from '../../../components/common/CommonModal';
+import Container from '../../../components/common/Container';
+import KeyboardContainer from '../../../components/layout/KeyboardContainer';
 
 const DeliveryConfirmationScreen = () => {
   const {
@@ -30,6 +32,8 @@ const DeliveryConfirmationScreen = () => {
     goBack,
     isSuccessModalVisible,
     handleCloseModal,
+    handleTrack,
+    handleChat,
   } = useDeliveryConfirmationViewModel();
 
   const renderStatusItem = (
@@ -85,7 +89,7 @@ const DeliveryConfirmationScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -102,11 +106,7 @@ const DeliveryConfirmationScreen = () => {
       {!fromHistory && (
         <Stepper currentStep={deliverySteps.DeliveryConfirmation} />
       )}
-
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <KeyboardContainer contentContainerStyle={styles.scrollContent}>
         {fromHistory && (
           <View style={styles.trackingHeaderCard}>
             <View style={styles.trackingRow}>
@@ -343,7 +343,10 @@ const DeliveryConfirmationScreen = () => {
                     </View>
                   </View>
                 </View>
-                <TouchableOpacity style={styles.chatButton}>
+                <TouchableOpacity
+                  style={styles.chatButton}
+                  onPress={handleChat}
+                >
                   <Image
                     source={Images.chatUnSelected}
                     style={styles.chatIcon}
@@ -372,7 +375,7 @@ const DeliveryConfirmationScreen = () => {
 
             <CustomButton
               title="TRACK"
-              onPress={() => {}}
+              onPress={handleTrack}
               style={styles.trackButtonLarge}
             />
 
@@ -407,7 +410,7 @@ const DeliveryConfirmationScreen = () => {
             </View>
           </>
         )}
-      </ScrollView>
+      </KeyboardContainer>
 
       <CommonModal
         visible={isSuccessModalVisible}
@@ -424,7 +427,7 @@ const DeliveryConfirmationScreen = () => {
         }
         tapToClose
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

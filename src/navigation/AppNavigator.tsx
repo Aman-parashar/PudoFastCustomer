@@ -29,6 +29,8 @@ import { RouteConstant } from './Constant';
 import NavigationService from './NavigationService';
 import NotificationScreen from '../screens/notification';
 import DeliveryConfirmationScreen from '../screens/home/DeliveryConfirmation';
+import OrderTrackScreen from '../screens/home/OrderTrack';
+import ChatScreen from '../screens/home/Chat';
 import { storage } from '../helper/MMKVStorage';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -68,6 +70,8 @@ const AppNavigator = () => {
         <Stack.Screen name={RouteConstant.PaymentOptions} component={PaymentOptionsScreen} />
         <Stack.Screen name={RouteConstant.DeliveryConfirmation} component={DeliveryConfirmationScreen} />
         <Stack.Screen name={RouteConstant.ReceivingOrderHistory} component={HistoryScreen} />
+        <Stack.Screen name={RouteConstant.OrderTrack} component={OrderTrackScreen} />
+        <Stack.Screen name={RouteConstant.Chat} component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

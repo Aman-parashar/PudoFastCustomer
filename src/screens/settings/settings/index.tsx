@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, Modal, ActivityIndicator, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Modal,
+  ActivityIndicator,
+  StyleSheet,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 import { useSettingsViewModel } from './SettingsViewModel';
@@ -9,6 +18,7 @@ import CustomButton from '../../../components/common/CustomButton';
 import { useProfileData } from '../../../hooks/userProfile';
 import { UserData } from '../../../models/User';
 import { FONTS } from '../../../utils/fonts';
+import Container from '../../../components/common/Container';
 
 const SettingsScreen = () => {
   const {
@@ -25,9 +35,9 @@ const SettingsScreen = () => {
     submitRating,
     isSubmittingRating,
   } = useSettingsViewModel();
-  const { data } = useProfileData()
-  const user: UserData = data!
-
+  const { data } = useProfileData();
+  const user: UserData = data!;
+  console.log(user, 'user');
   const renderRatingStars = (rating: number) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -46,7 +56,7 @@ const SettingsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container container={{ marginTop: -10 }}>
       <View style={styles.headerWrapper}>
         <Header type="home" onNotificationPress={navigateToNotifications} />
       </View>
@@ -59,7 +69,11 @@ const SettingsScreen = () => {
         <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
             <Image
-              source={user?.profile_image ? { uri: user.profile_image } : Images.userPlaceholder}
+              source={
+                user?.profile_image
+                  ? { uri: user.profile_image }
+                  : Images.userPlaceholder
+              }
               style={styles.profileImage}
             />
           </View>
@@ -72,13 +86,12 @@ const SettingsScreen = () => {
           </View>
 
           <TouchableOpacity
-            onPress={() => { navigateToProfile(user) }}
+            onPress={() => {
+              navigateToProfile(user);
+            }}
             style={styles.editIconContainer}
           >
-            <Image
-              source={Images.editIcon}
-              style={styles.editIcon}
-            />
+            <Image source={Images.editIcon} style={styles.editIcon} />
           </TouchableOpacity>
         </View>
 
@@ -171,7 +184,7 @@ const SettingsScreen = () => {
           </View>
         </View>
       </Modal>
-    </SafeAreaView>
+    </Container>
   );
 };
 

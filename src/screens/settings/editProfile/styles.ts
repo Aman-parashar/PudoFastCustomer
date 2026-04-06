@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   actionContainer: {
     gap: 10,
   },
+ 
 });
 
 export default styles;

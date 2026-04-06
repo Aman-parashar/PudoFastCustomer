@@ -11,12 +11,14 @@ import Header from '../../../components/common/Header';
 import { COLORS } from '../../../utils/colors';
 import AddressBottomSheet from '../../../components/home/AddressBottomSheet';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import Container from '../../../components/common/Container';
 
 const HomeScreen = () => {
   const {
     pickupLocation,
     setPickupLocation,
-    deliveryLocation, setDeliveryLocation,
+    deliveryLocation,
+    setDeliveryLocation,
     navigateToNotifications,
     navigateToChooseAddress,
     navigateToDeliveryMiles,
@@ -34,7 +36,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -116,7 +118,7 @@ const HomeScreen = () => {
           })
         }
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

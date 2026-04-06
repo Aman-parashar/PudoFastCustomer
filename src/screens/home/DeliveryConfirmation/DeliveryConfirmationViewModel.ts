@@ -33,6 +33,14 @@ export const useDeliveryConfirmationViewModel = () => {
     NavigationService.goBack();
   };
 
+  const handleTrack = () => {
+    NavigationService.navigate(RouteConstant.OrderTrack);
+  };
+
+  const handleChat = () => {
+    NavigationService.navigate(RouteConstant.Chat, { orderId: orderData?.orderId || '112515212' });
+  };
+
   return {
     orderData,
     comment,
@@ -42,5 +50,7 @@ export const useDeliveryConfirmationViewModel = () => {
     fromHistory,
     isSuccessModalVisible,
     handleCloseModal,
+    handleTrack,
+    handleChat,
   };
 };

@@ -10,6 +10,7 @@ import {
   NotificationItem,
 } from './NotificationViewModel';
 import styles from './styles';
+import Container from '../../components/common/Container';
 
 const NotificationScreen = () => {
   const { notifications, totalCount, isLoading, deleteNotification, clearAll } =
@@ -71,7 +72,7 @@ const NotificationScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -102,7 +103,7 @@ const NotificationScreen = () => {
         ListEmptyComponent={isLoading ? null : renderEmptyState}
         showsVerticalScrollIndicator={false}
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

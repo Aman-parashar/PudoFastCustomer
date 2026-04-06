@@ -10,6 +10,7 @@ import styles from './styles';
 import { useChooseAddressViewModel } from './ChooseAddressViewModel';
 import { Images } from '../../../utils/images';
 import { COLORS } from '../../../utils/colors';
+import Container from '../../../components/common/Container';
 
 const ChooseAddressScreen: React.FC = () => {
   const { type, search, setSearch, goBack, confirmAddress } =
@@ -65,7 +66,7 @@ const ChooseAddressScreen: React.FC = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Container>
       {/* MapView */}
       <MapView
         style={styles.map}
@@ -145,7 +146,7 @@ const ChooseAddressScreen: React.FC = () => {
           <Text style={styles.doneText}>Done</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Container>
   );
 };
 

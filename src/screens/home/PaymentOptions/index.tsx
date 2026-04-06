@@ -15,6 +15,7 @@ import { deliverySteps } from '../../../utils/enum';
 import Header from '../../../components/common/Header';
 import CommonToggle from '../../../components/common/CommonToggle';
 import { CardType } from '../../../utils/data';
+import Container from '../../../components/common/Container';
 
 const PaymentOptionsScreen = () => {
   const {
@@ -27,7 +28,7 @@ const PaymentOptionsScreen = () => {
   } = usePaymentOptionsViewModel();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -100,7 +101,7 @@ const PaymentOptionsScreen = () => {
           style={styles.nextButton}
         />
       </View>
-    </SafeAreaView>
+    </Container>
   );
 };
 

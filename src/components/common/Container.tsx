@@ -2,7 +2,6 @@ import {
   StatusBar,
   StyleProp,
   StyleSheet,
-
   View,
   ViewStyle,
 } from 'react-native';
@@ -34,7 +33,9 @@ const Container = ({
         backgroundColor={statusBackground ? statusBackground : COLORS.WHITE}
         translucent={true}
       />
-      <View style={[{ marginTop: useSafeAreaInsets().top + 5 }, subContainer]} />
+      <View
+        style={[{ marginTop: useSafeAreaInsets().top + 5 }, subContainer]}
+      />
       {children}
       {!bottomContainer && (
         <View style={[styles.bottomContainer, bottomContainerStyle]} />
@@ -48,7 +49,7 @@ export default Container;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: COLORS.WHITE,
   },
   bottomContainer: {

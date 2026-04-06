@@ -15,6 +15,7 @@ import { useMyReviewsViewModel } from './MyReviewsViewModel';
 import { Images } from '../../../utils/images';
 
 import Header from '../../../components/common/Header';
+import Container from '../../../components/common/Container';
 
 const MyReviewsScreen = () => {
   const {
@@ -90,7 +91,7 @@ const MyReviewsScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container container={{ marginTop: -10 }}>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -146,19 +147,33 @@ const MyReviewsScreen = () => {
           </View>
         }
         contentContainerStyle={styles.scrollContent}
-        ListEmptyComponent={() => (
+        ListEmptyComponent={() =>
           isLoading ? (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 50,
+              }}
+            >
               <Text>Loading reviews...</Text>
             </View>
           ) : (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50 }}>
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 50,
+              }}
+            >
               <Text>No reviews found</Text>
             </View>
           )
-        )}
+        }
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

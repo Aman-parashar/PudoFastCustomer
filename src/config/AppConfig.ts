@@ -3,10 +3,10 @@
  */
 import Config from "react-native-config";
 
-const IS_PRODUCTION = false; // Toggle for Production vs Dev
+const IS_PRODUCTION = true; // Toggle for Production vs Dev
 
-const DEV_URL = 'http://192.168.1.82:5502/api/v2/';
-const PROD_URL = 'https://pudofast.com/pudofast/api/v2/'; // Verified from SettingsViewModel
+const DEV_URL = 'http://192.168.1.82:3000/api/v2/';
+const PROD_URL = 'https://pudofast.com:5502/api/v2/'; // Verified from SettingsViewModel
 
 export const BASE_URL = IS_PRODUCTION ? PROD_URL : DEV_URL;
 

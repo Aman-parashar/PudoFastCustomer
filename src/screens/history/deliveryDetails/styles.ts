@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   backIcon: {
     width: 24,
     height: 24,
+    resizeMode:'contain'
   },
   headerTitle: {
     fontSize: 18,

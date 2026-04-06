@@ -26,4 +26,6 @@ export type RootStackParamList = {
   NewPassword: { userId: string };
   DeliveryConfirmation: { orderData: any; fromHistory?: boolean };
   ReceivingOrderHistory?: { isFromSettings?: boolean; title?: string };
+  Chat: { orderId: string };
+  OrderTrack: undefined;
 };

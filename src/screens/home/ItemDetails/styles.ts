@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
 
   scrollContent: {
     padding: 20,
-    paddingBottom: 40,
   },
   header: {
     backgroundColor: COLORS.WHITE,

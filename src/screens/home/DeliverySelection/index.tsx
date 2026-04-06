@@ -15,6 +15,7 @@ import Header from '../../../components/common/Header';
 import CommonToggle from '../../../components/common/CommonToggle';
 import { ScheduleType } from '../../../utils/data';
 import DatePicker from 'react-native-date-picker';
+import Container from '../../../components/common/Container';
 
 const DeliverySelectionScreen = () => {
   const {
@@ -37,12 +38,11 @@ const DeliverySelectionScreen = () => {
     calculatePrice,
     handleNext,
     goBack,
-    getDistanceinMeters
+    // getDistanceinMeters,
   } = useDeliverySelectionViewModel();
 
-
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <View style={styles.header}>
         <Image
           source={Images.navShadow}
@@ -242,7 +242,7 @@ const DeliverySelectionScreen = () => {
           setTimePickerVisible(false);
         }}
       />
-    </SafeAreaView>
+    </Container>
   );
 };
 

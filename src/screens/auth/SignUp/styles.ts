@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   },
   headerPadding: {
     paddingHorizontal: 16,
+    marginTop:20
   },
   headerSpacing: {
     height: dimensions.height * 0.05,
